@@ -4,7 +4,10 @@
  */
 package controlador;
 
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import modelo.Cliente;
 
 /**
@@ -50,9 +53,17 @@ public class ControladorClientes implements CRUD{
     public Object consultarUno(Object obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    public Object consultarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    
+    @Override
+    public void consultarTodos(){
+        for(Cliente c:arregloClientes)
+            System.out.println(c.toString());
+    }
+    
+    @Override
+    public void ordenar(){
+        Collections.sort(arregloClientes);
     }
     
 }

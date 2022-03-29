@@ -9,5 +9,14 @@ package vista;
  * @author rafael
  */
 public class PrincipalBanco {
-    
+ 
+    public static void main(String[] args){
+        PrincipalClientes ppcliente = new PrincipalClientes();
+        
+        while(true)
+        {
+            ppcliente.menu();
+        }
+        
+    }
 }

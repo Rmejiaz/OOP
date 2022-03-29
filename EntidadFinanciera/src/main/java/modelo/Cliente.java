@@ -8,7 +8,7 @@ package modelo;
  *
  * @author rafael
  */
-public class Cliente extends Usuario{
+public class Cliente extends Usuario implements Comparable<Cliente>{
     private CuentaAhorros cuentaAho;
     private CuentaCorriente cuentaCorr;
 
@@ -19,6 +19,11 @@ public class Cliente extends Usuario{
     public Cliente() {
     }
     
+    @Override
+    public int compareTo(Cliente c){
+        return (this.getCedula() < c.getCedula()? -1:
+                (this.getCedula() == c.getCedula()? 0 : 1));
+    }
     
     
 }

@@ -20,8 +20,13 @@ Interfaz - Es una clase donde TODOS los métodos son abstractos - solo tienen la
            las clases que la implementen deben colocar el comportamiento o la funcionalidad del método
 */
 public interface CRUD {
+    // Todos los metodos son abstractos
+    // La clase que implemente esa interface tiene que 
+    // escribir el comportamiento de los metodos
     public boolean insertar(Object obj);
     public Object  modificar(Object obj);
     public boolean borrar(Object obj);
-    public Object consultarUno(Object obj);
+    public Object  consultarUno(Object obj);
+    public void    consultarTodos();
+    public void    ordenar();
 }
