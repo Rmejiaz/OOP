@@ -14,19 +14,24 @@ public class Carro {
     private String color; 
     private String marca;
     private float km;
+    private float motor;
     
     //Atributos de clase:
     
     static float velMax; // velocidad maxima permitida
 
-    public Carro(int modelo, float tanque, String color, String marca, float km) {
+    public Carro(int modelo, float tanque, String color, String marca, float km, float motor) {
         this.modelo = modelo;
         this.tanque = tanque;
         this.color = color;
         this.marca = marca;
         this.km = km;
+        this.motor = motor;
     } // Constructor
     
+    public Carro(){
+        
+    }
     
     public void avanzar(float tiempo, float velocidad){ // tiempo y velocidad son parametros del metodo avanzar
         
@@ -34,7 +39,32 @@ public class Carro {
             System.out.println("Velocidad no permitida, deteniendo carro");
         else{
             float distancia = velocidad*tiempo;
-            this.km = this.km + distancia; //actualizar el kilometraje del carro
+            float gasto = (10/motor)*distancia;
+   
+            if(tanque<gasto)
+                System.out.println("No alcanza la gasolina para avanzar la distancia");
+            else{
+                km = km + distancia; //actualizar el kilometraje del carro
+                tanque = tanque - gasto; // Actualizar el tanque
+        
+            }
         }
     }
+    
+    public void llenar(){
+        tanque = 1;
+    }
+    
+    public void tanquear(float cant){
+        tanque = tanque + cant;
+        if(tanque>1)
+            tanque = 1;
+    }
+
+    @Override
+    public String toString() {
+        return "Carro{" + "modelo=" + modelo + ", tanque=" + tanque + ", color=" + color + ", marca=" + marca + ", km=" + km + ", motor=" + motor + '}';
+    }
+
+    
 }

@@ -34,23 +34,31 @@ public class TestLegislador {
         
         
         Senador sen2 = new Senador();
-        sen1.setNombre("Juan");
-        sen1.setApellido("Perez");
-        sen1.setPartido("sldkjlfs");
-        sen1.setProvinciaQueRepresenta("Risaralda");
-        sen1.setTelefono(31462556);
-        sen1.seteMail("jperezz@unal.edu.co");
-        sen1.setDireccion("Calle 11");
-        sen1.setCedula(1314000);
+        sen2.setNombre("Juan");
+        sen2.setApellido("Perez");
+        sen2.setPartido("sldkjlfs");
+        sen2.setProvinciaQueRepresenta("Risaralda");
+        sen2.setTelefono(31462556);
+        sen2.seteMail("jperezz@unal.edu.co");
+        sen2.setDireccion("Calle 11");
+        sen2.setCedula(1314000);
+        
+        Diputado dip1 = new Diputado();
+        dip1.setNombre("Karen");
+        dip1.setApellido("Agudelo");
+        dip1.setPartido("Verde");
+        dip1.setProvinciaQueRepresenta("Quindio");
+        dip1.setTelefono(23421);
+        dip1.seteMail("lsdflsdf");
         
         
         
         listaLegisladores.add(sen1);
         listaLegisladores.add(sen2);
-        
+        listaLegisladores.add(dip1);
         
         for(Legislador c:listaLegisladores){
-            System.out.println("El legislador "+c.getNombre() + "trabaja en "+c.getCamaraEnQueTrabaja());
+            System.out.println("El legislador "+c.getNombre() + " trabaja en "+c.getCamaraEnQueTrabaja() + "y representa la región "+c.getProvinciaQueRepresenta());
         }
         
     }

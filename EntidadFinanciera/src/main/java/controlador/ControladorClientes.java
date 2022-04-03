@@ -46,12 +46,32 @@ public class ControladorClientes implements CRUD{
 
     @Override
     public boolean borrar(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Cliente cli = new Cliente();
+        cli = (Cliente)obj;
+        int index = 0;
+        for(Cliente c:arregloClientes){
+            if(c.equals(cli)){
+                arregloClientes.remove(index);
+                return true;
+            }
+            index++;
+        }
+        return false;
     }
 
     @Override
-    public Object consultarUno(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void consultarUno(Object obj) {
+        Cliente cli = new Cliente();
+        cli = (Cliente)obj;
+        boolean esta = false;
+        for(Cliente c:arregloClientes){
+            if(c.equals(cli)){
+                System.out.println(c.toString());
+                esta = true;
+            }
+        }
+        if(!esta)
+            System.out.println("Cliente no encontrado");
     }
     
     

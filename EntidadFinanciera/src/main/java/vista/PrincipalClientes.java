@@ -54,8 +54,29 @@ public class PrincipalClientes {
         contrcli.consultarTodos();
     }
     
+    public void consultarUno(){
+        System.out.println("Digite la cedula del cliente que desea consultar: ");
+        int cedula = leerDatos.nextInt();
+        Cliente cli = new Cliente();
+        cli.setCedula(cedula);
+        contrcli.consultarUno(cli);
+    }
+    
     public void ordenarDatos(){
         contrcli.ordenar();
+    }
+    
+    public void eliminarCliente(){
+        
+        System.out.println("Digite la cedula del cliente que desea borrar: ");
+        int cedula = leerDatos.nextInt();
+        Cliente cli = new Cliente();
+        cli.setCedula(cedula);
+        
+        if(contrcli.borrar(cli))
+            System.out.println("El cliente con cedula "+cedula+ " ha sido eliminado exitosamente");
+        else
+            System.out.println("No se ha encontrado en el sistema algún cliente con cedula "+cedula);
     }
     
     public void menu()
@@ -75,13 +96,13 @@ public class PrincipalClientes {
                 leerDatosCliente();
                 break;
             case 2:
-                System.out.println("No implementado aun");
+                consultarUno();
                 break;
             case 3:
                 System.out.println("No implementado aun");
                 break;
             case 4:
-                System.out.println("No implementado aun");
+                eliminarCliente();
                 break;
             case 5:
                 consultarTodos();
