@@ -59,7 +59,8 @@ public class PrincipalClientes {
         int cedula = leerDatos.nextInt();
         Cliente cli = new Cliente();
         cli.setCedula(cedula);
-        contrcli.consultarUno(cli);
+        cli = (Cliente)contrcli.consultarUno(cli);
+        System.out.println(cli.toString());
     }
     
     public void ordenarDatos(){
@@ -79,6 +80,10 @@ public class PrincipalClientes {
             System.out.println("No se ha encontrado en el sistema algún cliente con cedula "+cedula);
     }
     
+    public void ordenarDatosNombre(){
+        contrcli.quicksort(0, contrcli.arregloClientes.size()-1);
+    }
+    
     public void menu()
     {
         int opc = 0;
@@ -88,7 +93,8 @@ public class PrincipalClientes {
         System.out.println("3. Modificar");
         System.out.println("4. Borrar");
         System.out.println("5. Consultar todos los clientes");
-        System.out.println("6. Ordenar los clientes");
+        System.out.println("6. Ordenar los clientes por cedula");
+        System.out.println("7. Ordenar los clientes por nombre");
         
         opc = leerDatos.nextInt();
         switch(opc){
@@ -109,6 +115,9 @@ public class PrincipalClientes {
                 break;
             case 6:
                 ordenarDatos();
+                break;
+            case 7:
+                ordenarDatosNombre();
                 break;
             default:
                 System.exit(0);

@@ -26,7 +26,8 @@ public interface CRUD {
     public boolean insertar(Object obj);
     public Object  modificar(Object obj);
     public boolean borrar(Object obj);
-    public void  consultarUno(Object obj);
+    public Object  consultarUno(Object obj);
     public void    consultarTodos();
     public void    ordenar();
+    public void    quicksort(int izq, int der);
 }
