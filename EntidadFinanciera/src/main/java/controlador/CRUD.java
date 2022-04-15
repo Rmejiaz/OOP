@@ -24,7 +24,7 @@ public interface CRUD {
     // La clase que implemente esa interface tiene que 
     // escribir el comportamiento de los metodos
     public boolean insertar(Object obj);
-    public Object  modificar(Object obj);
+    public boolean  modificar(Object obj_old, Object obj_new);
     public boolean borrar(Object obj);
     public Object  consultarUno(Object obj);
     public void    consultarTodos();

@@ -40,23 +40,38 @@ public class ControladorClientes implements CRUD{
     }
 
     @Override
-    public Object modificar(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean modificar(Object obj_old, Object obj_new) {
+        Cliente old_cli = new Cliente();
+        old_cli = (Cliente)obj_old;
+        
+        Cliente new_cli = new Cliente();
+        new_cli = (Cliente)obj_new;
+        
+        Collections.sort(arregloClientes);
+        int index = Collections.binarySearch(arregloClientes, old_cli, null);
+        
+        if(index < 0)
+            return false;
+        else{
+            arregloClientes.set(index, new_cli);
+            return true;
+        }
     }
 
     @Override
     public boolean borrar(Object obj) {
         Cliente cli = new Cliente();
         cli = (Cliente)obj;
-        int index = 0;
-        for(Cliente c:arregloClientes){
-            if(c.equals(cli)){
-                arregloClientes.remove(index);
-                return true;
-            }
-            index++;
+        Collections.sort(arregloClientes);
+        int index = Collections.binarySearch(arregloClientes, cli, null);
+        
+        if(index<0)
+            return false;
+        else{
+            arregloClientes.remove(index);
+            return true;
         }
-        return false;
+         
     }
 
     @Override

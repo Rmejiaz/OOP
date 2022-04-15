@@ -18,6 +18,18 @@ public class Cliente extends Usuario implements Comparable<Cliente>{
 
     public Cliente() {
     }
+
+    public Cliente(Cliente another) { // Constructor para crear copias
+        this.nombre = another.nombre;
+        this.apellido = another.apellido;
+        this.direccion = another.apellido;
+        this.telefono = another.telefono;
+        this.correo = another.correo;
+        this.cedula = another.cedula;
+        this.cuentaAho = another.cuentaAho;
+        this.cuentaCorr = another.cuentaCorr;
+    }
+    
     
     @Override
     public int compareTo(Cliente c){
