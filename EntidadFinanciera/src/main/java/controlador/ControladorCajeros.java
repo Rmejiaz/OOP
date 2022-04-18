@@ -77,7 +77,10 @@ public class ControladorCajeros implements CRUD{
         caj = (Cajero)obj;
         Collections.sort(arregloCajeros);
         int pos = Collections.binarySearch(arregloCajeros, caj, null);
-        return arregloCajeros.get(pos);
+        if(pos < 0)
+            return caj;
+        else
+            return arregloCajeros.get(pos);
     }
 
     @Override

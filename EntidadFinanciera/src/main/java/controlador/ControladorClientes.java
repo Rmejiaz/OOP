@@ -98,7 +98,10 @@ public class ControladorClientes implements CRUD{
         cli = (Cliente)obj;
         Collections.sort(arregloClientes);
         int pos = Collections.binarySearch(arregloClientes, cli, null);
-        return arregloClientes.get(pos);
+        if(pos < 0)
+            return cli;
+        else
+            return arregloClientes.get(pos);
 }
     
     
