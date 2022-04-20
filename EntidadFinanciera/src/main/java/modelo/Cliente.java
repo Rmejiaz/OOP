@@ -9,8 +9,8 @@ package modelo;
  * @author rafael
  */
 public class Cliente extends Usuario implements Comparable<Cliente>{
-    private CuentaAhorros cuentaAho;
-    private CuentaCorriente cuentaCorr;
+//    private CuentaAhorros cuentaAho;
+//    private CuentaCorriente cuentaCorr;
 
     public Cliente(String nombre, String apellido, String direccion, int telefono, String correo, int cedula) {
         super(nombre, apellido, direccion, telefono, correo, cedula);
@@ -26,8 +26,8 @@ public class Cliente extends Usuario implements Comparable<Cliente>{
         this.telefono = another.telefono;
         this.correo = another.correo;
         this.cedula = another.cedula;
-        this.cuentaAho = another.cuentaAho;
-        this.cuentaCorr = another.cuentaCorr;
+//        this.cuentaAho = another.cuentaAho;
+//        this.cuentaCorr = another.cuentaCorr;
     }
     
     

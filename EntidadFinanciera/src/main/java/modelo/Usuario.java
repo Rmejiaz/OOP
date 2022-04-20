@@ -15,6 +15,7 @@ public class Usuario {
     protected int    telefono;
     protected String correo;
     protected int    cedula;
+    private String contrasena;
 
     public Usuario(String nombre, String apellido, String direccion, int telefono, String correo, int cedula) {
         this.nombre = nombre;
@@ -27,6 +28,21 @@ public class Usuario {
 
     public Usuario() {
     }
+
+    public Usuario(int cedula, String contrasena) {
+        this.cedula = cedula;
+        this.contrasena = contrasena;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+    
+    
 
     public String getNombre() {
         return nombre;

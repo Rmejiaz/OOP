@@ -18,6 +18,11 @@ public class Administrador extends Usuario implements Comparable<Administrador>{
 
     public Administrador() {
     }
+
+    public Administrador(int cedula, String contrasena) {
+        super(cedula, contrasena);
+    }
+    
     
     
     public Administrador(Administrador another){
