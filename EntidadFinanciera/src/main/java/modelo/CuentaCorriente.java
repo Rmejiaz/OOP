@@ -8,7 +8,7 @@ package modelo;
  *
  * @author rafael
  */
-public class CuentaCorriente {
+public class CuentaCorriente implements Comparable<CuentaCorriente>{
     private String idCuentaCorriente;
     private float saldoCuentaCorriente;
     private int idCliente;
@@ -20,7 +20,13 @@ public class CuentaCorriente {
     }
 
     public CuentaCorriente() {
-        
+    }
+    
+    
+    public CuentaCorriente(CuentaCorriente another){
+        this.idCuentaCorriente = another.idCuentaCorriente;
+        this.saldoCuentaCorriente = another.saldoCuentaCorriente;
+        this.idCliente = another.idCliente;
     }
     
     
@@ -48,8 +54,10 @@ public class CuentaCorriente {
         this.idCliente = idCliente;
     }
     
-    
-    
-    
+    @Override
+    public int compareTo(CuentaCorriente c){
+        return (this.getIdCuentaCorriente().compareToIgnoreCase(c.getIdCuentaCorriente())<0? -1:
+                (this.getIdCuentaCorriente().compareToIgnoreCase(c.getIdCuentaCorriente())==0? 0 : 1));
+    }
     
 }

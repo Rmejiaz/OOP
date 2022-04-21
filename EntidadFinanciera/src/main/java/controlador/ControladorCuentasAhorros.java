@@ -72,22 +72,56 @@ public class ControladorCuentasAhorros implements CRUD{
 
     @Override
     public Object consultarUno(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        CuentaAhorros cuenta = new CuentaAhorros();
+        cuenta = (CuentaAhorros)obj;
+        Collections.sort(arregloCuentasAhorros);
+        int pos = Collections.binarySearch(arregloCuentasAhorros, cuenta, null);
+        if(pos < 0)
+            return cuenta;
+        else
+            return arregloCuentasAhorros.get(pos);
     }
 
     @Override
     public void consultarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for(CuentaAhorros c:arregloCuentasAhorros)
+            System.out.println(c.toString());
     }
 
     @Override
     public void ordenar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Collections.sort(arregloCuentasAhorros);
     }
 
     @Override
     public void quicksort(int izq, int der) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //int pivote=A[izq]; // tomamos primer elemento como pivote
+        CuentaAhorros pivote = arregloCuentasAhorros.get(izq);
+        int i=izq;         // i realiza la búsqueda de izquierda a derecha
+        int j=der;         // j realiza la búsqueda de derecha a izquierda
+        CuentaAhorros aux;
+
+        while(i < j){                          // mientras no se crucen las búsquedas                                   
+          // while(A[i] <= pivote && i < j) i++; // busca elemento mayor que pivote
+          while(arregloCuentasAhorros.get(i).getIdCuentaAhorros().compareToIgnoreCase(pivote.getIdCuentaAhorros()) <=0 && i<j) i++; 
+          
+          //while(A[j] > pivote) j--;           // busca elemento menor que pivote
+          while(arregloCuentasAhorros.get(j).getIdCuentaAhorros().compareToIgnoreCase(pivote.getIdCuentaAhorros()) > 0) j--;  
+          if (i < j) {                        // si no se han cruzado                      
+               aux = arregloCuentasAhorros.get(i);                      // los intercambia
+               arregloCuentasAhorros.set(i, arregloCuentasAhorros.get(j));
+               arregloCuentasAhorros.set(j, aux);
+           }
+         }
+
+         //A[izq]=A[j];      // se coloca el pivote en su lugar de forma que tendremos                                    
+         arregloCuentasAhorros.set(izq, arregloCuentasAhorros.get(j));
+         //A[j]=pivote;      // los menores a su izquierda y los mayores a su derecha
+         arregloCuentasAhorros.set(j, pivote);
+         if(izq < j-1)
+            quicksort(izq,j-1);          // ordenamos subarray izquierdo
+         if(j+1 < der)
+            quicksort(j+1,der);          // ordenamos subarray derecho
     }
     
 }

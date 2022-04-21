@@ -23,6 +23,13 @@ public class CuentaAhorros implements Comparable<CuentaAhorros>{
         
     }
     
+    public CuentaAhorros(CuentaAhorros another){
+        this.idCuentaAhorros = another.idCuentaAhorros;
+        this.idCliente = another.idCliente;
+        this.saldoCuentaAhorros = another.saldoCuentaAhorros;
+    }
+    
+    
     public String getIdCuentaAhorros() {
         return idCuentaAhorros;
     }
@@ -53,6 +60,11 @@ public class CuentaAhorros implements Comparable<CuentaAhorros>{
         return (this.getIdCuentaAhorros().compareToIgnoreCase(c.getIdCuentaAhorros())<0? -1:
                 (this.getIdCuentaAhorros().compareToIgnoreCase(c.getIdCuentaAhorros())==0? 0 : 1));
     }
+
+    @Override
+    public String toString() {
+        return "CuentaAhorros{" + "idCuentaAhorros=" + idCuentaAhorros + ", saldoCuentaAhorros=" + saldoCuentaAhorros + ", idCliente=" + idCliente + '}';
+    }
     
-    
+       
 }

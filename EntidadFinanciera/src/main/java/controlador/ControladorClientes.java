@@ -148,4 +148,13 @@ public class ControladorClientes implements CRUD{
 
       }
     
+    
+    public boolean existeCliente(int idCliente){  // para verificar si un cliente existe en el sistema
+        Cliente cli = new Cliente();
+        cli.setCedula(idCliente);
+        Collections.sort(arregloClientes);
+        int pos = Collections.binarySearch(arregloClientes, cli, null);
+        return pos >= 0;
+    }
+    
 }
