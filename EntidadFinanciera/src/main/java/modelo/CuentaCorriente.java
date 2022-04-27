@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.Objects;
+
 /**
  *
  * @author rafael
@@ -59,5 +61,29 @@ public class CuentaCorriente implements Comparable<CuentaCorriente>{
         return (this.getIdCuentaCorriente().compareToIgnoreCase(c.getIdCuentaCorriente())<0? -1:
                 (this.getIdCuentaCorriente().compareToIgnoreCase(c.getIdCuentaCorriente())==0? 0 : 1));
     }
+
+  
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CuentaCorriente other = (CuentaCorriente) obj;
+        return Objects.equals(this.idCuentaCorriente, other.idCuentaCorriente);
+    }
+
+    @Override
+    public String toString() {
+        return "CuentaCorriente{" + "idCuentaCorriente=" + idCuentaCorriente + ", saldoCuentaCorriente=" + saldoCuentaCorriente + ", idCliente=" + idCliente + '}';
+    }   
+    
+    
     
 }

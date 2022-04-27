@@ -36,19 +36,19 @@ public class PrincipalCuentasAhorros {
             System.out.println("El cliente no existe en el sistema");
         }
         else{
-        cuenta.setIdCliente(idCliente);
-        System.out.println("Digite el numero de la cuenta");
-        cuenta.setIdCuentaAhorros(leerDatos.next());
-        
-        System.out.println("Digite el saldo de la cuenta");
-        cuenta.setSaldoCuentaAhorros(leerDatos.nextFloat());
-        
-        
-        if(contrCuentasAhorros.insertar(cuenta))
-            System.out.println("Cuenta creada");
-        else
-            System.out.println("Error al crear cuenta (posible duplicada)");
-    
+            cuenta.setIdCliente(idCliente);
+            System.out.println("Digite el numero de la cuenta");
+            cuenta.setIdCuentaAhorros(leerDatos.next());
+
+            System.out.println("Digite el saldo de la cuenta");
+            cuenta.setSaldoCuentaAhorros(leerDatos.nextFloat());
+
+
+            if(contrCuentasAhorros.insertar(cuenta))
+                System.out.println("Cuenta creada");
+            else
+                System.out.println("Error al crear cuenta (posible duplicada)");
+
             }
         }
     

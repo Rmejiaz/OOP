@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.Objects;
+
 /**
  *
  * @author rafael
@@ -65,6 +67,25 @@ public class CuentaAhorros implements Comparable<CuentaAhorros>{
     public String toString() {
         return "CuentaAhorros{" + "idCuentaAhorros=" + idCuentaAhorros + ", saldoCuentaAhorros=" + saldoCuentaAhorros + ", idCliente=" + idCliente + '}';
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CuentaAhorros other = (CuentaAhorros) obj;
+        return Objects.equals(this.idCuentaAhorros, other.idCuentaAhorros);
+    }
+   
+    
+    
     
        
 }

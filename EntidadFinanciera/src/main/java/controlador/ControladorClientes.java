@@ -16,10 +16,10 @@ import modelo.Cliente;
  */
 public class ControladorClientes implements CRUD{
     
-    public static ArrayList<Cliente> arregloClientes;
+    public static ArrayList<Cliente> arregloClientes = new ArrayList<Cliente>();
     
     public ControladorClientes(){
-        arregloClientes = new ArrayList<Cliente>();
+//        arregloClientes = new ArrayList<Cliente>();
     }
     
     @Override

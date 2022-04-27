@@ -12,12 +12,12 @@ public class Usuario {
     protected String nombre;
     protected String apellido;
     protected String direccion;
-    protected int    telefono;
+    protected  long  telefono;
     protected String correo;
     protected int    cedula;
-    private String contrasena;
+    protected String contrasena;
 
-    public Usuario(String nombre, String apellido, String direccion, int telefono, String correo, int cedula) {
+    public Usuario(String nombre, String apellido, String direccion, long telefono, String correo, int cedula) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -34,6 +34,18 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
+    public Usuario(String nombre, String apellido, String direccion, long telefono, String correo, int cedula, String contrasena) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.cedula = cedula;
+        this.contrasena = contrasena;
+    }
+
+    
+    
     public String getContrasena() {
         return contrasena;
     }
@@ -68,11 +80,11 @@ public class Usuario {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 

@@ -13,8 +13,8 @@ public class Cajero extends Usuario implements Comparable<Cajero>{
     private int idCajero;
     private double sueldo;
 
-    public Cajero(int idCajero, double sueldo, String nombre, String apellido, String direccion, int telefono, String correo, int cedula) {
-        super(nombre, apellido, direccion, telefono, correo, cedula);
+    public Cajero(int idCajero, double sueldo, String nombre, String apellido, String direccion, long telefono, String correo, int cedula, String contrasena) {
+        super(nombre, apellido, direccion, telefono, correo, cedula, contrasena);
         this.idCajero = idCajero;
         this.sueldo = sueldo;
     }
@@ -68,5 +68,5 @@ public class Cajero extends Usuario implements Comparable<Cajero>{
                 idCajero + ", sueldo="+sueldo+'}';
     }
    
-      
+    
 }

@@ -123,9 +123,18 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
         // TODO add your handling code here:
         ControladorUsuariosSistema contusuSis = new ControladorUsuariosSistema();
-        int idUsu = Integer.parseInt(cedula.getText());
+        int idUsu = -1;
+        try
+        {
+        idUsu = Integer.parseInt(cedula.getText());
+        }
+        catch(NumberFormatException ex)
+        {
+            JOptionPane.showMessageDialog(null, "La cedula debe ser numerica");
+            ex.printStackTrace();
+        }
         String pass = new String(contrasena.getPassword());
-       
+        
         if(contusuSis.autenticar(idUsu, pass)){        
             java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

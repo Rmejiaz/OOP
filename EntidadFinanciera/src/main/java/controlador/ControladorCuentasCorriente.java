@@ -13,10 +13,10 @@ import modelo.CuentaCorriente;
  * @author rafael
  */
 public class ControladorCuentasCorriente implements CRUD{
-    public static ArrayList<CuentaCorriente> arregloCuentasCorriente;
+    public static ArrayList<CuentaCorriente> arregloCuentasCorriente = new ArrayList<CuentaCorriente>();
     
     public ControladorCuentasCorriente(){
-        arregloCuentasCorriente = new ArrayList<CuentaCorriente>();
+       // arregloCuentasCorriente = new ArrayList<CuentaCorriente>();
     }
 
     @Override

@@ -35,7 +35,7 @@ public class PrincipalClientes {
         cliT.setDireccion(leerDatos.next());
         
         System.out.println("Digite el telefono del cliente");
-        cliT.setTelefono(leerDatos.nextInt());
+        cliT.setTelefono(leerDatos.nextLong());
         
         System.out.println("Digite la cedula del cliente");
         cliT.setCedula(leerDatos.nextInt());

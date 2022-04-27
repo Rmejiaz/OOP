@@ -12,8 +12,8 @@ public class Cliente extends Usuario implements Comparable<Cliente>{
 //    private CuentaAhorros cuentaAho;
 //    private CuentaCorriente cuentaCorr;
 
-    public Cliente(String nombre, String apellido, String direccion, int telefono, String correo, int cedula) {
-        super(nombre, apellido, direccion, telefono, correo, cedula);
+    public Cliente(String nombre, String apellido, String direccion, long telefono, String correo, int cedula, String contrasena) {
+        super(nombre, apellido, direccion, telefono, correo, cedula, contrasena);
     }
 
     public Cliente() {
@@ -28,6 +28,10 @@ public class Cliente extends Usuario implements Comparable<Cliente>{
         this.cedula = another.cedula;
 //        this.cuentaAho = another.cuentaAho;
 //        this.cuentaCorr = another.cuentaCorr;
+    }
+
+    public Cliente(String text, String text0, String text1, int parseInt, String text2, int parseInt0) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

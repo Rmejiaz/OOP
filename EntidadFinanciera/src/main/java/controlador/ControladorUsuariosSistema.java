@@ -11,7 +11,7 @@ import modelo.Administrador;
  * @author rafael
  */
 public class ControladorUsuariosSistema {
-    Administrador admin = new Administrador(123, "Admin123");
+    Administrador admin = new Administrador(1234, "1234");
     
     public boolean autenticar(int idUsuario, String contrasena){
         if(admin.getCedula() == idUsuario && admin.getContrasena().equals(contrasena))
