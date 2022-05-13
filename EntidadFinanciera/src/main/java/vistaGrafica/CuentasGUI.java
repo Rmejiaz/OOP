@@ -4,10 +4,19 @@
  */
 package vistaGrafica;
 
+import controlador.ConexionBD;
 import controlador.ControladorClientes;
 import controlador.ControladorCuentasCorriente;
 import controlador.ControladorCuentasAhorros;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Cliente;
 import modelo.CuentaAhorros;
 import modelo.CuentaCorriente;
 
@@ -24,12 +33,35 @@ public class CuentasGUI extends javax.swing.JFrame {
     private ControladorCuentasCorriente contrCuentasCorriente;
     private ControladorCuentasAhorros contrCuentasAhorros;
     ControladorClientes contrCli;
+    static DefaultTableModel model;
+    Object rowData[];
+    private ConexionBD connBD;
+    private Connection con;
     
     public CuentasGUI() {
         initComponents();
         contrCuentasCorriente = new ControladorCuentasCorriente();
         contrCuentasAhorros = new ControladorCuentasAhorros();
         contrCli = new ControladorClientes();
+        
+        model = (DefaultTableModel)jTableCuentasCorriente.getModel();
+        rowData = new Object [3];
+        
+        // Llenar la tabla con los datos del controlador:
+        for(CuentaAhorros cuentaAhorros:contrCuentasAhorros.arregloCuentasAhorros){
+            rowData[0] = cuentaAhorros.getIdCliente();
+            rowData[1] = cuentaAhorros.getIdCuentaAhorros();
+            rowData[2] = cuentaAhorros.getSaldoCuentaAhorros();
+            model.addRow(rowData);
+        }
+        
+        
+        for (Cliente c:ControladorClientes.arregloClientes)
+            jComboBoxIdTitular.addItem(Integer.toString(c.getCedula()));
+        
+    
+        connBD = new ConexionBD();
+        con = connBD.conexionMysql();
     }
 
     /**
@@ -49,14 +81,15 @@ public class CuentasGUI extends javax.swing.JFrame {
         jTextSaldoCuenta = new javax.swing.JTextField();
         jButtonInsertar = new javax.swing.JButton();
         jButtonConsultar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonBorrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableCuentasCorriente = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jTextIdTitular = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jComboBoxTipoCuenta = new javax.swing.JComboBox<>();
+        jComboBoxIdTitular = new javax.swing.JComboBox<>();
+        jLabelTipoCuenta = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
@@ -75,46 +108,47 @@ public class CuentasGUI extends javax.swing.JFrame {
             }
         });
 
-        jButtonConsultar.setText("Consultar");
+        jButtonConsultar.setText("Consultar Todas");
         jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConsultarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Modificar");
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Borrar");
+        jButtonBorrar.setText("Borrar");
+        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCuentasCorriente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Id Cuenta", "Saldo"
+                "Id Titular", "Id Cuenta", "Saldo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableCuentasCorriente);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel4.setText("Cedula del Titular");
-
-        jTextIdTitular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextIdTitularActionPerformed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setText("Tipo de Cuenta");
@@ -135,53 +169,56 @@ public class CuentasGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabelTipoCuenta.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelTipoCuenta.setText("Cuentas Ahorros");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButtonInsertar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonConsultar)))
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBoxTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextIdTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                        .addComponent(jButtonInsertar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonConsultar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonModificar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonBorrar)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(71, 71, 71))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextSaldoCuenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(71, 71, 71)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBoxTipoCuenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxIdTitular, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(47, 47, 47))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15)))))
                 .addGap(32, 32, 32))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelTipoCuenta)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -196,7 +233,7 @@ public class CuentasGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextIdTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxIdTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -209,19 +246,17 @@ public class CuentasGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonInsertar)
                     .addComponent(jButtonConsultar)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jButtonModificar)
+                    .addComponent(jButtonBorrar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(jLabelTipoCuenta)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextIdTitularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIdTitularActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextIdTitularActionPerformed
 
     private void jButtonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarActionPerformed
         // TODO add your handling code here:
@@ -230,27 +265,37 @@ public class CuentasGUI extends javax.swing.JFrame {
         CuentaCorriente cuentaCorriente = new CuentaCorriente();
         CuentaAhorros cuentaAhorros = new CuentaAhorros();
         if(tipo.equals("Corriente")){
-            cuentaCorriente.setIdCliente(Integer.parseInt(jTextIdTitular.getText()));
+            cuentaCorriente.setIdCliente(Integer.parseInt((String)jComboBoxIdTitular.getSelectedItem()));
             cuentaCorriente.setIdCuentaCorriente(jTextIdCuenta.getText());
             cuentaCorriente.setSaldoCuentaCorriente(Float.parseFloat(jTextSaldoCuenta.getText()));
-            if(contrCli.existeCliente(Integer.parseInt(jTextIdTitular.getText())))
+            if(contrCli.existeCliente(Integer.parseInt((String)jComboBoxIdTitular.getSelectedItem())))
             {
             if(!contrCuentasCorriente.insertar(cuentaCorriente))
                 JOptionPane.showMessageDialog(null, "Error al crear cuenta (Posible repetida)");
+            else{
+                insertBD(cuentaCorriente);
+            }
             }
             else
                 JOptionPane.showMessageDialog(null, "El cliente no existe en el sistema, debe crearlo primero.");
-       
         }
         else{ 
-            cuentaAhorros.setIdCliente(Integer.parseInt(jTextIdTitular.getText()));
+            cuentaAhorros.setIdCliente(Integer.parseInt((String)jComboBoxIdTitular.getSelectedItem()));
             cuentaAhorros.setIdCuentaAhorros(jTextIdCuenta.getText());
             cuentaAhorros.setSaldoCuentaAhorros(Float.parseFloat(jTextSaldoCuenta.getText()));
         
-            if(contrCli.existeCliente(Integer.parseInt(jTextIdTitular.getText())))
+            if(contrCli.existeCliente(Integer.parseInt((String)jComboBoxIdTitular.getSelectedItem())))
             {
             if(!contrCuentasAhorros.insertar(cuentaAhorros))
                 JOptionPane.showMessageDialog(null, "Error al crear cuenta (Posible repetida)");
+            else
+            {
+                rowData[0] = cuentaAhorros.getIdCliente();
+                rowData[1] = cuentaAhorros.getIdCuentaAhorros();
+                rowData[2] = cuentaAhorros.getSaldoCuentaAhorros();
+                model.addRow(rowData);
+                
+            }
             }
             else
                 JOptionPane.showMessageDialog(null, "El cliente no existe en el sistema, debe crearlo primero.");
@@ -259,13 +304,101 @@ public class CuentasGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonInsertarActionPerformed
 
+    
+    public void consultarDatos(){
+        
+        String query = "SELECT * FROM EntidadFinanciera.CUENTA_CORRIENTE";
+        
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = (Statement)con.createStatement();
+            
+            if(stmt.execute(query)){
+                rs = stmt.getResultSet();
+                while(rs.next()){
+                    rowData[0] = rs.getInt("Cedula");
+                    rowData[1] = rs.getString("idCuenta");
+                    rowData[2] = rs.getFloat("Saldo");
+                    CuentaCorriente tempcc = new CuentaCorriente(rs.getString("idCuenta"), rs.getFloat("Saldo"), rs.getInt("Cedula"));
+                    contrCuentasCorriente.insertar(tempcc);
+                    
+//                    model.addRow(rowData);
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Problemas al conectarse con la base de datos");
+        }
+        
+        
+    }
+    
+    
+    
+    public void insertBD(CuentaCorriente cuenta){
+        
+        String statement = "INSERT INTO CUENTA_CORRIENTE "
+                         + "VALUES("+cuenta.getIdCliente()+","
+                         +cuenta.getIdCuentaCorriente()+","+cuenta.getSaldoCuentaCorriente()+");";
+    
+//        Statement stmt = null;
+        try {
+            Statement stmt = (Statement)con.createStatement();
+            stmt.executeUpdate(statement);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Problemas al conectarse con la base de datos");
+        }
+    }
+    
+    
+    public void eliminarBD(CuentaCorriente cuenta){
+     String statement = "DELETE FROM CUENTA_CORRIENTE WHERE "+"idCuenta = "+cuenta.getIdCuentaCorriente();
+    
+//        Statement stmt = null;
+        try {
+            Statement stmt = (Statement)con.createStatement();
+            stmt.executeUpdate(statement);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Problemas al conectarse con la base de datos");
+        }
+        
+        
+    }
+    
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-        // TODO add your handling code here:
+        jLabelTipoCuenta.setText("Cuentas "+jComboBoxTipoCuenta.getSelectedItem());
+        
+        //Limpiar la tabla:
+        
+        int rowCount = model.getRowCount();
+        
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        
+        consultarDatos(); // consultar de la base de datos para llenar el arreglo del controlador
+        
         String tipo = (String)jComboBoxTipoCuenta.getSelectedItem();
-        if(tipo.equals("Ahorros"))
+        if(tipo.equals("Ahorros")){
             contrCuentasAhorros.consultarTodos();
-        else
+            for(CuentaAhorros cuentaAhorros:contrCuentasAhorros.arregloCuentasAhorros){
+                rowData[0] = cuentaAhorros.getIdCliente();
+                rowData[1] = cuentaAhorros.getIdCuentaAhorros();
+                rowData[2] = cuentaAhorros.getSaldoCuentaAhorros();
+                model.addRow(rowData);
+            }
+        }
+        else{
             contrCuentasCorriente.consultarTodos();
+            for(CuentaCorriente cuenta:contrCuentasCorriente.arregloCuentasCorriente){
+                rowData[0] = cuenta.getIdCliente();
+                rowData[1] = cuenta.getIdCuentaCorriente();
+                rowData[2] = cuenta.getSaldoCuentaCorriente();
+                model.addRow(rowData);
+            }
+        
+        }
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     private void jComboBoxTipoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoCuentaActionPerformed
@@ -275,6 +408,23 @@ public class CuentasGUI extends javax.swing.JFrame {
     private void jComboBoxTipoCuentaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jComboBoxTipoCuentaAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoCuentaAncestorAdded
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
+        // TODO add your handling code here:
+        int row = jTableCuentasCorriente.getSelectedRow();
+        
+        String idCuenta = jTableCuentasCorriente.getModel().getValueAt(row, 1).toString();
+        model.removeRow(row);
+        JOptionPane.showMessageDialog(null, "La cuenta con id "+idCuenta+" ha sido eliminada");
+        CuentaCorriente cuenta = new CuentaCorriente();
+        cuenta.setIdCuentaCorriente(idCuenta);
+        contrCuentasCorriente.borrar(cuenta);
+        
+    }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,20 +463,21 @@ public class CuentasGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonConsultar;
     private javax.swing.JButton jButtonInsertar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JComboBox<String> jComboBoxIdTitular;
     private javax.swing.JComboBox<String> jComboBoxTipoCuenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelTipoCuenta;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableCuentasCorriente;
     private javax.swing.JTextField jTextIdCuenta;
-    private javax.swing.JTextField jTextIdTitular;
     private javax.swing.JTextField jTextSaldoCuenta;
     // End of variables declaration//GEN-END:variables
 }
