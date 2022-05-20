@@ -26,6 +26,9 @@ public class Cajero extends Usuario implements Comparable<Cajero>{
     public Cajero() {
     }
     
+    public Cajero(int cedula, String contrasena){
+        super(cedula, contrasena);
+    }
     
     public Cajero(Cajero another){
         this.idCajero = another.idCajero;
@@ -36,6 +39,7 @@ public class Cajero extends Usuario implements Comparable<Cajero>{
         this.telefono = another.telefono;
         this.correo = another.correo;
         this.cedula = another.cedula;
+        this.contrasena = another.contrasena;
     }
     
     

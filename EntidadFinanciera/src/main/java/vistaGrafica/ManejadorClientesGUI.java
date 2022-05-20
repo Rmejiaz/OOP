@@ -19,7 +19,7 @@ import modelo.CuentaCorriente;
  * @author rafael
  */
 
-public class ClienteGUI extends javax.swing.JFrame {
+public class ManejadorClientesGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form ClienteGUI
@@ -33,7 +33,7 @@ public class ClienteGUI extends javax.swing.JFrame {
     private Connection con;
     
     
-    public ClienteGUI() {
+    public ManejadorClientesGUI() {
         initComponents();
         contrCli = new ControladorClientes();
         model = (DefaultTableModel)jTableClientes.getModel();

@@ -24,7 +24,7 @@ import modelo.CuentaCorriente;
  *
  * @author rafael
  */
-public class CuentasGUI extends javax.swing.JFrame {
+public class ManejadorCuentasGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form CuentasCorrienteGUI
@@ -38,7 +38,7 @@ public class CuentasGUI extends javax.swing.JFrame {
     private ConexionBD connBD;
     private Connection con;
     
-    public CuentasGUI() {
+    public ManejadorCuentasGUI() {
         initComponents();
         contrCuentasCorriente = new ControladorCuentasCorriente();
         contrCuentasAhorros = new ControladorCuentasAhorros();
@@ -46,6 +46,11 @@ public class CuentasGUI extends javax.swing.JFrame {
         
         model = (DefaultTableModel)jTableCuentasCorriente.getModel();
         rowData = new Object [3];
+        
+        // Llenar el controlador de acuerdo a la base de datos:
+        connBD = new ConexionBD();
+        con = connBD.conexionMysql();
+        consultarDatos();
         
         // Llenar la tabla con los datos del controlador:
         for(CuentaAhorros cuentaAhorros:contrCuentasAhorros.arregloCuentasAhorros){
@@ -59,9 +64,6 @@ public class CuentasGUI extends javax.swing.JFrame {
         for (Cliente c:ControladorClientes.arregloClientes)
             jComboBoxIdTitular.addItem(Integer.toString(c.getCedula()));
         
-    
-        connBD = new ConexionBD();
-        con = connBD.conexionMysql();
     }
 
     /**
@@ -187,10 +189,7 @@ public class CuentasGUI extends javax.swing.JFrame {
                         .addComponent(jButtonModificar)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonBorrar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(71, 71, 71))
+                        .addGap(0, 32, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,18 +201,21 @@ public class CuentasGUI extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jComboBoxTipoCuenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jComboBoxIdTitular, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(47, 47, 47))
+                                .addGap(79, 79, 79))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15))
+                                .addGap(47, 47, 47))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15)))))
-                .addGap(32, 32, 32))
+                                .addGap(47, 47, 47))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(102, 102, 102))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,8 +424,8 @@ public class CuentasGUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "La cuenta con id "+idCuenta+" ha sido eliminada");
         CuentaCorriente cuenta = new CuentaCorriente();
         cuenta.setIdCuentaCorriente(idCuenta);
-        contrCuentasCorriente.borrar(cuenta);
-        
+        contrCuentasCorriente.borrar(cuenta); // Eliminar del controlador
+        eliminarBD(cuenta);  // Eliminar de la base de datos
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     /**

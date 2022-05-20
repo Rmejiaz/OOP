@@ -14,10 +14,31 @@ import java.util.Collections;
  */
 public class ControladorAdministradores implements CRUD{
 
-    public static ArrayList<Administrador> arregloAdministradores;
+    public static ArrayList<Administrador> arregloAdministradores = new ArrayList<Administrador>();
 
     public ControladorAdministradores() {
-        arregloAdministradores = new ArrayList<Administrador>();
+//        arregloAdministradores = 
+    }
+    
+    
+    public boolean autenticar(int cedula, String contrasena){
+        
+        
+        if(cedula == 1234 & contrasena.equals("1234"))
+            return true;
+        
+        
+        Administrador admin = new Administrador(cedula, contrasena);
+        
+        Collections.sort(arregloAdministradores);
+        int pos = Collections.binarySearch(arregloAdministradores, admin, null);
+        
+        if (pos<0)
+            return false;
+        else
+        {
+            return admin.getContrasena().equals(contrasena); // Solo lo valida si la contrasena si coincide
+        }
     }
     
     

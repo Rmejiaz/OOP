@@ -1,0 +1,55 @@
+# Crear las tablas
+CREATE TABLE EntidadFinanciera.CUENTA_CORRIENTE(
+Cedula INT NOT NULL,
+idCuenta VARCHAR(10) NOT NULL PRIMARY KEY,
+Saldo FLOAT NOT NULL);
+
+CREATE TABLE EntidadFinanciera.CLIENTE(
+Cedula INT NOT NULL PRIMARY KEY,
+Nombre VARCHAR(15) NOT NULL,
+Apellido VARCHAR(15) NOT NULL,
+Direccion VARCHAR(20) NOT NULL,
+Telefono INT NOT NULL,
+Correo VARCHAR(20) NOT NULL,
+Contrasena VARCHAR(25) NOT NULL
+);
+
+CREATE TABLE EntidadFinanciera.CUENTA_AHORROS(
+Cedula INT NOT NULL,
+idCuenta INT NOT NULL PRIMARY KEY,
+Saldo FLOAT NOT NULL);
+
+CREATE TABLE EntidadFinanciera.ADMINISTRADOR(
+Cedula INT NOT NULL,
+idAdmin INT NOT NULL,
+Nombre VARCHAR(15) NOT NULL,
+Apellido VARCHAR(15) NOT NULL,
+Direccion VARCHAR(20) NOT NULL,
+Telefono INT NOT NULL,
+Correo VARCHAR(20) NOT NULL,
+Contrasena VARCHAR(25) NOT NULL,
+PRIMARY KEY(Cedula, idAdmin)
+);
+
+CREATE TABLE EntidadFinanciera.CAJERO(
+Cedula INT NOT NULL,
+Nombre VARCHAR(15) NOT NULL,
+Apellido VARCHAR(15) NOT NULL,
+Direccion VARCHAR(20) NOT NULL,
+Telefono INT NOT NULL,
+Correo VARCHAR(20) NOT NULL,
+Contrasena VARCHAR(25) NOT NULL,
+idCajero INT NOT NULL,
+Sueldo FLOAT NOT NULL,
+PRIMARY KEY(Cedula, idCajero)
+);
+
+
+INSERT INTO EntidadFinanciera.CUENTA_CORRIENTE VALUES (100, 10, 10000);
+
+select *
+from EntidadFinanciera.CUENTA_CORRIENTE;
+
+
+delete from EntidadFinanciera.CUENTA_CORRIENTE WHERE idCuenta = 10;
+

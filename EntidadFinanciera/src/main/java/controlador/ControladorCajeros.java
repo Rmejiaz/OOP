@@ -14,11 +14,28 @@ import modelo.Cajero;
  */
 public class ControladorCajeros implements CRUD{
 
-    public static ArrayList<Cajero> arregloCajeros;
+    public static ArrayList<Cajero> arregloCajeros = new ArrayList<Cajero>();
 
     public ControladorCajeros() {
-        arregloCajeros = new ArrayList<Cajero>();
+//        arregloCajeros = new ArrayList<Cajero>();
     }
+    
+    public boolean autenticar(int cedula, String contrasena){
+        
+      
+        Cajero caj = new Cajero(cedula, contrasena);
+        
+        Collections.sort(arregloCajeros);
+        int pos = Collections.binarySearch(arregloCajeros, caj, null);
+        
+        if (pos<0)
+            return false;
+        else
+        {
+            return caj.getContrasena().equals(contrasena); // Solo lo valida si la contrasena si coincide
+        }
+    }
+    
     
     
     @Override

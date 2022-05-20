@@ -1,8 +1,11 @@
 package vistaGrafica;
 
+import controlador.ControladorAdministradores;
+import controlador.ControladorCajeros;
 import controlador.ControladorUsuariosSistema;
 import javax.swing.JOptionPane;
-
+import controlador.ControladorClientes;
+import modelo.Cliente;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -17,8 +20,19 @@ public class PrincipalGUI extends javax.swing.JFrame {
     /**
      * Creates new form AutenticarUsuarios1
      */
+    
+    
+    ControladorAdministradores contrAdmin;
+    ControladorClientes contrCli;
+    ControladorCajeros contrCaj;
+    
     public PrincipalGUI() {
         initComponents();
+        
+        // Se necesitan los controladores para poder autenticar a los usuarios según su tipo
+        contrAdmin = new ControladorAdministradores();
+        contrCli = new ControladorClientes();
+        contrCaj = new ControladorCajeros();
     }
 
     /**
@@ -36,6 +50,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
         cedula = new javax.swing.JTextField();
         entrar = new javax.swing.JButton();
         contrasena = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBoxTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Autenticación");
@@ -67,6 +83,15 @@ public class PrincipalGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Rol");
+
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "Cajero", "Administrador" }));
+        jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,11 +102,13 @@ public class PrincipalGUI extends javax.swing.JFrame {
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cedula, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                            .addComponent(contrasena)))
+                            .addComponent(cedula)
+                            .addComponent(contrasena)
+                            .addComponent(jComboBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(entrar)))
@@ -96,17 +123,21 @@ public class PrincipalGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(48, 48, 48)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(29, 29, 29)
                 .addComponent(entrar)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -121,9 +152,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_contrasenaActionPerformed
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        // TODO add your handling code here:
-        ControladorUsuariosSistema contusuSis = new ControladorUsuariosSistema();
+
         int idUsu = -1;
+        
         try
         {
         idUsu = Integer.parseInt(cedula.getText());
@@ -133,18 +164,54 @@ public class PrincipalGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La cedula debe ser numerica");
             ex.printStackTrace();
         }
-        String pass = new String(contrasena.getPassword());
+        String pass = new String(contrasena.getPassword());        
         
-        if(contusuSis.autenticar(idUsu, pass)){        
-            java.awt.EventQueue.invokeLater(new Runnable() {
+
+        if (jComboBoxTipo.getSelectedItem().equals("Administrador")){
+            if(contrAdmin.autenticar(idUsu, pass)){
+                java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuGUI().setVisible(true);
+                new MenuAdminGUI().setVisible(true);
             }
-        }); 
+            });
         }
-        else
-            JOptionPane.showMessageDialog(null, "Usuario o constraseña erroneos");
+            else
+                JOptionPane.showMessageDialog(null, "Usuario o constraseña erroneos");
+        }
+        
+        if (jComboBoxTipo.getSelectedItem().equals("Cliente")){
+            if(contrCli.autenticar(idUsu, pass)){
+                Cliente cli = new Cliente(idUsu, pass);
+                final Cliente cli1 = (Cliente)contrCli.consultarUno(cli);
+                java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MenuClientesGUI(cli1).setVisible(true);
+            }
+            });
+        }
+            else
+                JOptionPane.showMessageDialog(null, "Usuario o constraseña erroneos");
+        }
+        
+        if (jComboBoxTipo.getSelectedItem().equals("Cajero")){
+            if(contrCaj.autenticar(idUsu, pass)){
+                java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MenuAdminGUI().setVisible(true);
+            }
+            });
+        }
+            else
+                JOptionPane.showMessageDialog(null, "Usuario o constraseña erroneos");
+        }
+        
+        
+        
     }//GEN-LAST:event_entrarActionPerformed
+
+    private void jComboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,8 +255,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JTextField cedula;
     private javax.swing.JPasswordField contrasena;
     private javax.swing.JButton entrar;
+    private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

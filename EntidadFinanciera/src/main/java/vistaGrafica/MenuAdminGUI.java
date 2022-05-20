@@ -8,12 +8,12 @@ package vistaGrafica;
  *
  * @author rafael
  */
-public class MenuGUI extends javax.swing.JFrame {
+public class MenuAdminGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form PrincipalGUI
      */
-    public MenuGUI() {
+    public MenuAdminGUI() {
         initComponents();
     }
 
@@ -26,83 +26,98 @@ public class MenuGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonClientes = new javax.swing.JButton();
+        jButtonCajeros = new javax.swing.JButton();
+        jButtonAdministradores = new javax.swing.JButton();
+        jButtonCuentas = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
-        setTitle("Menu Principal");
+        setTitle("Menu Administradores");
 
-        jMenu1.setText("Manejadores de Usuarios");
-
-        jMenuItem1.setText("Cajeros");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonClientes.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonClientes.setText("Clientes");
+        jButtonClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jButtonClientesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Clientes");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCajeros.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonCajeros.setText("Cajeros");
+
+        jButtonAdministradores.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonAdministradores.setText("Administradores");
+        jButtonAdministradores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jButtonAdministradoresActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Manejador de Cuentas");
-
-        jMenuItem3.setText("Cuentas");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCuentas.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonCuentas.setText("Cuentas ");
+        jButtonCuentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jButtonCuentasActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 583, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(129, 129, 129)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAdministradores)
+                    .addComponent(jButtonCajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 389, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jButtonClientes)
+                .addGap(46, 46, 46)
+                .addComponent(jButtonCajeros)
+                .addGap(58, 58, 58)
+                .addComponent(jButtonAdministradores)
+                .addGap(54, 54, 54)
+                .addComponent(jButtonCuentas)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CuentasGUI().setVisible(true);
-            }
-        });
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClienteGUI().setVisible(true);
+                new ManejadorClientesGUI().setVisible(true);
+            }
+        }); 
+    }//GEN-LAST:event_jButtonClientesActionPerformed
+
+    private void jButtonCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCuentasActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ManejadorCuentasGUI().setVisible(true);
             }
         });
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jButtonCuentasActionPerformed
+
+    private void jButtonAdministradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministradoresActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ManejadorAdmins().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonAdministradoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,11 +155,10 @@ public class MenuGUI extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JButton jButtonAdministradores;
+    private javax.swing.JButton jButtonCajeros;
+    private javax.swing.JButton jButtonClientes;
+    private javax.swing.JButton jButtonCuentas;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }

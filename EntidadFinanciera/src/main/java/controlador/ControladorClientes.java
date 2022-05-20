@@ -22,6 +22,24 @@ public class ControladorClientes implements CRUD{
 //        arregloClientes = new ArrayList<Cliente>();
     }
     
+    
+    public boolean autenticar(int cedula, String contrasena){
+        
+        
+        Cliente cli = new Cliente(cedula, contrasena);
+        
+        Collections.sort(arregloClientes);
+        int pos = Collections.binarySearch(arregloClientes, cli, null);
+        
+        if (pos<0)
+            return false;
+        else
+        {
+            return cli.getContrasena().equals(contrasena); // Solo lo valida si la contrasena si coincide
+        }
+    }
+    
+    
     @Override
     public boolean insertar(Object obj) {
         boolean inserto = true;
