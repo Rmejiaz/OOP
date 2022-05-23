@@ -63,7 +63,7 @@ public class ConsultarCuentas extends javax.swing.JFrame {
         
         for(CuentaCorriente cuenta: contrCuentasCorr.arregloCuentasCorriente){
             if(cuenta.getIdCliente() == cli.getCedula()){
-                rowData[0] = cuenta.getIdCliente();
+                rowData[0] = cuenta.getIdCuentaCorriente();
                 rowData[1] = cuenta.getSaldoCuentaCorriente();
                 modelCorr.addRow(rowData);
             }

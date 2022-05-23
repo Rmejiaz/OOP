@@ -6,6 +6,7 @@ package vistaGrafica;
 
 import controlador.ConexionBD;
 import controlador.ControladorClientes;
+import excepciones.VerificarNombreUsuario;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -224,6 +225,17 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
 
     private void jButtonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarActionPerformed
         // TODO add your handling code here:
+        
+        Cliente cli0 = new Cliente();
+        
+        try{
+            VerificarNombreUsuario.verificar(jTextNombre.getText());
+            cli0.setNombre(jTextNombre.getText());
+        }
+        catch(VerificarNombreUsuario ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+
         Cliente cli = new Cliente(jTextNombre.getText(), jTextApellido.getText(), jTextDireccion.getText(), Long.parseLong(jTextTelefono.getText()), jTextCorreo.getText(), Integer.parseInt(jTextCedula.getText()), jTextContrasena.getText());
         
         

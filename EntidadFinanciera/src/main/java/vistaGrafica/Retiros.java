@@ -6,6 +6,8 @@ package vistaGrafica;
 
 import controlador.ControladorCuentasAhorros;
 import controlador.ControladorCuentasCorriente;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.JComboBox;
 import modelo.Cliente;
 import modelo.CuentaAhorros;
@@ -43,10 +45,33 @@ public class Retiros extends javax.swing.JFrame {
             }
         }
         
-        jLabelDisponible.setVisible(false);
         
-    }
+        
+        jToggleButton1.addItemListener(new ItemListener(){
+ 
+            @Override
+            public void itemStateChanged(ItemEvent itemEvent) {
+                String cuenta = (String)jComboCuenta.getSelectedItem(); 
+                String idCuenta = cuenta.replaceAll("[^0-9]", "");
+                String tipo = cuenta.replaceAll("[0-9]", "");
 
+                jLabelDisponible.setVisible(true);
+                if(tipo.equals("Ahorros - ")){
+                    CuentaAhorros cuentaAho = new CuentaAhorros();
+                    cuentaAho.setIdCuentaAhorros(idCuenta);
+
+                    cuentaAho = (CuentaAhorros)contrCuentasAho.consultarUno(cuentaAho);
+                        int estado = itemEvent.getStateChange();
+                        if(estado == ItemEvent.SELECTED){
+                            jLabelTotal.setText("$ " +cuentaAho.getSaldoCuentaAhorros());
+                        } else {
+                            jLabelTotal.setText("******");
+                        }
+                    }
+                }});
+        
+    }         
+            
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,6 +91,7 @@ public class Retiros extends javax.swing.JFrame {
         jLabelTotal = new javax.swing.JLabel();
         jLabelDisponible = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
@@ -110,6 +136,9 @@ public class Retiros extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 255));
         jLabel4.setText("Retiro");
 
+        jToggleButton1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jToggleButton1.setText("👁️");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,9 +151,6 @@ public class Retiros extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelDisponible)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
@@ -136,7 +162,12 @@ public class Retiros extends javax.swing.JFrame {
                             .addComponent(jComboCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addContainerGap(125, Short.MAX_VALUE))))
+                        .addContainerGap(80, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelDisponible)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jToggleButton1)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +181,8 @@ public class Retiros extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDisponible)
-                    .addComponent(jLabelTotal))
+                    .addComponent(jLabelTotal)
+                    .addComponent(jToggleButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -159,7 +191,7 @@ public class Retiros extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jButtonRetirar)
                 .addGap(29, 29, 29))
         );
@@ -191,9 +223,6 @@ public class Retiros extends javax.swing.JFrame {
 
     private void jComboCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCuentaActionPerformed
         // TODO add your handling code here:
-        
-        
-        
         
         
     }//GEN-LAST:event_jComboCuentaActionPerformed
@@ -244,5 +273,6 @@ public class Retiros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTotal;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldMonto;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
