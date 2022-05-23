@@ -228,7 +228,7 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
         
         
         if(!contrCli.insertar(cli))
-            JOptionPane.showMessageDialog(null, "Error al insertar corriente (posible repetido)");
+            JOptionPane.showMessageDialog(null, "Error al insertar cliente (posible repetido)");
         
         else{
             rowData[0] = cli.getCedula();

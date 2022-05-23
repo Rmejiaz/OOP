@@ -35,6 +35,7 @@ public class MenuClientesGUI extends javax.swing.JFrame {
         jButtonTransaccion = new javax.swing.JButton();
         jButtonRetirar = new javax.swing.JButton();
         jLabelBienvenida = new javax.swing.JLabel();
+        jButtonDatos = new javax.swing.JButton();
 
         jButtonConsultar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonConsultar.setText("Consultas");
@@ -49,10 +50,23 @@ public class MenuClientesGUI extends javax.swing.JFrame {
 
         jButtonRetirar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonRetirar.setText("Retirar");
+        jButtonRetirar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRetirarActionPerformed(evt);
+            }
+        });
 
         jLabelBienvenida.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabelBienvenida.setForeground(new java.awt.Color(0, 0, 255));
         jLabelBienvenida.setText("jLabel1");
+
+        jButtonDatos.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonDatos.setText("Datos Personales");
+        jButtonDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDatosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,21 +82,24 @@ public class MenuClientesGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButtonTransaccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonConsultar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonRetirar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(129, Short.MAX_VALUE))
+                            .addComponent(jButtonRetirar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabelBienvenida)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(jButtonConsultar)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonTransaccion)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonRetirar)
-                .addGap(26, 26, 26))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonDatos)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -96,6 +113,22 @@ public class MenuClientesGUI extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_jButtonConsultarActionPerformed
+
+    private void jButtonRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetirarActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Retiros(cli).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonRetirarActionPerformed
+
+    private void jButtonDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDatosActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new DatosCliente(cli).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonDatosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +167,7 @@ public class MenuClientesGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConsultar;
+    private javax.swing.JButton jButtonDatos;
     private javax.swing.JButton jButtonRetirar;
     private javax.swing.JButton jButtonTransaccion;
     private javax.swing.JLabel jLabelBienvenida;

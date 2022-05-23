@@ -44,6 +44,11 @@ public class MenuAdminGUI extends javax.swing.JFrame {
 
         jButtonCajeros.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonCajeros.setText("Cajeros");
+        jButtonCajeros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCajerosActionPerformed(evt);
+            }
+        });
 
         jButtonAdministradores.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonAdministradores.setText("Administradores");
@@ -118,6 +123,14 @@ public class MenuAdminGUI extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_jButtonAdministradoresActionPerformed
+
+    private void jButtonCajerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCajerosActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ManejadorCajeros().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonCajerosActionPerformed
 
     /**
      * @param args the command line arguments

@@ -40,6 +40,7 @@ public class ConsultarCuentas extends javax.swing.JFrame {
         initComponents();
         this.cli = cli;
         contrCuentasAho = new ControladorCuentasAhorros();
+        contrCuentasCorr = new ControladorCuentasCorriente();
         modelAho = (DefaultTableModel)jTableAhorros.getModel();
         modelCorr = (DefaultTableModel)jTableCorriente.getModel();
         rowData = new Object [2];
