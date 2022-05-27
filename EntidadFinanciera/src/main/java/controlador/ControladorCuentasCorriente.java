@@ -19,6 +19,16 @@ public class ControladorCuentasCorriente implements CRUD{
        // arregloCuentasCorriente = new ArrayList<CuentaCorriente>();
     }
 
+    
+    
+    public boolean consultarCliente(int idCliente){
+        for(CuentaCorriente cuenta:arregloCuentasCorriente){
+            if(cuenta.getIdCliente() == idCliente)
+                return true; // Si encuentra una cuenta del cliente, inmediatamente retorna true
+        }
+        return false; // Si se sale del ciclo es porque no encontró ninguna cuenta del cliente
+    }
+    
     @Override
     public boolean insertar(Object obj) {
         boolean inserto = true;

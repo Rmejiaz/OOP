@@ -4,6 +4,11 @@
  */
 package vistaGrafica;
 
+import controlador.ControladorAdministradores;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Administrador;
+
 /**
  *
  * @author rafael
@@ -13,8 +18,45 @@ public class ManejadorAdmins extends javax.swing.JFrame {
     /**
      * Creates new form ControladorAdmins
      */
+    
+    ControladorAdministradores contrAdmins;
+    private DefaultTableModel model;
+    Object rowData[];
+    
     public ManejadorAdmins() {
         initComponents();
+        
+        contrAdmins = new ControladorAdministradores();
+        
+        model = (DefaultTableModel)jTableAdmins.getModel();
+        rowData = new Object [7];
+        
+        actualizarTabla();
+        
+    }
+    
+    
+    private void llenarTabla(){
+        for(Administrador admin:contrAdmins.arregloAdministradores){
+            rowData[0] = admin.getCedula();
+            rowData[1] = admin.getIdAdmin();
+            rowData[2] = admin.getNombre();
+            rowData[3] = admin.getApellido();
+            rowData[4] = admin.getTelefono();
+            rowData[5] = admin.getCorreo();
+            rowData[6] = admin.getDireccion();
+            
+            model.addRow(rowData);
+        }
+    }
+    
+    private void vaciarTabla(){
+        model.setRowCount(0);
+    }
+    
+    private void actualizarTabla(){
+        vaciarTabla();
+        llenarTabla();
     }
 
     /**
@@ -27,40 +69,178 @@ public class ManejadorAdmins extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableAdmins = new javax.swing.JTable();
+        jButtonNuevo = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonOrdenar = new javax.swing.JButton();
+        jButtonActualizar = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAdmins.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Cedula", "idAdmin", "Nombre", "Apellido", "Telefono", "Correo", "Direccion"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableAdmins);
+
+        jButtonNuevo.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonNuevo.setText("Nuevo");
+        jButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNuevoActionPerformed(evt);
+            }
+        });
+
+        jButtonEliminar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
+
+        jButtonModificar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
+
+        jButtonOrdenar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonOrdenar.setText("Ordenar");
+        jButtonOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenarActionPerformed(evt);
+            }
+        });
+
+        jButtonActualizar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonActualizar.setText("Actualizar");
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonOrdenar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jButtonNuevo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEliminar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonModificar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonOrdenar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonActualizar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(18, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        //También se debe consultar de la bd antes
+        actualizarTabla();
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
+
+    private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
+        contrAdmins.ordenar();
+        actualizarTabla();
+    }//GEN-LAST:event_jButtonOrdenarActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        
+        int row = jTableAdmins.getSelectedRow();
+        
+        int cedula = (int)jTableAdmins.getModel().getValueAt(row, 0);
+        
+        
+        Administrador admin = new Administrador();
+        admin.setCedula(cedula);
+        
+        
+        // También hay que eliminarlo de la bd
+        
+        if(!contrAdmins.borrar(admin))
+            JOptionPane.showMessageDialog(null, "Error al eliminar administrador");
+        else
+            JOptionPane.showMessageDialog(null, "El administrador con cedula "+cedula+" ha sido eliminado exitosamente");
+        
+        
+        
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        int row = jTableAdmins.getSelectedRow();
+        
+        int cedula = (int)jTableAdmins.getModel().getValueAt(row, 0);
+        
+        
+        Administrador admin = new Administrador();
+        admin.setCedula(cedula);
+        
+        Administrador new_admin = new Administrador();
+        
+        
+        new_admin.setNombre(jTableAdmins.getModel().getValueAt(row, 2).toString());
+        new_admin.setApellido(jTableAdmins.getModel().getValueAt(row, 3).toString());
+        new_admin.setTelefono((long)jTableAdmins.getModel().getValueAt(row, 4));
+        new_admin.setCorreo(jTableAdmins.getModel().getValueAt(row, 5).toString());
+        new_admin.setDireccion(jTableAdmins.getModel().getValueAt(row, 6).toString());
+        
+        
+        if(!contrAdmins.modificar(admin, new_admin))
+            JOptionPane.showMessageDialog(null, "Error al modificar administrador");
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
+        // TODO add your handling code here:
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InsertarAdmin().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonNuevoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,7 +279,12 @@ public class ManejadorAdmins extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonNuevo;
+    private javax.swing.JButton jButtonOrdenar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableAdmins;
     // End of variables declaration//GEN-END:variables
 }

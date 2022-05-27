@@ -5,6 +5,7 @@
 package vistaGrafica;
 
 import controlador.ControladorCajeros;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cajero;
 
@@ -107,12 +108,27 @@ public class ManejadorCajeros extends javax.swing.JFrame {
 
         jButtonEliminar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
 
         jButtonModificar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
 
         jButtonOrdenar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonOrdenar.setText("Ordenar");
+        jButtonOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenarActionPerformed(evt);
+            }
+        });
 
         jButtonActualizar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonActualizar.setText("Actualizar");
@@ -171,8 +187,36 @@ public class ManejadorCajeros extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNuevoActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        //tambien se debe consultar de la bd
         actualizarTabla();
     }//GEN-LAST:event_jButtonActualizarActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        int row = jTableCajeros.getSelectedRow();
+        
+        int cedula = (int)jTableCajeros.getModel().getValueAt(row, 0);
+        
+        
+        Cajero caj = new Cajero();
+        caj.setCedula(cedula);
+        
+        
+        // También hay que eliminarlo de la bd
+        
+        if(!contrCaj.borrar(caj))
+            JOptionPane.showMessageDialog(null, "Error al eliminar cajero");
+        else
+            JOptionPane.showMessageDialog(null, "El cajero con cedula "+cedula+" ha sido eliminado exitosamente");
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
+        contrCaj.ordenar();
+        actualizarTabla();
+    }//GEN-LAST:event_jButtonOrdenarActionPerformed
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     /**
      * @param args the command line arguments

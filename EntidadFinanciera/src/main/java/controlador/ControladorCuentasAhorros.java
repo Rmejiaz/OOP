@@ -19,6 +19,16 @@ public class ControladorCuentasAhorros implements CRUD{
     public ControladorCuentasAhorros(){
         //arregloCuentasAhorros = new ArrayList<CuentaAhorros>();
     }
+    
+    
+    public boolean consultarCliente(int idCliente){
+        for (CuentaAhorros cuenta:arregloCuentasAhorros){
+            if(cuenta.getIdCliente() == idCliente){
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public boolean insertar(Object obj) {

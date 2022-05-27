@@ -6,6 +6,8 @@ package vistaGrafica;
 
 import controlador.ConexionBD;
 import controlador.ControladorClientes;
+import controlador.ControladorCuentasAhorros;
+import controlador.ControladorCuentasCorriente;
 import excepciones.VerificarNombreUsuario;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,6 +28,8 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
      * Creates new form ClienteGUI
      */
     private ControladorClientes contrCli;
+    private ControladorCuentasCorriente contrCorr;
+    private ControladorCuentasAhorros contrAho;
     private DefaultTableModel model;
 
     Object rowData[];
@@ -37,18 +41,15 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
     public ManejadorClientesGUI() {
         initComponents();
         contrCli = new ControladorClientes();
+        contrCorr = new ControladorCuentasCorriente();
+        contrAho = new ControladorCuentasAhorros();
+        
+        
         model = (DefaultTableModel)jTableClientes.getModel();
         rowData = new Object [6];
         
-        for(Cliente cli:contrCli.arregloClientes){
-            rowData[0] = cli.getCedula();
-            rowData[1] = cli.getNombre();
-            rowData[2] = cli.getApellido();
-            rowData[3] = cli.getDireccion();
-            rowData[4] = cli.getTelefono();
-            rowData[5] = cli.getCorreo();
-            model.addRow(rowData);
-        }
+        actualizarTabla();
+        
     }
 
     /**
@@ -79,6 +80,9 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
         jTextContrasena = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();
+        jButtonEliminar = new javax.swing.JButton();
+        jButtonOrdenar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
@@ -102,6 +106,7 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel7.setText("Direccion");
 
+        jButtonInsertar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonInsertar.setText("Insertar");
         jButtonInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +114,7 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
             }
         });
 
+        jButtonConsultar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonConsultar.setText("Consultar");
         jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,8 +138,40 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
             new String [] {
                 "Id", "Nombre", "Apellido", "Direccion", "Telefono", "Correo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTableClientes);
+
+        jButtonEliminar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
+
+        jButtonOrdenar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonOrdenar.setText("Ordenar");
+        jButtonOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenarActionPerformed(evt);
+            }
+        });
+
+        jButtonModificar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,45 +182,50 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(272, 272, 272))
             .addGroup(layout.createSequentialGroup()
+                .addGap(94, 94, 94)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel3))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel3))
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(78, 78, 78)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(9, 9, 9)
-                                        .addComponent(jTextContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel4))
-                                        .addGap(32, 32, 32)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(78, 78, 78)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(459, 459, 459))))
+                                .addComponent(jLabel8)
+                                .addGap(9, 9, 9)
+                                .addComponent(jTextContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4))
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jButtonInsertar)
-                        .addGap(50, 50, 50)
-                        .addComponent(jButtonConsultar)))
+                        .addComponent(jTextDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(459, 459, 459)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonInsertar)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonConsultar)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonEliminar)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonOrdenar)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonModificar)
+                .addGap(90, 90, 90))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,11 +254,14 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(74, 74, 74)
+                .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonInsertar)
-                    .addComponent(jButtonConsultar))
-                .addGap(35, 35, 35)
+                    .addComponent(jButtonConsultar)
+                    .addComponent(jButtonEliminar)
+                    .addComponent(jButtonOrdenar)
+                    .addComponent(jButtonModificar))
+                .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -223,6 +269,31 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    private void vaciarTabla(){
+        model.setRowCount(0);     
+    }
+    
+    
+    private void llenarTabla(){
+        for(Cliente cli:contrCli.arregloClientes){
+            rowData[0] = cli.getCedula();
+            rowData[1] = cli.getNombre();
+            rowData[2] = cli.getApellido();
+            rowData[3] = cli.getDireccion();
+            rowData[4] = cli.getTelefono();
+            rowData[5] = cli.getCorreo();
+            model.addRow(rowData);
+        }
+    }
+    
+    private void actualizarTabla(){
+        vaciarTabla();
+        llenarTabla();
+    }
+    
+    
     private void jButtonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarActionPerformed
         // TODO add your handling code here:
         
@@ -258,12 +329,69 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
         // TODO add your handling code here:
-        contrCli.consultarTodos();
+        
+        // Aquí también iría el metodo de consultar de la base de datos
+        actualizarTabla();
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     private void jTextContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContrasenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextContrasenaActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        
+        int row = jTableClientes.getSelectedRow();
+        
+        int idCliente = (int)jTableClientes.getModel().getValueAt(row, 0);
+        
+        
+        Cliente cli = new Cliente();
+        cli.setCedula(idCliente);
+        
+        
+        // Primero hay que verificar si el cliente tiene cuentas abiertas:
+        
+        if(contrCorr.consultarCliente(idCliente) || contrAho.consultarCliente(idCliente)){
+            JOptionPane.showMessageDialog(null, "El cliente con cedula "+idCliente + " no puede eliminarse, pues todavía tiene cuentas abiertas en el banco");
+        }
+        else{
+        model.removeRow(row);
+        contrCli.borrar(cli);
+        
+        JOptionPane.showMessageDialog(null, "El cliente con cedula "+idCliente + " ha sido eliminado exitosamente");    
+        
+        // Falta borrarlo de la base de datos
+        }
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
+        contrCli.ordenar();
+        actualizarTabla();
+    }//GEN-LAST:event_jButtonOrdenarActionPerformed
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        int row = jTableClientes.getSelectedRow();
+        
+        int idCliente = (int)jTableClientes.getModel().getValueAt(row, 0);
+        
+        
+        Cliente cli = new Cliente();
+        cli.setCedula(idCliente);
+        
+        Cliente new_cli = new Cliente();
+        
+        
+        new_cli.setNombre(jTableClientes.getModel().getValueAt(row, 1).toString());
+        new_cli.setApellido(jTableClientes.getModel().getValueAt(row, 2).toString());
+        new_cli.setDireccion(jTableClientes.getModel().getValueAt(row, 3).toString());
+        new_cli.setTelefono((long)jTableClientes.getModel().getValueAt(row, 4));
+        new_cli.setCorreo(jTableClientes.getModel().getValueAt(row, 5).toString());
+        
+        
+        if(!contrCli.modificar(cli, new_cli))
+            JOptionPane.showMessageDialog(null, "Error al modificar cliente");
+        
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     
         public void insertBD(Cliente cliente){
@@ -325,7 +453,10 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConsultar;
+    private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonInsertar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonOrdenar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
