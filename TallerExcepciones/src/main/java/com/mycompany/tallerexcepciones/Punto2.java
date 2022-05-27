@@ -19,7 +19,7 @@ public class Punto2 {
         
         
         int array[] = new int[2];
-//        
+        
 //        try{
 //            array[3] = 2;  // La posición es inválida
 //        }
@@ -37,16 +37,12 @@ public class Punto2 {
 //        }
         
         
-         try{
-            array[3] = 1; // Posición inválida
-        }
-        catch(Exception e){
-            System.out.println("Hubo un error al acceder a la posición en el array"); // mensaje de error propio
-        }
-        
-        
-        
-        
-        
+//         try{
+//            array[3] = 1; // Posición inválida
+//        }
+//        catch(Exception e){
+//            System.out.println("Hubo un error al acceder a la posición en el array"); // mensaje de error propio
+//        }
+  
     }
 }
