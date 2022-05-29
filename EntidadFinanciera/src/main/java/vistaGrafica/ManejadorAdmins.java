@@ -76,6 +76,8 @@ public class ManejadorAdmins extends javax.swing.JFrame {
         jButtonOrdenar = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
 
+        setTitle("Manejador de Administradores");
+
         jTableAdmins.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -220,13 +222,13 @@ public class ManejadorAdmins extends javax.swing.JFrame {
         
         Administrador new_admin = new Administrador();
         
-        
+        new_admin.setCedula((int)jTableAdmins.getModel().getValueAt(row, 0));
+        new_admin.setIdAdmin((int)jTableAdmins.getModel().getValueAt(row, 1));
         new_admin.setNombre(jTableAdmins.getModel().getValueAt(row, 2).toString());
         new_admin.setApellido(jTableAdmins.getModel().getValueAt(row, 3).toString());
         new_admin.setTelefono((long)jTableAdmins.getModel().getValueAt(row, 4));
         new_admin.setCorreo(jTableAdmins.getModel().getValueAt(row, 5).toString());
         new_admin.setDireccion(jTableAdmins.getModel().getValueAt(row, 6).toString());
-        
         
         if(!contrAdmins.modificar(admin, new_admin))
             JOptionPane.showMessageDialog(null, "Error al modificar administrador");

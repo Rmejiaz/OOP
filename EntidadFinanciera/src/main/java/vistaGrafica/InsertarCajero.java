@@ -52,6 +52,8 @@ public class InsertarCajero extends javax.swing.JFrame {
         jTextFieldDireccion = new javax.swing.JTextField();
         jTextFieldContrasena = new javax.swing.JTextField();
 
+        setTitle("Crear Cajero");
+
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("Nombre:");

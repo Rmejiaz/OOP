@@ -48,9 +48,9 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
         rowData = new Object [3];
         
         // Llenar el controlador de acuerdo a la base de datos:
-        connBD = new ConexionBD();
-        con = connBD.conexionMysql();
-        consultarDatos();
+//        connBD = new ConexionBD();
+//        con = connBD.conexionMysql();
+//        consultarDatos();
         
         // Llenar la tabla con los datos del controlador:
         for(CuentaAhorros cuentaAhorros:contrCuentasAhorros.arregloCuentasAhorros){

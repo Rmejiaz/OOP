@@ -24,8 +24,8 @@ public class ControladorAdministradores implements CRUD{
     public boolean autenticar(int cedula, String contrasena){
         
         
-        if(cedula == 1234 & contrasena.equals("1234"))
-            return true;
+//        if(cedula == 1234 & contrasena.equals("1234"))
+//            return true;
         
         
         Administrador admin = new Administrador(cedula, contrasena);

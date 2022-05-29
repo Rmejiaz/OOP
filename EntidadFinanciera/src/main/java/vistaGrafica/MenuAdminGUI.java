@@ -4,6 +4,8 @@
  */
 package vistaGrafica;
 
+import modelo.Administrador;
+
 /**
  *
  * @author rafael
@@ -13,8 +15,11 @@ public class MenuAdminGUI extends javax.swing.JFrame {
     /**
      * Creates new form PrincipalGUI
      */
-    public MenuAdminGUI() {
+    Administrador admin;
+    public MenuAdminGUI(Administrador admin) {
         initComponents();
+        this.admin = admin;
+        jLabelWelcome.setText("Bienvenido, "+admin.getNombre());
     }
 
     /**
@@ -30,9 +35,13 @@ public class MenuAdminGUI extends javax.swing.JFrame {
         jButtonCajeros = new javax.swing.JButton();
         jButtonAdministradores = new javax.swing.JButton();
         jButtonCuentas = new javax.swing.JButton();
+        jLabelWelcome = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
-        setTitle("Menu Administradores");
+        setTitle("Menu de Administradores");
 
         jButtonClientes.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonClientes.setText("Clientes");
@@ -65,6 +74,21 @@ public class MenuAdminGUI extends javax.swing.JFrame {
                 jButtonCuentasActionPerformed(evt);
             }
         });
+
+        jLabelWelcome.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabelWelcome.setForeground(new java.awt.Color(0, 0, 255));
+        jLabelWelcome.setText("jLabel1");
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel1.setText("Manejadores:");
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel2.setText("Area Personal:");
+
+        jButton1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButton1.setText("Información Personal");
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -72,26 +96,44 @@ public class MenuAdminGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAdministradores)
-                    .addComponent(jButtonCajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelWelcome)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButtonCuentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonAdministradores, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                                .addComponent(jButtonClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonCajeros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel1))
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2)
+                            .addComponent(jButton1))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jButtonClientes)
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelWelcome)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(30, 30, 30)
+                        .addComponent(jButtonClientes))
+                    .addComponent(jButton1))
+                .addGap(33, 33, 33)
                 .addComponent(jButtonCajeros)
-                .addGap(58, 58, 58)
+                .addGap(29, 29, 29)
                 .addComponent(jButtonAdministradores)
-                .addGap(54, 54, 54)
+                .addGap(30, 30, 30)
                 .addComponent(jButtonCuentas)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,10 +210,14 @@ public class MenuAdminGUI extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAdministradores;
     private javax.swing.JButton jButtonCajeros;
     private javax.swing.JButton jButtonClientes;
     private javax.swing.JButton jButtonCuentas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelWelcome;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

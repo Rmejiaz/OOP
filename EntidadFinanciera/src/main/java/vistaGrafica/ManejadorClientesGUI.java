@@ -61,73 +61,29 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextCedula = new javax.swing.JTextField();
-        jTextNombre = new javax.swing.JTextField();
-        jTextCorreo = new javax.swing.JTextField();
-        jTextTelefono = new javax.swing.JTextField();
-        jTextApellido = new javax.swing.JTextField();
-        jTextDireccion = new javax.swing.JTextField();
-        jButtonInsertar = new javax.swing.JButton();
-        jButtonConsultar = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jTextContrasena = new javax.swing.JTextField();
+        jButtonNuevo = new javax.swing.JButton();
+        jButtonActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();
-        jButtonEliminar = new javax.swing.JButton();
-        jButtonOrdenar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
+        jButtonOrdenar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel1.setText("Manejador de Clientes");
+        setTitle("Manejador de Clientes");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel2.setText("Cedula");
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel3.setText("Nombre");
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel4.setText("Correo");
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel5.setText("Telefono");
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel6.setText("Apellido");
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel7.setText("Direccion");
-
-        jButtonInsertar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButtonInsertar.setText("Insertar");
-        jButtonInsertar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNuevo.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonNuevo.setText("Nuevo");
+        jButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonInsertarActionPerformed(evt);
+                jButtonNuevoActionPerformed(evt);
             }
         });
 
-        jButtonConsultar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButtonConsultar.setText("Consultar");
-        jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonActualizar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonActualizar.setText("Actualizar");
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel8.setText("Contraseña");
-
-        jTextContrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextContrasenaActionPerformed(evt);
+                jButtonActualizarActionPerformed(evt);
             }
         });
 
@@ -149,11 +105,11 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableClientes);
 
-        jButtonEliminar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButtonEliminar.setText("Eliminar");
-        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEliminarActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
@@ -165,11 +121,11 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
             }
         });
 
-        jButtonModificar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButtonModificar.setText("Modificar");
-        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModificarActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
 
@@ -178,92 +134,34 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(272, 272, 272))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel3))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(78, 78, 78)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(9, 9, 9)
-                                .addComponent(jTextContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4))
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(459, 459, 459)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonInsertar)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonConsultar)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonEliminar)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonOrdenar)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonModificar)
-                .addGap(90, 90, 90))
+                    .addComponent(jButtonActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonOrdenar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonInsertar)
-                    .addComponent(jButtonConsultar)
-                    .addComponent(jButtonEliminar)
-                    .addComponent(jButtonOrdenar)
-                    .addComponent(jButtonModificar))
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonNuevo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEliminar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonModificar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonOrdenar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonActualizar)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -294,49 +192,51 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
     }
     
     
-    private void jButtonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarActionPerformed
-        // TODO add your handling code here:
-        
-        Cliente cli0 = new Cliente();
-        
-        try{
-            VerificarNombreUsuario.verificar(jTextNombre.getText());
-            cli0.setNombre(jTextNombre.getText());
-        }
-        catch(VerificarNombreUsuario ex){
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+    private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
+       java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InsertarCliente().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonNuevoActionPerformed
 
-        Cliente cli = new Cliente(jTextNombre.getText(), jTextApellido.getText(), jTextDireccion.getText(), Long.parseLong(jTextTelefono.getText()), jTextCorreo.getText(), Integer.parseInt(jTextCedula.getText()), jTextContrasena.getText());
-        
-        
-        if(!contrCli.insertar(cli))
-            JOptionPane.showMessageDialog(null, "Error al insertar cliente (posible repetido)");
-        
-        else{
-            rowData[0] = cli.getCedula();
-            rowData[1] = cli.getNombre();
-            rowData[2] = cli.getApellido();
-            rowData[3] = cli.getDireccion();
-            rowData[4] = cli.getTelefono();
-            rowData[5] = cli.getCorreo();
-            model.addRow(rowData);
-            insertBD(cli);
-        }
-        
-        
-    }//GEN-LAST:event_jButtonInsertarActionPerformed
-
-    private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // TODO add your handling code here:
         
         // Aquí también iría el metodo de consultar de la base de datos
         actualizarTabla();
-    }//GEN-LAST:event_jButtonConsultarActionPerformed
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
 
-    private void jTextContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextContrasenaActionPerformed
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        
+        
+        int row = jTableClientes.getSelectedRow();
+        
+        int idCliente = (int)jTableClientes.getModel().getValueAt(row, 0);
+        
+        
+        Cliente cli = new Cliente();
+        cli.setCedula(idCliente);
+        
+        Cliente new_cli = new Cliente();
+        
+        
+        new_cli.setNombre(jTableClientes.getModel().getValueAt(row, 1).toString());
+        new_cli.setApellido(jTableClientes.getModel().getValueAt(row, 2).toString());
+        new_cli.setDireccion(jTableClientes.getModel().getValueAt(row, 3).toString());
+        new_cli.setTelefono((long)jTableClientes.getModel().getValueAt(row, 4));
+        new_cli.setCorreo(jTableClientes.getModel().getValueAt(row, 5).toString());
+        new_cli.setCedula((int)jTableClientes.getModel().getValueAt(row, 0));
+        
+        if(!contrCli.modificar(cli, new_cli))
+            JOptionPane.showMessageDialog(null, "Error al modificar cliente");
+        
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
+        contrCli.ordenar();
+        actualizarTabla();
+    }//GEN-LAST:event_jButtonOrdenarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         
@@ -361,59 +261,31 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "El cliente con cedula "+idCliente + " ha sido eliminado exitosamente");    
         
         // Falta borrarlo de la base de datos
+     
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
-        contrCli.ordenar();
-        actualizarTabla();
-    }//GEN-LAST:event_jButtonOrdenarActionPerformed
-
-    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        int row = jTableClientes.getSelectedRow();
-        
-        int idCliente = (int)jTableClientes.getModel().getValueAt(row, 0);
-        
-        
-        Cliente cli = new Cliente();
-        cli.setCedula(idCliente);
-        
-        Cliente new_cli = new Cliente();
-        
-        
-        new_cli.setNombre(jTableClientes.getModel().getValueAt(row, 1).toString());
-        new_cli.setApellido(jTableClientes.getModel().getValueAt(row, 2).toString());
-        new_cli.setDireccion(jTableClientes.getModel().getValueAt(row, 3).toString());
-        new_cli.setTelefono((long)jTableClientes.getModel().getValueAt(row, 4));
-        new_cli.setCorreo(jTableClientes.getModel().getValueAt(row, 5).toString());
-        
-        
-        if(!contrCli.modificar(cli, new_cli))
-            JOptionPane.showMessageDialog(null, "Error al modificar cliente");
-        
-    }//GEN-LAST:event_jButtonModificarActionPerformed
-
     
-        public void insertBD(Cliente cliente){
-        con = connBD.conexionMysql();
-        
-        String statement = "INSERT INTO CLIENTE "
-                         + "VALUES("+cliente.getCedula()+","
-                         +cliente.getNombre()+","
-                         +cliente.getApellido()+","
-                         +cliente.getDireccion()+","
-                         +cliente.getTelefono()+","
-                         +cliente.getCorreo()+","
-                         +cliente.getContrasena()+");";
-    
+    public void insertBD(Cliente cliente){
+    con = connBD.conexionMysql();
+
+    String statement = "INSERT INTO CLIENTE "
+                     + "VALUES("+cliente.getCedula()+","
+                     +cliente.getNombre()+","
+                     +cliente.getApellido()+","
+                     +cliente.getDireccion()+","
+                     +cliente.getTelefono()+","
+                     +cliente.getCorreo()+","
+                     +cliente.getContrasena()+");";
+
 //        Statement stmt = null;
-        try {
-            Statement stmt = (Statement)con.createStatement();
-            stmt.executeUpdate(statement);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Problemas al conectarse con la base de datos");
-        }
+    try {
+        Statement stmt = (Statement)con.createStatement();
+        stmt.executeUpdate(statement);
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Problemas al conectarse con la base de datos");
     }
+}
     
     
     /**
@@ -452,27 +324,12 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonConsultar;
+    private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonEliminar;
-    private javax.swing.JButton jButtonInsertar;
     private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonNuevo;
     private javax.swing.JButton jButtonOrdenar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableClientes;
-    private javax.swing.JTextField jTextApellido;
-    private javax.swing.JTextField jTextCedula;
-    private javax.swing.JTextField jTextContrasena;
-    private javax.swing.JTextField jTextCorreo;
-    private javax.swing.JTextField jTextDireccion;
-    private javax.swing.JTextField jTextNombre;
-    private javax.swing.JTextField jTextTelefono;
     // End of variables declaration//GEN-END:variables
 }

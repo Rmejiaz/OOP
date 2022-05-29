@@ -37,6 +37,8 @@ public class MenuClientesGUI extends javax.swing.JFrame {
         jLabelBienvenida = new javax.swing.JLabel();
         jButtonDatos = new javax.swing.JButton();
 
+        setTitle("Menu de Clientes");
+
         jButtonConsultar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonConsultar.setText("Consultas");
         jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {

@@ -5,6 +5,8 @@ import controlador.ControladorCajeros;
 import controlador.ControladorUsuariosSistema;
 import javax.swing.JOptionPane;
 import controlador.ControladorClientes;
+import modelo.Administrador;
+import modelo.Cajero;
 import modelo.Cliente;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -33,6 +35,12 @@ public class PrincipalGUI extends javax.swing.JFrame {
         contrAdmin = new ControladorAdministradores();
         contrCli = new ControladorClientes();
         contrCaj = new ControladorCajeros();
+        
+        Administrador root = new Administrador();
+        root.setCedula(1234);
+        root.setContrasena("1234");
+        root.setNombre("root");
+        contrAdmin.insertar(root);
     }
 
     /**
@@ -169,9 +177,11 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
         if (jComboBoxTipo.getSelectedItem().equals("Administrador")){
             if(contrAdmin.autenticar(idUsu, pass)){
+                Administrador admin = new Administrador(idUsu, pass);
+                final Administrador admin1 = (Administrador)contrAdmin.consultarUno(admin);
                 java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuAdminGUI().setVisible(true);
+                new MenuAdminGUI(admin1).setVisible(true);
             }
             });
         }
@@ -195,11 +205,13 @@ public class PrincipalGUI extends javax.swing.JFrame {
         
         if (jComboBoxTipo.getSelectedItem().equals("Cajero")){
             if(contrCaj.autenticar(idUsu, pass)){
+                Cajero caj = new Cajero(idUsu, pass);
+                final Cajero caj1 = (Cajero)contrCaj.consultarUno(caj);
                 java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuAdminGUI().setVisible(true);
+                new MenuCajeros(caj1).setVisible(true);
             }
-            });
+        });
         }
             else
                 JOptionPane.showMessageDialog(null, "Usuario o constraseña erroneos");

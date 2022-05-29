@@ -4,23 +4,24 @@
  */
 package vistaGrafica;
 
-import controlador.ControladorAdministradores;
+import controlador.ControladorClientes;
+import excepciones.VerificarNombreUsuario;
 import javax.swing.JOptionPane;
-import modelo.Administrador;
+import modelo.Cliente;
 
 /**
  *
  * @author rafael
  */
-public class InsertarAdmin extends javax.swing.JFrame {
+public class InsertarCliente extends javax.swing.JFrame {
 
     /**
      * Creates new form InsertarCajero
      */
-    ControladorAdministradores contrAdmins;
-    public InsertarAdmin() {
+    ControladorClientes contrCli;
+    public InsertarCliente() {
         initComponents();
-        contrAdmins = new ControladorAdministradores();
+        contrCli = new ControladorClientes();
     }
 
     /**
@@ -35,13 +36,11 @@ public class InsertarAdmin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
         jTextFieldApellidos = new javax.swing.JTextField();
         jTextFieldCedula = new javax.swing.JTextField();
-        jTextFieldIdentificador = new javax.swing.JTextField();
         jTextFieldCorreo = new javax.swing.JTextField();
         jTextFieldTelefono = new javax.swing.JTextField();
         jButtonInsertar = new javax.swing.JButton();
@@ -50,7 +49,7 @@ public class InsertarAdmin extends javax.swing.JFrame {
         jTextFieldDireccion = new javax.swing.JTextField();
         jTextFieldContrasena = new javax.swing.JTextField();
 
-        setTitle("Crear Administrador");
+        setTitle("Crear Cliente");
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
@@ -63,10 +62,6 @@ public class InsertarAdmin extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 255));
         jLabel3.setText("Cedula:");
-
-        jLabel4.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel4.setText("Identificador:");
 
         jLabel5.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 255));
@@ -81,8 +76,6 @@ public class InsertarAdmin extends javax.swing.JFrame {
         jTextFieldApellidos.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
         jTextFieldCedula.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-
-        jTextFieldIdentificador.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
         jTextFieldCorreo.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
@@ -119,24 +112,26 @@ public class InsertarAdmin extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(74, 74, 74)
+                            .addComponent(jLabel9)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel6))))
+                        .addGap(86, 86, 86)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                             .addComponent(jTextFieldApellidos)
                             .addComponent(jTextFieldCedula)
-                            .addComponent(jTextFieldIdentificador)
                             .addComponent(jTextFieldCorreo)
                             .addComponent(jTextFieldTelefono)
                             .addComponent(jTextFieldDireccion)
                             .addComponent(jTextFieldContrasena)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
+                        .addGap(136, 136, 136)
                         .addComponent(jButtonInsertar)))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
@@ -151,33 +146,29 @@ public class InsertarAdmin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextFieldCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextFieldIdentificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(46, 46, 46)
                 .addComponent(jButtonInsertar)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -186,22 +177,29 @@ public class InsertarAdmin extends javax.swing.JFrame {
     private void jButtonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarActionPerformed
         // TODO add your handling code here:
         
-        Administrador admin= new Administrador();
+        Cliente cli= new Cliente();
         
-        //Faltaría validar los datos ingresados
-        admin.setCedula(Integer.parseInt(jTextFieldCedula.getText()));
-        admin.setIdAdmin(Integer.parseInt(jTextFieldIdentificador.getText()));
-        admin.setNombre(jTextFieldNombre.getText());
-        admin.setApellido(jTextFieldApellidos.getText());
-        admin.setCorreo(jTextFieldCorreo.getText());
-        admin.setTelefono(Long.parseLong(jTextFieldTelefono.getText()));
-        admin.setDireccion(jTextFieldDireccion.getText());
-        admin.setContrasena(jTextFieldContrasena.getText());
+        
+        try{
+            VerificarNombreUsuario.verificar(jTextFieldNombre.getText());
+            
+            //Faltaría validar los datos ingresados
+            cli.setCedula(Integer.parseInt(jTextFieldCedula.getText()));
+            cli.setNombre(jTextFieldNombre.getText());
+            cli.setApellido(jTextFieldApellidos.getText());
+            cli.setCorreo(jTextFieldCorreo.getText());
+            cli.setTelefono(Long.parseLong(jTextFieldTelefono.getText()));
+            cli.setDireccion(jTextFieldDireccion.getText());
+            cli.setContrasena(jTextFieldContrasena.getText());
+        }
+        catch(VerificarNombreUsuario ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
         
         // Agregar al controlador:
         
-        if(!contrAdmins.insertar(admin)){
-            JOptionPane.showMessageDialog(null, "Error al insertar administrador (posible repetido)");
+        if(!contrCli.insertar(cli)){
+            JOptionPane.showMessageDialog(null, "Error al insertar cliente (posible repetido)");
         }
         
         
@@ -247,7 +245,6 @@ public class InsertarAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
@@ -257,7 +254,6 @@ public class InsertarAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldContrasena;
     private javax.swing.JTextField jTextFieldCorreo;
     private javax.swing.JTextField jTextFieldDireccion;
-    private javax.swing.JTextField jTextFieldIdentificador;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldTelefono;
     // End of variables declaration//GEN-END:variables

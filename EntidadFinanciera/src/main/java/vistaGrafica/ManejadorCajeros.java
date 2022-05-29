@@ -75,7 +75,7 @@ public class ManejadorCajeros extends javax.swing.JFrame {
         jButtonOrdenar = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
 
-        setTitle("Cajeros");
+        setTitle("Manejador de Cajeros");
 
         jTableCajeros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -215,7 +215,29 @@ public class ManejadorCajeros extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonOrdenarActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        // TODO add your handling code here:
+        int row = jTableCajeros.getSelectedRow();
+        
+        int cedula = (int)jTableCajeros.getModel().getValueAt(row, 0);
+        
+        
+        Cajero caj = new Cajero();
+        caj.setCedula(cedula);
+        
+        Cajero new_caj = new Cajero();
+        
+        // falta validar
+        new_caj.setCedula((int)jTableCajeros.getModel().getValueAt(row, 0));
+        new_caj.setIdCajero((int)jTableCajeros.getModel().getValueAt(row, 1));
+        new_caj.setNombre(jTableCajeros.getModel().getValueAt(row, 2).toString());
+        new_caj.setApellido(jTableCajeros.getModel().getValueAt(row, 3).toString());
+        new_caj.setCorreo(jTableCajeros.getModel().getValueAt(row, 4).toString());
+        new_caj.setTelefono((long)jTableCajeros.getModel().getValueAt(row, 5));
+        new_caj.setSueldo((double)jTableCajeros.getModel().getValueAt(row, 6));
+        new_caj.setDireccion(jTableCajeros.getModel().getValueAt(row, 7).toString());
+        
+        
+        if(!contrCaj.modificar(caj, new_caj))
+            JOptionPane.showMessageDialog(null, "Error al modificar cajero");
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     /**

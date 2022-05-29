@@ -9,6 +9,7 @@ import controlador.ControladorCuentasCorriente;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import modelo.Cliente;
 import modelo.CuentaAhorros;
 import modelo.CuentaCorriente;
@@ -68,6 +69,18 @@ public class Retiros extends javax.swing.JFrame {
                             jLabelTotal.setText("******");
                         }
                     }
+                else{
+                    CuentaCorriente cuentaCorr = new CuentaCorriente();
+                    cuentaCorr.setIdCuentaCorriente(idCuenta);
+
+                    cuentaCorr = (CuentaCorriente)contrCuentasCorr.consultarUno(cuentaCorr);
+                        int estado = itemEvent.getStateChange();
+                        if(estado == ItemEvent.SELECTED){
+                            jLabelTotal.setText("$ " +cuentaCorr.getSaldoCuentaCorriente());
+                        } else {
+                            jLabelTotal.setText("******");
+                        }
+                }
                 }});
         
     }         
@@ -111,6 +124,12 @@ public class Retiros extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 255));
         jLabel3.setText("Cuenta:");
 
+        jPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordFieldActionPerformed(evt);
+            }
+        });
+
         jTextFieldMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldMontoActionPerformed(evt);
@@ -144,10 +163,6 @@ public class Retiros extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(jButtonRetirar)
-                .addGap(40, 40, 40))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -160,21 +175,29 @@ public class Retiros extends javax.swing.JFrame {
                             .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelTotal)
                             .addComponent(jComboCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jTextFieldMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(80, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelDisponible)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jToggleButton1)
                         .addGap(19, 19, 19))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jButtonRetirar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(jLabel4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel4)
-                .addGap(34, 34, 34)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jComboCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -200,25 +223,58 @@ public class Retiros extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMontoActionPerformed
-        String cuenta = (String)jComboCuenta.getSelectedItem(); 
-        String idCuenta = cuenta.replaceAll("[^0-9]", "");
-        String tipo = cuenta.replaceAll("[0-9]", "");
-        
-        jLabelDisponible.setVisible(true);
-        if(tipo.equals("Ahorros - ")){
-            CuentaAhorros cuentaAho = new CuentaAhorros();
-            cuentaAho.setIdCuentaAhorros(idCuenta);
-            
-            cuentaAho = (CuentaAhorros)contrCuentasAho.consultarUno(cuentaAho);
-            
-            
-            jLabelTotal.setText("$ " +cuentaAho.getSaldoCuentaAhorros());
-        }
-        
+ 
     }//GEN-LAST:event_jTextFieldMontoActionPerformed
 
     private void jButtonRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetirarActionPerformed
         // TODO add your handling code here:
+        String cuenta = (String)jComboCuenta.getSelectedItem(); 
+        String idCuenta = cuenta.replaceAll("[^0-9]", "");
+        String tipo = cuenta.replaceAll("[0-9]", "");
+        
+        float monto =  Float.parseFloat(jTextFieldMonto.getText());
+        float total_cuenta;
+        
+        String clave = new String(jPasswordField.getPassword());
+        
+        if(clave.equals(cli.getContrasena())){
+            if(tipo.equals("Ahorros - ")){
+                CuentaAhorros cuentaAho = new CuentaAhorros();
+                cuentaAho.setIdCuentaAhorros(idCuenta);
+
+                cuentaAho = (CuentaAhorros)contrCuentasAho.consultarUno(cuentaAho);
+                CuentaAhorros cuentaAho_aux = new CuentaAhorros(cuentaAho);
+                total_cuenta = cuentaAho.getSaldoCuentaAhorros();
+                if(total_cuenta < monto){
+                    JOptionPane.showMessageDialog(null, "Fondos insuficientes. \nSaldo actual: "+cuentaAho.getSaldoCuentaAhorros()+"\nmonto solicitado: "+monto);
+                }
+                else{
+                    cuentaAho_aux.setSaldoCuentaAhorros(total_cuenta-monto);
+                    contrCuentasAho.modificar(cuentaAho, cuentaAho_aux);
+                    JOptionPane.showMessageDialog(null, "Transacción exitosa. Su nuevo saldo es: "+cuentaAho_aux.getSaldoCuentaAhorros());
+                }
+            }
+            if(tipo.equals("Corriente - ")){
+                CuentaCorriente cuentaCorr = new CuentaCorriente();
+                cuentaCorr.setIdCuentaCorriente(idCuenta);
+
+                cuentaCorr = (CuentaCorriente)contrCuentasCorr.consultarUno(cuentaCorr);
+                
+                CuentaCorriente cuentaCorr_aux = new CuentaCorriente(cuentaCorr);
+                total_cuenta = cuentaCorr.getSaldoCuentaCorriente();
+                if(total_cuenta < monto){
+                    JOptionPane.showMessageDialog(null, "Fondos insuficientes. \nSaldo actual: "+cuentaCorr.getSaldoCuentaCorriente()+"\nmonto solicitado: "+monto);
+                }
+                else{
+                    cuentaCorr_aux.setSaldoCuentaCorriente(total_cuenta-monto);
+                    contrCuentasCorr.modificar(cuentaCorr, cuentaCorr_aux);
+                    JOptionPane.showMessageDialog(null, "Transacción exitosa. Su nuevo saldo es: "+cuentaCorr_aux.getSaldoCuentaCorriente());
+                }
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Clave incorrecta");
+        }
     }//GEN-LAST:event_jButtonRetirarActionPerformed
 
     private void jComboCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCuentaActionPerformed
@@ -226,6 +282,10 @@ public class Retiros extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jComboCuentaActionPerformed
+
+    private void jPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordFieldActionPerformed
 
     /**
      * @param args the command line arguments
