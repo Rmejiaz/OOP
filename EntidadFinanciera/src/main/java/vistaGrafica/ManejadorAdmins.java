@@ -5,6 +5,7 @@
 package vistaGrafica;
 
 import controlador.ControladorAdministradores;
+import controlador.ControladorBD;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Administrador;
@@ -22,11 +23,13 @@ public class ManejadorAdmins extends javax.swing.JFrame {
     ControladorAdministradores contrAdmins;
     private DefaultTableModel model;
     Object rowData[];
+    ControladorBD contrBD;
     
     public ManejadorAdmins() {
         initComponents();
         
         contrAdmins = new ControladorAdministradores();
+        contrBD = new ControladorBD();
         
         model = (DefaultTableModel)jTableAdmins.getModel();
         rowData = new Object [7];
@@ -204,9 +207,12 @@ public class ManejadorAdmins extends javax.swing.JFrame {
         
         if(!contrAdmins.borrar(admin))
             JOptionPane.showMessageDialog(null, "Error al eliminar administrador");
-        else
+        else{
             JOptionPane.showMessageDialog(null, "El administrador con cedula "+cedula+" ha sido eliminado exitosamente");
+            contrBD.eliminarAdmin(admin);
+            model.removeRow(row);
         
+        }
         
         
     }//GEN-LAST:event_jButtonEliminarActionPerformed

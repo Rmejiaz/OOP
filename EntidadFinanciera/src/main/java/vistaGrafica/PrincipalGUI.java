@@ -1,6 +1,7 @@
 package vistaGrafica;
 
 import controlador.ControladorAdministradores;
+import controlador.ControladorBD;
 import controlador.ControladorCajeros;
 import controlador.ControladorUsuariosSistema;
 import javax.swing.JOptionPane;
@@ -27,6 +28,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     ControladorAdministradores contrAdmin;
     ControladorClientes contrCli;
     ControladorCajeros contrCaj;
+    ControladorBD contrBD;
     
     public PrincipalGUI() {
         initComponents();
@@ -35,6 +37,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
         contrAdmin = new ControladorAdministradores();
         contrCli = new ControladorClientes();
         contrCaj = new ControladorCajeros();
+        contrBD = new ControladorBD();
+        
+        
+        contrBD.actualizarControladores();
         
         Administrador root = new Administrador();
         root.setCedula(1234);

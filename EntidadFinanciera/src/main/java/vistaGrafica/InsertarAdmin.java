@@ -5,6 +5,7 @@
 package vistaGrafica;
 
 import controlador.ControladorAdministradores;
+import controlador.ControladorBD;
 import javax.swing.JOptionPane;
 import modelo.Administrador;
 
@@ -18,9 +19,12 @@ public class InsertarAdmin extends javax.swing.JFrame {
      * Creates new form InsertarCajero
      */
     ControladorAdministradores contrAdmins;
+    ControladorBD contrBD;
+    
     public InsertarAdmin() {
         initComponents();
         contrAdmins = new ControladorAdministradores();
+        contrBD = new ControladorBD();
     }
 
     /**
@@ -203,8 +207,9 @@ public class InsertarAdmin extends javax.swing.JFrame {
         if(!contrAdmins.insertar(admin)){
             JOptionPane.showMessageDialog(null, "Error al insertar administrador (posible repetido)");
         }
-        
-        
+        else{
+            contrBD.insertarAdmin(admin);
+        }
     }//GEN-LAST:event_jButtonInsertarActionPerformed
 
     /**

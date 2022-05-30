@@ -5,6 +5,7 @@
 package vistaGrafica;
 
 import controlador.ConexionBD;
+import controlador.ControladorBD;
 import controlador.ControladorClientes;
 import controlador.ControladorCuentasAhorros;
 import controlador.ControladorCuentasCorriente;
@@ -31,19 +32,16 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
     private ControladorCuentasCorriente contrCorr;
     private ControladorCuentasAhorros contrAho;
     private DefaultTableModel model;
-
+    ControladorBD contrBD;
+    
     Object rowData[];
-    
-    private ConexionBD connBD;
-    private Connection con;
-    
     
     public ManejadorClientesGUI() {
         initComponents();
         contrCli = new ControladorClientes();
         contrCorr = new ControladorCuentasCorriente();
         contrAho = new ControladorCuentasAhorros();
-        
+        contrBD = new ControladorBD();
         
         model = (DefaultTableModel)jTableClientes.getModel();
         rowData = new Object [6];
@@ -257,36 +255,14 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
         else{
         model.removeRow(row);
         contrCli.borrar(cli);
-        
+        contrBD.eliminarCliente(cli);
         JOptionPane.showMessageDialog(null, "El cliente con cedula "+idCliente + " ha sido eliminado exitosamente");    
         
-        // Falta borrarlo de la base de datos
      
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    
-    public void insertBD(Cliente cliente){
-    con = connBD.conexionMysql();
-
-    String statement = "INSERT INTO CLIENTE "
-                     + "VALUES("+cliente.getCedula()+","
-                     +cliente.getNombre()+","
-                     +cliente.getApellido()+","
-                     +cliente.getDireccion()+","
-                     +cliente.getTelefono()+","
-                     +cliente.getCorreo()+","
-                     +cliente.getContrasena()+");";
-
-//        Statement stmt = null;
-    try {
-        Statement stmt = (Statement)con.createStatement();
-        stmt.executeUpdate(statement);
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Problemas al conectarse con la base de datos");
-    }
-}
-    
+  
     
     /**
      * @param args the command line arguments

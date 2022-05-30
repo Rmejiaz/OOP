@@ -4,6 +4,7 @@
  */
 package vistaGrafica;
 
+import controlador.ControladorBD;
 import controlador.ControladorClientes;
 import excepciones.VerificarNombreUsuario;
 import javax.swing.JOptionPane;
@@ -19,9 +20,12 @@ public class InsertarCliente extends javax.swing.JFrame {
      * Creates new form InsertarCajero
      */
     ControladorClientes contrCli;
+    ControladorBD contrBD;
+    
     public InsertarCliente() {
         initComponents();
         contrCli = new ControladorClientes();
+        contrBD = new ControladorBD();
     }
 
     /**
@@ -201,7 +205,9 @@ public class InsertarCliente extends javax.swing.JFrame {
         if(!contrCli.insertar(cli)){
             JOptionPane.showMessageDialog(null, "Error al insertar cliente (posible repetido)");
         }
-        
+        else{
+            contrBD.insertarCliente(cli);
+        }
         
     }//GEN-LAST:event_jButtonInsertarActionPerformed
 

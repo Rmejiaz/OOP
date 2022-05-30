@@ -4,12 +4,12 @@
  */
 package vistaGrafica;
 
-import controlador.ConexionBD;
+
+import controlador.ControladorBD;
 import controlador.ControladorClientes;
 import controlador.ControladorCuentasCorriente;
 import controlador.ControladorCuentasAhorros;
-import java.sql.Connection;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -33,24 +33,25 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
     private ControladorCuentasCorriente contrCuentasCorriente;
     private ControladorCuentasAhorros contrCuentasAhorros;
     ControladorClientes contrCli;
+    ControladorBD contrBD;
+    
+    
     static DefaultTableModel model;
     Object rowData[];
-    private ConexionBD connBD;
-    private Connection con;
+    
     
     public ManejadorCuentasGUI() {
         initComponents();
         contrCuentasCorriente = new ControladorCuentasCorriente();
         contrCuentasAhorros = new ControladorCuentasAhorros();
         contrCli = new ControladorClientes();
+        contrBD = new ControladorBD();
         
         model = (DefaultTableModel)jTableCuentasCorriente.getModel();
         rowData = new Object [3];
         
         // Llenar el controlador de acuerdo a la base de datos:
-//        connBD = new ConexionBD();
-//        con = connBD.conexionMysql();
-//        consultarDatos();
+        
         
         // Llenar la tabla con los datos del controlador:
         for(CuentaAhorros cuentaAhorros:contrCuentasAhorros.arregloCuentasAhorros){
@@ -275,7 +276,7 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
             if(!contrCuentasCorriente.insertar(cuentaCorriente))
                 JOptionPane.showMessageDialog(null, "Error al crear cuenta (Posible repetida)");
             else{
-                insertBD(cuentaCorriente);
+                contrBD.insertarCuentaCorr(cuentaCorriente);
             }
             }
             else
@@ -296,6 +297,7 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
                 rowData[1] = cuentaAhorros.getIdCuentaAhorros();
                 rowData[2] = cuentaAhorros.getSaldoCuentaAhorros();
                 model.addRow(rowData);
+                contrBD.insertarCuentaAho(cuentaAhorros);
                 
             }
             }
@@ -306,81 +308,11 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonInsertarActionPerformed
 
-    
-    public void consultarDatos(){
-        
-        String query = "SELECT * FROM EntidadFinanciera.CUENTA_CORRIENTE";
-        
-        Statement stmt = null;
-        ResultSet rs = null;
-        
-        try {
-            stmt = (Statement)con.createStatement();
-            
-            if(stmt.execute(query)){
-                rs = stmt.getResultSet();
-                while(rs.next()){
-                    rowData[0] = rs.getInt("Cedula");
-                    rowData[1] = rs.getString("idCuenta");
-                    rowData[2] = rs.getFloat("Saldo");
-                    CuentaCorriente tempcc = new CuentaCorriente(rs.getString("idCuenta"), rs.getFloat("Saldo"), rs.getInt("Cedula"));
-                    contrCuentasCorriente.insertar(tempcc);
-                    
-//                    model.addRow(rowData);
-                }
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Problemas al conectarse con la base de datos");
-        }
-        
-        
+    private void vaciarTablas(){
+        model.setRowCount(0);
     }
     
-    
-    
-    public void insertBD(CuentaCorriente cuenta){
-        
-        String statement = "INSERT INTO CUENTA_CORRIENTE "
-                         + "VALUES("+cuenta.getIdCliente()+","
-                         +cuenta.getIdCuentaCorriente()+","+cuenta.getSaldoCuentaCorriente()+");";
-    
-//        Statement stmt = null;
-        try {
-            Statement stmt = (Statement)con.createStatement();
-            stmt.executeUpdate(statement);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Problemas al conectarse con la base de datos");
-        }
-    }
-    
-    
-    public void eliminarBD(CuentaCorriente cuenta){
-     String statement = "DELETE FROM CUENTA_CORRIENTE WHERE "+"idCuenta = "+cuenta.getIdCuentaCorriente();
-    
-//        Statement stmt = null;
-        try {
-            Statement stmt = (Statement)con.createStatement();
-            stmt.executeUpdate(statement);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Problemas al conectarse con la base de datos");
-        }
-        
-        
-    }
-    
-    private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-        jLabelTipoCuenta.setText("Cuentas "+jComboBoxTipoCuenta.getSelectedItem());
-        
-        //Limpiar la tabla:
-        
-        int rowCount = model.getRowCount();
-        
-        for (int i = rowCount - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-        
-        consultarDatos(); // consultar de la base de datos para llenar el arreglo del controlador
-        
+    private void llenarTablas(){
         String tipo = (String)jComboBoxTipoCuenta.getSelectedItem();
         if(tipo.equals("Ahorros")){
             contrCuentasAhorros.consultarTodos();
@@ -401,6 +333,17 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
             }
         
         }
+    }
+    
+    private void actualizarTablas(){
+        vaciarTablas();
+        llenarTablas();
+    }
+    
+    
+    private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
+        jLabelTipoCuenta.setText("Cuentas "+jComboBoxTipoCuenta.getSelectedItem());
+       actualizarTablas(); 
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     private void jComboBoxTipoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoCuentaActionPerformed
@@ -417,15 +360,37 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
 
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
         // TODO add your handling code here:
-        int row = jTableCuentasCorriente.getSelectedRow();
         
+        String tipo = (String)jComboBoxTipoCuenta.getSelectedItem();
+        int row = jTableCuentasCorriente.getSelectedRow();
         String idCuenta = jTableCuentasCorriente.getModel().getValueAt(row, 1).toString();
-        model.removeRow(row);
-        JOptionPane.showMessageDialog(null, "La cuenta con id "+idCuenta+" ha sido eliminada");
-        CuentaCorriente cuenta = new CuentaCorriente();
-        cuenta.setIdCuentaCorriente(idCuenta);
-        contrCuentasCorriente.borrar(cuenta); // Eliminar del controlador
-        eliminarBD(cuenta);  // Eliminar de la base de datos
+        
+        
+        if (tipo.equals("Corriente"))
+        {
+            CuentaCorriente cuenta = new CuentaCorriente();
+            cuenta.setIdCuentaCorriente(idCuenta);
+            if(!contrCuentasCorriente.borrar(cuenta)) // Eliminar del controlador
+            {
+                JOptionPane.showMessageDialog(null, "No ha sido posible eliminar la cuenta");
+            }else{
+                contrBD.eliminarCuentaCorr(cuenta);  // Eliminar de la base de datos
+                model.removeRow(row);
+                JOptionPane.showMessageDialog(null, "La cuenta corriente con id "+idCuenta+" ha sido eliminada");
+            }
+        }
+        else{
+            CuentaAhorros cuenta = new CuentaAhorros();
+            cuenta.setIdCuentaAhorros(idCuenta);
+            if(!contrCuentasAhorros.borrar(cuenta)) // Eliminar del controlador
+            {
+                JOptionPane.showMessageDialog(null, "No ha sido posible eliminar la cuenta");
+            }else{
+                contrBD.eliminarCuentaAho(cuenta);  // Eliminar de la base de datos
+                model.removeRow(row);
+                JOptionPane.showMessageDialog(null, "La cuenta de ahorros con id "+idCuenta+" ha sido eliminada");
+            }
+        }
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     /**

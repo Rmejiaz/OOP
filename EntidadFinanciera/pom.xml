@@ -7,9 +7,9 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>Mysql</groupId>
+            <groupId>MySql</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>2.7.3</version>
+            <version>3.0.4</version>
         </dependency>
     </dependencies>
     <properties>

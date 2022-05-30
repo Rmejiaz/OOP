@@ -4,6 +4,7 @@
  */
 package vistaGrafica;
 
+import controlador.ControladorBD;
 import controlador.ControladorCajeros;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,12 +22,15 @@ public class ManejadorCajeros extends javax.swing.JFrame {
     ControladorCajeros contrCaj;
     private DefaultTableModel model;
     Object rowData[];
+    ControladorBD contrBD;
     
     public ManejadorCajeros() {
         initComponents();
         model = (DefaultTableModel)jTableCajeros.getModel();
         rowData = new Object [8];
         
+        contrBD = new ControladorBD();
+        contrCaj = new ControladorCajeros();
         // Llenar la tabla:
         actualizarTabla();
     }
@@ -205,8 +209,11 @@ public class ManejadorCajeros extends javax.swing.JFrame {
         
         if(!contrCaj.borrar(caj))
             JOptionPane.showMessageDialog(null, "Error al eliminar cajero");
-        else
+        else{
             JOptionPane.showMessageDialog(null, "El cajero con cedula "+cedula+" ha sido eliminado exitosamente");
+            contrBD.eliminarCajero(caj);
+            model.removeRow(row);
+        }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed

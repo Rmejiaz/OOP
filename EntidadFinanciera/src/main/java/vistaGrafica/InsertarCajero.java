@@ -4,6 +4,7 @@
  */
 package vistaGrafica;
 
+import controlador.ControladorBD;
 import controlador.ControladorCajeros;
 import javax.swing.JOptionPane;
 import modelo.Cajero;
@@ -18,9 +19,11 @@ public class InsertarCajero extends javax.swing.JFrame {
      * Creates new form InsertarCajero
      */
     ControladorCajeros contrCaj;
+    ControladorBD contrBD;
     public InsertarCajero() {
         initComponents();
         contrCaj = new ControladorCajeros();
+        contrBD = new ControladorBD();
     }
 
     /**
@@ -210,7 +213,9 @@ public class InsertarCajero extends javax.swing.JFrame {
         if(!contrCaj.insertar(caj)){
             JOptionPane.showMessageDialog(null, "Error al insertar cajero (posible repetido)");
         }
-        
+        else{
+            contrBD.insertarCajero(caj);
+        }
         
     }//GEN-LAST:event_jButtonInsertarActionPerformed
 
