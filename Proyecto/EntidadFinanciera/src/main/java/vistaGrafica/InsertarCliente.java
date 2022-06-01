@@ -6,6 +6,7 @@ package vistaGrafica;
 
 import controlador.ControladorBD;
 import controlador.ControladorClientes;
+import excepciones.ValidarCorreo;
 import excepciones.VerificarNombreUsuario;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
@@ -186,6 +187,7 @@ public class InsertarCliente extends javax.swing.JFrame {
         
         try{
             VerificarNombreUsuario.verificar(jTextFieldNombre.getText());
+            ValidarCorreo.verificar(jTextFieldCorreo.getText());
             
             //Faltaría validar los datos ingresados
             cli.setCedula(Integer.parseInt(jTextFieldCedula.getText()));
@@ -195,18 +197,26 @@ public class InsertarCliente extends javax.swing.JFrame {
             cli.setTelefono(Long.parseLong(jTextFieldTelefono.getText()));
             cli.setDireccion(jTextFieldDireccion.getText());
             cli.setContrasena(jTextFieldContrasena.getText());
-        }
-        catch(VerificarNombreUsuario ex){
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-        
-        // Agregar al controlador:
-        
-        if(!contrCli.insertar(cli)){
+            
+            if(!contrCli.insertar(cli)){
             JOptionPane.showMessageDialog(null, "Error al insertar cliente (posible repetido)");
         }
         else{
             contrBD.insertarCliente(cli);
+            JOptionPane.showMessageDialog(null, "Cliente insertado exitosamente");
+        }
+            
+            
+        }
+        catch(VerificarNombreUsuario ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        catch(ValidarCorreo ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Los campos numéricos no pueden contener letras");
+            ex.printStackTrace();
         }
         
     }//GEN-LAST:event_jButtonInsertarActionPerformed

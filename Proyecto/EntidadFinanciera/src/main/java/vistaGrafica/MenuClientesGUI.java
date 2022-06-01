@@ -48,7 +48,12 @@ public class MenuClientesGUI extends javax.swing.JFrame {
         });
 
         jButtonTransaccion.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButtonTransaccion.setText("Transacciones");
+        jButtonTransaccion.setText("Transferencias");
+        jButtonTransaccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTransaccionActionPerformed(evt);
+            }
+        });
 
         jButtonRetirar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonRetirar.setText("Retirar");
@@ -131,6 +136,14 @@ public class MenuClientesGUI extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_jButtonDatosActionPerformed
+
+    private void jButtonTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransaccionActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Transferencias(cli).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonTransaccionActionPerformed
 
     /**
      * @param args the command line arguments

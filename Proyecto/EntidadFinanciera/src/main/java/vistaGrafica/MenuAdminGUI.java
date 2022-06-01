@@ -4,6 +4,7 @@
  */
 package vistaGrafica;
 
+
 import modelo.Administrador;
 
 /**
