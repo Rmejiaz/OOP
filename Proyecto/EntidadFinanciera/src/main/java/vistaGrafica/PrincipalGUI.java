@@ -5,6 +5,8 @@ import controlador.ControladorBD;
 import controlador.ControladorCajeros;
 import javax.swing.JOptionPane;
 import controlador.ControladorClientes;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import modelo.Administrador;
 import modelo.Cajero;
 import modelo.Cliente;
@@ -46,6 +48,22 @@ public class PrincipalGUI extends javax.swing.JFrame {
         root.setContrasena("1234");
         root.setNombre("root");
         contrAdmin.insertar(root);
+        
+        
+        jToggleButton1.addItemListener(new ItemListener(){
+ 
+            @Override
+            public void itemStateChanged(ItemEvent itemEvent) {
+                int estado = itemEvent.getStateChange();
+                if(estado == ItemEvent.SELECTED){
+                    contrasena.setEchoChar((char)0);
+                } else {
+                    contrasena.setEchoChar('*');
+                }
+            }
+        });
+        
+        
     }
 
     /**
@@ -65,6 +83,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         contrasena = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jComboBoxTipo = new javax.swing.JComboBox<>();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Autenticación");
@@ -74,10 +93,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jLabel1.setText("Ingreso");
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel2.setText("Cedula");
+        jLabel2.setText("Cedula:");
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel3.setText("Contraseña");
+        jLabel3.setText("Contraseña:");
 
         cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +119,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel4.setText("Rol");
+        jLabel4.setText("Rol:");
 
         jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "Cajero", "Administrador" }));
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -109,38 +128,44 @@ public class PrincipalGUI extends javax.swing.JFrame {
             }
         });
 
+        jToggleButton1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jToggleButton1.setText("👁️");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(108, 108, 108))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cedula)
-                            .addComponent(contrasena)
-                            .addComponent(jComboBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cedula)
+                                    .addComponent(contrasena)
+                                    .addComponent(jComboBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(entrar)
+                                .addGap(96, 96, 96)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(entrar)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                        .addGap(115, 115, 115)
+                        .addComponent(jLabel1)))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -148,11 +173,12 @@ public class PrincipalGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(29, 29, 29)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(entrar)
                 .addContainerGap())
         );
@@ -281,5 +307,6 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

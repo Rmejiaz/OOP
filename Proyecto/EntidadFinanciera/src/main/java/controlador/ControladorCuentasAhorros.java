@@ -134,4 +134,13 @@ public class ControladorCuentasAhorros implements CRUD{
             quicksort(j+1,der);          // ordenamos subarray derecho
     }
     
+    
+    public boolean existeCuenta(String idCuenta){  // para verificar si un cliente existe en el sistema
+        CuentaAhorros cuenta = new CuentaAhorros();
+        cuenta.setIdCuentaAhorros(idCuenta);
+        Collections.sort(arregloCuentasAhorros);
+        int pos = Collections.binarySearch(arregloCuentasAhorros, cuenta, null);
+        return pos >= 0;
+    }
+    
 }

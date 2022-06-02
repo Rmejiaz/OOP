@@ -7,6 +7,8 @@ package vistaGrafica;
 import controlador.ControladorBD;
 import controlador.ControladorCuentasAhorros;
 import controlador.ControladorCuentasCorriente;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.JComboBox;
@@ -40,52 +42,48 @@ public class Retiros extends javax.swing.JFrame {
         for(CuentaAhorros cuenta: contrCuentasAho.arregloCuentasAhorros){
             if (cuenta.getIdCliente() == cli.getCedula()){
                 jComboCuenta.addItem("Ahorros - "+cuenta.getIdCuentaAhorros());
+                jLabelTotal.setText("Disponible: " +cuenta.getSaldoCuentaAhorros()+" $");
+                jComboCuenta.setSelectedItem("Ahorros - "+cuenta.getIdCuentaAhorros());
             }
         }
         
         for(CuentaCorriente cuenta: contrCuentasCorr.arregloCuentasCorriente){
             if (cuenta.getIdCliente() == cli.getCedula()){
                 jComboCuenta.addItem("Corriente - "+cuenta.getIdCuentaCorriente());
+                jLabelTotal.setText("Disponible: " +cuenta.getSaldoCuentaCorriente()+" $");
+                jComboCuenta.setSelectedItem("Corriente - "+cuenta.getIdCuentaCorriente());
             }
         }
         
         
         
-        jToggleButton1.addItemListener(new ItemListener(){
- 
-            @Override
-            public void itemStateChanged(ItemEvent itemEvent) {
-                String cuenta = (String)jComboCuenta.getSelectedItem(); 
-                String idCuenta = cuenta.replaceAll("[^0-9]", "");
-                String tipo = cuenta.replaceAll("[0-9]", "");
+        jComboCuenta.addActionListener(new ActionListener() {  
+                                            public void actionPerformed(ActionEvent e) {
+                                                
+                                                String cuenta = (String)jComboCuenta.getSelectedItem(); 
+                                                String idCuenta = cuenta.replaceAll("[^0-9]", "");
+                                                String tipo = cuenta.replaceAll("[0-9]", "");
+                                                
+                                                if(tipo.equals("Ahorros - ")){
+                                                    CuentaAhorros cuentaAho = new CuentaAhorros();
+                                                    cuentaAho.setIdCuentaAhorros(idCuenta);
 
-                jLabelDisponible.setVisible(true);
-                if(tipo.equals("Ahorros - ")){
-                    CuentaAhorros cuentaAho = new CuentaAhorros();
-                    cuentaAho.setIdCuentaAhorros(idCuenta);
+                                                    cuentaAho = (CuentaAhorros)contrCuentasAho.consultarUno(cuentaAho);
+                                                    
+                                                    jLabelTotal.setText("Disponible: " +cuentaAho.getSaldoCuentaAhorros()+" $");
+                                                    
+                                                }
+                                                if(tipo.equals("Corriente -")){
+                                                    CuentaCorriente cuentaCorr = new CuentaCorriente();
+                                                    cuentaCorr.setIdCuentaCorriente(idCuenta);
 
-                    cuentaAho = (CuentaAhorros)contrCuentasAho.consultarUno(cuentaAho);
-                        int estado = itemEvent.getStateChange();
-                        if(estado == ItemEvent.SELECTED){
-                            jLabelTotal.setText("$ " +cuentaAho.getSaldoCuentaAhorros());
-                        } else {
-                            jLabelTotal.setText("******");
-                        }
-                    }
-                else{
-                    CuentaCorriente cuentaCorr = new CuentaCorriente();
-                    cuentaCorr.setIdCuentaCorriente(idCuenta);
-
-                    cuentaCorr = (CuentaCorriente)contrCuentasCorr.consultarUno(cuentaCorr);
-                        int estado = itemEvent.getStateChange();
-                        if(estado == ItemEvent.SELECTED){
-                            jLabelTotal.setText("$ " +cuentaCorr.getSaldoCuentaCorriente());
-                        } else {
-                            jLabelTotal.setText("******");
-                        }
-                }
-                }});
-        
+                                                    cuentaCorr = (CuentaCorriente)contrCuentasCorr.consultarUno(cuentaCorr);
+                                                    
+                                                    jLabelTotal.setText("Disponible: " +cuentaCorr.getSaldoCuentaCorriente()+" $");
+                                                    
+                                                }
+                                            }  
+                                            });
     }         
             
     /**
@@ -105,9 +103,9 @@ public class Retiros extends javax.swing.JFrame {
         jTextFieldMonto = new javax.swing.JTextField();
         jButtonRetirar = new javax.swing.JButton();
         jLabelTotal = new javax.swing.JLabel();
-        jLabelDisponible = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+
+        setTitle("Retiros");
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
@@ -147,28 +145,22 @@ public class Retiros extends javax.swing.JFrame {
             }
         });
 
-        jLabelTotal.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabelTotal.setForeground(new java.awt.Color(0, 0, 255));
-
-        jLabelDisponible.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabelDisponible.setForeground(new java.awt.Color(0, 0, 255));
-        jLabelDisponible.setText("Disponible:");
+        jLabelTotal.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jLabelTotal.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelTotal.setText("Disponible");
 
         jLabel4.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 255));
         jLabel4.setText("Retiro");
-
-        jToggleButton1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jToggleButton1.setText("👁️");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
@@ -176,24 +168,16 @@ public class Retiros extends javax.swing.JFrame {
                         .addGap(59, 59, 59)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelTotal)
                             .addComponent(jComboCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(80, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelDisponible)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1)
-                        .addGap(19, 19, 19))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jButtonRetirar))
+                            .addComponent(jTextFieldMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(143, 143, 143)
-                        .addComponent(jLabel4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(jButtonRetirar)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,22 +188,19 @@ public class Retiros extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jComboCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDisponible)
-                    .addComponent(jLabelTotal)
-                    .addComponent(jToggleButton1))
-                .addGap(18, 18, 18)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(4, 4, 4)
+                .addComponent(jLabelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
                 .addComponent(jButtonRetirar)
-                .addGap(29, 29, 29))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -334,10 +315,8 @@ public class Retiros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabelDisponible;
     private javax.swing.JLabel jLabelTotal;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldMonto;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

@@ -132,4 +132,13 @@ public class ControladorCuentasCorriente implements CRUD{
          if(j+1 < der)
             quicksort(j+1,der);          // ordenamos subarray derecho
     }
+    
+    public boolean existeCuenta(String idCuenta){  // para verificar si un cliente existe en el sistema
+        CuentaCorriente cuenta = new CuentaCorriente();
+        cuenta.setIdCuentaCorriente(idCuenta);
+        Collections.sort(arregloCuentasCorriente);
+        int pos = Collections.binarySearch(arregloCuentasCorriente, cuenta, null);
+        return pos >= 0;
+    }
+    
 }
