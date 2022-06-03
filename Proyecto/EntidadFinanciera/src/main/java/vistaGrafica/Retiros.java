@@ -108,11 +108,9 @@ public class Retiros extends javax.swing.JFrame {
         setTitle("Retiros");
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("Monto:");
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setText("Clave:");
 
         jComboCuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +120,6 @@ public class Retiros extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 255));
         jLabel3.setText("Cuenta:");
 
         jPasswordField.addActionListener(new java.awt.event.ActionListener() {

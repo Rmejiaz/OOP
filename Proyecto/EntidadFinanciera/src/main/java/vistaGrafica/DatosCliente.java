@@ -41,6 +41,8 @@ public class DatosCliente extends javax.swing.JFrame {
             }
         });
         
+        setTitle("Información personal de "+cli.getNombre()+" "+cli.getApellido());
+        
     }
 
     /**
@@ -66,7 +68,7 @@ public class DatosCliente extends javax.swing.JFrame {
         jLabelCorreo = new javax.swing.JLabel();
         jLabelCedula = new javax.swing.JLabel();
         jLabelContrasena = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonCambiarContrasena = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
@@ -118,11 +120,11 @@ public class DatosCliente extends javax.swing.JFrame {
         jLabelContrasena.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabelContrasena.setText("jLabel14");
 
-        jButton1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButton1.setText("Cambiar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCambiarContrasena.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonCambiarContrasena.setText("Cambiar");
+        jButtonCambiarContrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonCambiarContrasenaActionPerformed(evt);
             }
         });
 
@@ -164,7 +166,7 @@ public class DatosCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addComponent(jToggleButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(jButtonCambiarContrasena)
                         .addGap(24, 24, 24))))
         );
         layout.setVerticalGroup(
@@ -198,7 +200,7 @@ public class DatosCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabelContrasena)
-                    .addComponent(jButton1)
+                    .addComponent(jButtonCambiarContrasena)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
@@ -206,9 +208,14 @@ public class DatosCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonCambiarContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarContrasenaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CambiarContrasena(cli).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonCambiarContrasenaActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
@@ -251,7 +258,7 @@ public class DatosCliente extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonCambiarContrasena;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

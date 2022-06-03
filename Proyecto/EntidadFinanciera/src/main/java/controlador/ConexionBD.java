@@ -9,6 +9,7 @@ import java.sql.Connection; // Realiza la conexión BD
 import java.sql.DriverManager; // Carga el controlador de conexion
 import java.sql.ResultSet; // Obtener respuesta del motor
 import java.sql.Statement; // Crear consultas SQL  
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,6 +34,8 @@ public class ConexionBD {
         }
         catch(Exception e)
         {
+            JOptionPane.showMessageDialog(null, "Ha habido un error de conexión con la base de datos.\n (Verifique que los datos de ingreso"
+                                                + "sean corrector y que la base de datos esté encendida");
             e.printStackTrace();
         }
         return con;

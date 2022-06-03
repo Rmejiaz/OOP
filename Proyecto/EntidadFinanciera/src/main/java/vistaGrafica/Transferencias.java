@@ -75,12 +75,12 @@ public class Transferencias extends javax.swing.JFrame {
                                                 
                                                 double saldo;
                                                 saldo = 0;
-                                                if(getTipoCuenta().equals("Ahorros -")){
-                                                    CuentaAhorros cuenta = (CuentaAhorros)getSelectedAccount("Ahorros -");
+                                                if(getTipoCuenta().equals("Ahorros - ")){
+                                                    CuentaAhorros cuenta = (CuentaAhorros)getSelectedAccount("Ahorros - ");
                                                     saldo = cuenta.getSaldoCuentaAhorros();
                                                 }
-                                                if(getTipoCuenta().equals("Corriente -")){
-                                                    CuentaCorriente cuenta = (CuentaCorriente)getSelectedAccount("Corriente -");
+                                                if(getTipoCuenta().equals("Corriente - ")){
+                                                    CuentaCorriente cuenta = (CuentaCorriente)getSelectedAccount("Corriente - ");
                                                     saldo = cuenta.getSaldoCuentaCorriente();
                                                 }
                                                 

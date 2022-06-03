@@ -225,9 +225,12 @@ public class PrincipalGUI extends javax.swing.JFrame {
         }
         
         if (jComboBoxTipo.getSelectedItem().equals("Cliente")){
+            System.out.println(contrCli.autenticar(idUsu, pass));
             if(contrCli.autenticar(idUsu, pass)){
                 Cliente cli = new Cliente(idUsu, pass);
                 final Cliente cli1 = (Cliente)contrCli.consultarUno(cli);
+                System.out.println("Contraseña ingresada: "+pass);
+                System.out.println("Contraseña cliente: "+cli1.getContrasena());
                 java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MenuClientesGUI(cli1).setVisible(true);
