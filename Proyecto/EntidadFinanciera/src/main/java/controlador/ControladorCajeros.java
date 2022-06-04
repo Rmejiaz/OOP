@@ -32,7 +32,8 @@ public class ControladorCajeros implements CRUD{
             return false;
         else
         {
-            return caj.getContrasena().equals(contrasena); // Solo lo valida si la contrasena si coincide
+            Cajero caj2 = arregloCajeros.get(pos);
+            return caj2.getContrasena().equals(contrasena); // Solo lo valida si la contrasena si coincide
         }
     }
     

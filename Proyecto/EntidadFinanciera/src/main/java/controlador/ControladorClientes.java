@@ -35,7 +35,8 @@ public class ControladorClientes implements CRUD{
             return false;
         else
         {
-            return cli.getContrasena().equals(contrasena); // Solo lo valida si la contrasena si coincide
+            Cliente cli2 = arregloClientes.get(pos);
+            return cli2.getContrasena().equals(contrasena); // Solo lo valida si la contrasena si coincide
         }
     }
     

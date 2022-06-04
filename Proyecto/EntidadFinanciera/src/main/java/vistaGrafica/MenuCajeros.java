@@ -37,7 +37,7 @@ public class MenuCajeros extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jButtonDatos = new javax.swing.JButton();
 
         setTitle("Menu de Cajeros");
 
@@ -77,11 +77,11 @@ public class MenuCajeros extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setText("Area Personal");
 
-        jButton4.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButton4.setText("Datos Personales");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDatos.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonDatos.setText("Datos Personales");
+        jButtonDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonDatosActionPerformed(evt);
             }
         });
 
@@ -107,7 +107,7 @@ public class MenuCajeros extends javax.swing.JFrame {
                                     .addComponent(jButton1))))
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
+                            .addComponent(jButtonDatos)
                             .addComponent(jLabel2))))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
@@ -123,7 +123,7 @@ public class MenuCajeros extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton4))
+                    .addComponent(jButtonDatos))
                 .addGap(29, 29, 29)
                 .addComponent(jButton2)
                 .addGap(30, 30, 30)
@@ -146,9 +146,14 @@ public class MenuCajeros extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDatosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new DatosCajero(caj).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonDatosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,7 +194,7 @@ public class MenuCajeros extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonDatos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelWelcome;

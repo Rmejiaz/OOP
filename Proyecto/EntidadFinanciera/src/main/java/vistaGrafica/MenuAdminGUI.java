@@ -39,7 +39,7 @@ public class MenuAdminGUI extends javax.swing.JFrame {
         jLabelWelcome = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonDatos = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setTitle("Menu de Administradores");
@@ -88,8 +88,13 @@ public class MenuAdminGUI extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setText("Area Personal:");
 
-        jButton1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButton1.setText("Información Personal");
+        jButtonDatos.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonDatos.setText("Información Personal");
+        jButtonDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDatosActionPerformed(evt);
+            }
+        });
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,7 +116,7 @@ public class MenuAdminGUI extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
-                            .addComponent(jButton1))))
+                            .addComponent(jButtonDatos))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -127,7 +132,7 @@ public class MenuAdminGUI extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(30, 30, 30)
                         .addComponent(jButtonClientes))
-                    .addComponent(jButton1))
+                    .addComponent(jButtonDatos))
                 .addGap(33, 33, 33)
                 .addComponent(jButtonCajeros)
                 .addGap(29, 29, 29)
@@ -175,6 +180,15 @@ public class MenuAdminGUI extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jButtonCajerosActionPerformed
 
+    private void jButtonDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDatosActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new DatosAdministrador(admin).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonDatosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -211,11 +225,11 @@ public class MenuAdminGUI extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAdministradores;
     private javax.swing.JButton jButtonCajeros;
     private javax.swing.JButton jButtonClientes;
     private javax.swing.JButton jButtonCuentas;
+    private javax.swing.JButton jButtonDatos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelWelcome;

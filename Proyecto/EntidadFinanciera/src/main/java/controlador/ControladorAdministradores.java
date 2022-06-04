@@ -37,7 +37,8 @@ public class ControladorAdministradores implements CRUD{
             return false;
         else
         {
-            return admin.getContrasena().equals(contrasena); // Solo lo valida si la contrasena si coincide
+            Administrador admin2 = arregloAdministradores.get(pos);
+            return admin2.getContrasena().equals(contrasena); // Solo lo valida si la contrasena si coincide
         }
     }
     
