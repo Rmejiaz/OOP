@@ -8,6 +8,9 @@ import controlador.ControladorBD;
 import controlador.ControladorClientes;
 import excepciones.ValidarCorreo;
 import excepciones.VerificarNombreUsuario;
+import java.awt.Color;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 
@@ -83,6 +86,23 @@ public class InsertarCliente extends javax.swing.JFrame {
         jTextFieldCedula.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
         jTextFieldCorreo.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jTextFieldCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldCorreoFocusGained(evt);
+            }
+        });
+        jTextFieldCorreo.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTextFieldCorreoInputMethodTextChanged(evt);
+            }
+        });
+        jTextFieldCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCorreoKeyTyped(evt);
+            }
+        });
 
         jTextFieldTelefono.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
@@ -213,6 +233,7 @@ public class InsertarCliente extends javax.swing.JFrame {
         }
         catch(ValidarCorreo ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());
+            jTextFieldCorreo.setForeground(Color.red);
         }
         catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Los campos numéricos no pueden contener letras");
@@ -220,6 +241,45 @@ public class InsertarCliente extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButtonInsertarActionPerformed
+
+    private void jTextFieldCorreoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextFieldCorreoInputMethodTextChanged
+        // TODO add your handling code here:
+        
+        
+        String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        
+        Pattern pattern = Pattern.compile(regex);
+        
+        Matcher matcher = pattern.matcher(jTextFieldCorreo.getText());
+        
+        if(!matcher.matches()){
+            jTextFieldCorreo.setForeground(Color.red);
+        }else{
+            jTextFieldCorreo.setForeground(Color.black);
+        }        
+        
+    }//GEN-LAST:event_jTextFieldCorreoInputMethodTextChanged
+
+    private void jTextFieldCorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCorreoFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCorreoFocusGained
+
+    private void jTextFieldCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCorreoKeyTyped
+        // TODO add your handling code here:
+        String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        
+        Pattern pattern = Pattern.compile(regex);
+        
+        Matcher matcher = pattern.matcher(jTextFieldCorreo.getText());
+        
+        if(!matcher.matches()){
+            jTextFieldCorreo.setForeground(Color.red);
+            
+        }else{
+            jTextFieldCorreo.setForeground(Color.black);
+            
+        }
+    }//GEN-LAST:event_jTextFieldCorreoKeyTyped
 
     /**
      * @param args the command line arguments
