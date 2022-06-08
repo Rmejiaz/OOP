@@ -32,9 +32,9 @@ public class MenuCajeros extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabelWelcome = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonConsignar = new javax.swing.JButton();
+        jButtonTransferir = new javax.swing.JButton();
+        jButtonRetirar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButtonDatos = new javax.swing.JButton();
@@ -45,27 +45,27 @@ public class MenuCajeros extends javax.swing.JFrame {
         jLabelWelcome.setForeground(new java.awt.Color(0, 0, 255));
         jLabelWelcome.setText("jLabel1");
 
-        jButton1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButton1.setText("Consignar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonConsignar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonConsignar.setText("Consignar");
+        jButtonConsignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonConsignarActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButton2.setText("Transferir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonTransferir.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonTransferir.setText("Transferir");
+        jButtonTransferir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonTransferirActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButton3.setText("Retirar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRetirar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonRetirar.setText("Retirar");
+        jButtonRetirar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonRetirarActionPerformed(evt);
             }
         });
 
@@ -102,9 +102,9 @@ public class MenuCajeros extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(107, 107, 107)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2)
-                                    .addComponent(jButton1))))
+                                    .addComponent(jButtonRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonTransferir)
+                                    .addComponent(jButtonConsignar))))
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonDatos)
@@ -122,29 +122,38 @@ public class MenuCajeros extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jButtonConsignar)
                     .addComponent(jButtonDatos))
                 .addGap(29, 29, 29)
-                .addComponent(jButton2)
+                .addComponent(jButtonTransferir)
                 .addGap(30, 30, 30)
-                .addComponent(jButton3)
+                .addComponent(jButtonRetirar)
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonConsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsignarActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Consignar(caj).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonConsignarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransferirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonTransferirActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetirarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new RetiroCajero(caj).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonRetirarActionPerformed
 
     private void jButtonDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDatosActionPerformed
         // TODO add your handling code here:
@@ -191,10 +200,10 @@ public class MenuCajeros extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonConsignar;
     private javax.swing.JButton jButtonDatos;
+    private javax.swing.JButton jButtonRetirar;
+    private javax.swing.JButton jButtonTransferir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelWelcome;
