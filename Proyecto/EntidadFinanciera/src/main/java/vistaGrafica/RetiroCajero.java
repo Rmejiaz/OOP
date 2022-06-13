@@ -249,6 +249,12 @@ public class RetiroCajero extends javax.swing.JFrame {
             float monto = Float.parseFloat(jTextFieldMonto.getText());
 
             
+            if(monto < 0){
+                JOptionPane.showMessageDialog(null, "Ingrese un monto valido (no puede ser negativo)");
+            }
+            
+            else{
+            
             if(!pass.equals(caj.getContrasena())){
                 JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
             }
@@ -323,7 +329,7 @@ public class RetiroCajero extends javax.swing.JFrame {
                 }
             }
         }
-        
+            }
         }
     }//GEN-LAST:event_jButtonRetirarActionPerformed
 

@@ -248,7 +248,10 @@ public class Consignar extends javax.swing.JFrame {
             int idTitular = Integer.parseInt(jTextFieldCedulaTitular.getText());
             float monto = Float.parseFloat(jTextFieldMonto.getText());
 
-            
+            if (monto <= 0){
+                JOptionPane.showMessageDialog(null, "Ingrese un monto valido (no puede ser negativo)");
+            }
+            else{
             if(!pass.equals(caj.getContrasena())){
                 JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
             }
@@ -312,7 +315,7 @@ public class Consignar extends javax.swing.JFrame {
                 }
             }
         }
-        
+            }
         }
     }//GEN-LAST:event_jButtonConsignarActionPerformed
 

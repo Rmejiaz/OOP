@@ -8,6 +8,7 @@ import controlador.ControladorAdministradores;
 import controlador.ControladorBD;
 import controlador.ControladorCajeros;
 import controlador.ControladorClientes;
+import java.awt.Color;
 import modelo.Usuario;
 import modelo.Administrador;
 import modelo.Cajero;
@@ -76,7 +77,7 @@ public class CambiarContrasena extends javax.swing.JFrame {
             }
         });
         
-        
+        jLabelDiferentes.setVisible(false);
     }
 
     /**
@@ -100,6 +101,7 @@ public class CambiarContrasena extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
+        jLabelDiferentes = new javax.swing.JLabel();
 
         setTitle("Cambio de Contraseña");
 
@@ -130,6 +132,14 @@ public class CambiarContrasena extends javax.swing.JFrame {
         jPasswordFieldNueva.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
         jPasswordFieldNueva2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jPasswordFieldNueva2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPasswordFieldNueva2KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordFieldNueva2KeyTyped(evt);
+            }
+        });
 
         jToggleButton1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jToggleButton1.setText("👁️");
@@ -140,23 +150,21 @@ public class CambiarContrasena extends javax.swing.JFrame {
         jToggleButton3.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jToggleButton3.setText("👁️");
 
+        jLabelDiferentes.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelDiferentes.setText("Las contraseñas no coinciden");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(215, 215, 215)
+                        .addComponent(jButtonCambiar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(73, 73, 73)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPasswordFieldNueva, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                                    .addComponent(jPasswordFieldNueva2)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -164,16 +172,23 @@ public class CambiarContrasena extends javax.swing.JFrame {
                                 .addGap(104, 104, 104)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTextFieldCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                                    .addComponent(jPasswordFieldActual))))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(215, 215, 215)
-                        .addComponent(jButtonCambiar)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                                    .addComponent(jPasswordFieldActual)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(73, 73, 73)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jPasswordFieldNueva, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                        .addComponent(jPasswordFieldNueva2))
+                                    .addComponent(jLabelDiferentes))))))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +212,9 @@ public class CambiarContrasena extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jPasswordFieldNueva2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton3))
-                .addGap(56, 56, 56)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelDiferentes)
+                .addGap(31, 31, 31)
                 .addComponent(jButtonCambiar)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -276,6 +293,30 @@ public class CambiarContrasena extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonCambiarActionPerformed
 
+    private void jPasswordFieldNueva2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldNueva2KeyTyped
+        
+        
+    }//GEN-LAST:event_jPasswordFieldNueva2KeyTyped
+
+    private void jPasswordFieldNueva2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldNueva2KeyReleased
+        // Comparar las contraseñas y ven si coinciden
+        
+        String nueva1 = new String(jPasswordFieldNueva.getPassword());
+        String nueva2 = new String(jPasswordFieldNueva2.getPassword());
+        
+        if(!nueva1.equals(nueva2)){
+            // Poner mensaje de que son diferentes
+            jLabelDiferentes.setVisible(true);
+            jLabelDiferentes.setForeground(Color.red);
+            jLabelDiferentes.setText("Las contraseñas no coinciden");
+        }else{
+            jLabelDiferentes.setText("Las contraseñas son iguales ✅");
+            Color col = new Color(0,102,0);
+            jLabelDiferentes.setForeground(col);
+            
+        }
+    }//GEN-LAST:event_jPasswordFieldNueva2KeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -317,6 +358,7 @@ public class CambiarContrasena extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelDiferentes;
     private javax.swing.JPasswordField jPasswordFieldActual;
     private javax.swing.JPasswordField jPasswordFieldNueva;
     private javax.swing.JPasswordField jPasswordFieldNueva2;

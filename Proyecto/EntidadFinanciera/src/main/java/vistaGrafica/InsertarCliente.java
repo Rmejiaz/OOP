@@ -6,6 +6,7 @@ package vistaGrafica;
 
 import controlador.ControladorBD;
 import controlador.ControladorClientes;
+import excepciones.ValidarContrasena;
 import excepciones.ValidarCorreo;
 import excepciones.VerificarNombreUsuario;
 import java.awt.Color;
@@ -56,6 +57,7 @@ public class InsertarCliente extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextFieldDireccion = new javax.swing.JTextField();
         jTextFieldContrasena = new javax.swing.JTextField();
+        jLabelContFuerte = new javax.swing.JLabel();
 
         setTitle("Crear Cliente");
 
@@ -99,6 +101,9 @@ public class InsertarCliente extends javax.swing.JFrame {
             }
         });
         jTextFieldCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldCorreoKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextFieldCorreoKeyTyped(evt);
             }
@@ -107,7 +112,7 @@ public class InsertarCliente extends javax.swing.JFrame {
         jTextFieldTelefono.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
         jButtonInsertar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButtonInsertar.setText("Insertar");
+        jButtonInsertar.setText("Crear");
         jButtonInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInsertarActionPerformed(evt);
@@ -125,40 +130,56 @@ public class InsertarCliente extends javax.swing.JFrame {
         jTextFieldDireccion.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
         jTextFieldContrasena.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jTextFieldContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldContrasenaActionPerformed(evt);
+            }
+        });
+        jTextFieldContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldContrasenaKeyReleased(evt);
+            }
+        });
+
+        jLabelContFuerte.setText("jLabel4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel9)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel6))))
+                .addGap(86, 86, 86)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
+                        .addComponent(jLabelContFuerte)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel9)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel6))))
-                        .addGap(86, 86, 86)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(jTextFieldApellidos)
-                            .addComponent(jTextFieldCedula)
                             .addComponent(jTextFieldCorreo)
                             .addComponent(jTextFieldTelefono)
                             .addComponent(jTextFieldDireccion)
-                            .addComponent(jTextFieldContrasena)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(jButtonInsertar)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                            .addComponent(jTextFieldContrasena)
+                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldApellidos)
+                            .addComponent(jTextFieldCedula))
+                        .addGap(57, 57, 57))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonInsertar)
+                .addGap(190, 190, 190))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,9 +212,11 @@ public class InsertarCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelContFuerte)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jButtonInsertar)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -265,6 +288,11 @@ public class InsertarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCorreoFocusGained
 
     private void jTextFieldCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCorreoKeyTyped
+        
+    }//GEN-LAST:event_jTextFieldCorreoKeyTyped
+
+    private void jTextFieldCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCorreoKeyReleased
+        // TODO add your handling code here:
         // TODO add your handling code here:
         String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
         
@@ -279,7 +307,31 @@ public class InsertarCliente extends javax.swing.JFrame {
             jTextFieldCorreo.setForeground(Color.black);
             
         }
-    }//GEN-LAST:event_jTextFieldCorreoKeyTyped
+        
+        
+    }//GEN-LAST:event_jTextFieldCorreoKeyReleased
+
+    private void jTextFieldContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldContrasenaActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jTextFieldContrasenaActionPerformed
+
+    private void jTextFieldContrasenaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldContrasenaKeyReleased
+        // TODO add your handling code here:
+        
+        try{
+            ValidarContrasena.verificar(jTextFieldContrasena.getText());
+            jLabelContFuerte.setText("La contraseña es fuerte");
+            Color col =  new Color(0,102,0);
+            jLabelContFuerte.setForeground(col);
+        }
+        catch(ValidarContrasena ex){
+            jLabelContFuerte.setText("La contraseña es debil");
+            jLabelContFuerte.setForeground(Color.red);
+        }
+        
+    }//GEN-LAST:event_jTextFieldContrasenaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -325,6 +377,7 @@ public class InsertarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelContFuerte;
     private javax.swing.JTextField jTextFieldApellidos;
     private javax.swing.JTextField jTextFieldCedula;
     private javax.swing.JTextField jTextFieldContrasena;

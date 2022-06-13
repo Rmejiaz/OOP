@@ -218,6 +218,11 @@ public class Retiros extends javax.swing.JFrame {
         
         String clave = new String(jPasswordField.getPassword());
         
+        
+        if(monto<=0){
+            JOptionPane.showMessageDialog(null, "Ingrese un monto valido (no puede ser negativo)");
+        }
+        else{
         if(clave.equals(cli.getContrasena())){
             if(tipo.equals("Ahorros - ")){
                 CuentaAhorros cuentaAho = new CuentaAhorros();
@@ -258,6 +263,7 @@ public class Retiros extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "Clave incorrecta");
         }
+      }
     }//GEN-LAST:event_jButtonRetirarActionPerformed
 
     private void jComboCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCuentaActionPerformed
