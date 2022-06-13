@@ -6,6 +6,10 @@ package vistaGrafica;
 
 import controlador.ControladorBD;
 import controlador.ControladorCajeros;
+import excepciones.ValidarContrasena;
+import java.awt.Color;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import modelo.Cajero;
 
@@ -24,6 +28,8 @@ public class InsertarCajero extends javax.swing.JFrame {
         initComponents();
         contrCaj = new ControladorCajeros();
         contrBD = new ControladorBD();
+        jLabelCorreoValido.setText("");
+        jLabelContFuerte.setText("");
     }
 
     /**
@@ -54,6 +60,8 @@ public class InsertarCajero extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextFieldDireccion = new javax.swing.JTextField();
         jTextFieldContrasena = new javax.swing.JTextField();
+        jLabelCorreoValido = new javax.swing.JLabel();
+        jLabelContFuerte = new javax.swing.JLabel();
 
         setTitle("Crear Cajero");
 
@@ -94,6 +102,11 @@ public class InsertarCajero extends javax.swing.JFrame {
         jTextFieldIdentificador.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
         jTextFieldCorreo.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jTextFieldCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldCorreoKeyReleased(evt);
+            }
+        });
 
         jTextFieldTelefono.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
@@ -118,6 +131,15 @@ public class InsertarCajero extends javax.swing.JFrame {
         jTextFieldDireccion.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
         jTextFieldContrasena.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jTextFieldContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldContrasenaKeyReleased(evt);
+            }
+        });
+
+        jLabelCorreoValido.setText("jLabel10");
+
+        jLabelContFuerte.setText("jLabel10");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,6 +147,9 @@ public class InsertarCajero extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(jButtonInsertar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,19 +163,19 @@ public class InsertarCajero extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(jLabel9))
                         .addGap(74, 74, 74)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(jTextFieldApellidos)
-                            .addComponent(jTextFieldCedula)
-                            .addComponent(jTextFieldIdentificador)
-                            .addComponent(jTextFieldCorreo)
-                            .addComponent(jTextFieldTelefono)
-                            .addComponent(jTextFieldSueldo)
-                            .addComponent(jTextFieldDireccion)
-                            .addComponent(jTextFieldContrasena)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jButtonInsertar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCorreoValido)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                                .addComponent(jTextFieldApellidos)
+                                .addComponent(jTextFieldCedula)
+                                .addComponent(jTextFieldIdentificador)
+                                .addComponent(jTextFieldCorreo)
+                                .addComponent(jTextFieldTelefono)
+                                .addComponent(jTextFieldSueldo)
+                                .addComponent(jTextFieldDireccion)
+                                .addComponent(jTextFieldContrasena))
+                            .addComponent(jLabelContFuerte))))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -176,7 +201,9 @@ public class InsertarCajero extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelCorreoValido)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -192,9 +219,11 @@ public class InsertarCajero extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelContFuerte)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonInsertar)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -218,6 +247,41 @@ public class InsertarCajero extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButtonInsertarActionPerformed
+
+    private void jTextFieldCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCorreoKeyReleased
+        // TODO add your handling code here:
+        String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        
+        Pattern pattern = Pattern.compile(regex);
+        
+        Matcher matcher = pattern.matcher(jTextFieldCorreo.getText());
+        
+        if(!matcher.matches()){
+            jLabelCorreoValido.setForeground(Color.red);
+            jLabelCorreoValido.setText("Correo no valido");
+            
+        }else{
+            Color col =  new Color(0,102,0);
+            jLabelCorreoValido.setForeground(col);
+            jLabelCorreoValido.setText("Correo valido");
+            
+            
+        }  
+    }//GEN-LAST:event_jTextFieldCorreoKeyReleased
+
+    private void jTextFieldContrasenaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldContrasenaKeyReleased
+        // TODO add your handling code here:
+        try{
+            ValidarContrasena.verificar(jTextFieldContrasena.getText());
+            jLabelContFuerte.setText("La contraseña es fuerte");
+            Color col =  new Color(0,102,0);
+            jLabelContFuerte.setForeground(col);
+        }
+        catch(ValidarContrasena ex){
+            jLabelContFuerte.setText("La contraseña es debil");
+            jLabelContFuerte.setForeground(Color.red);
+        }
+    }//GEN-LAST:event_jTextFieldContrasenaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -265,6 +329,8 @@ public class InsertarCajero extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelContFuerte;
+    private javax.swing.JLabel jLabelCorreoValido;
     private javax.swing.JTextField jTextFieldApellidos;
     private javax.swing.JTextField jTextFieldCedula;
     private javax.swing.JTextField jTextFieldContrasena;

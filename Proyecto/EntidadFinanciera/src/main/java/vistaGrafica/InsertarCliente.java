@@ -31,6 +31,8 @@ public class InsertarCliente extends javax.swing.JFrame {
         initComponents();
         contrCli = new ControladorClientes();
         contrBD = new ControladorBD();
+        jLabelContFuerte.setText("");
+        jLabelCorreoValido.setText("");
     }
 
     /**
@@ -58,6 +60,7 @@ public class InsertarCliente extends javax.swing.JFrame {
         jTextFieldDireccion = new javax.swing.JTextField();
         jTextFieldContrasena = new javax.swing.JTextField();
         jLabelContFuerte = new javax.swing.JLabel();
+        jLabelCorreoValido = new javax.swing.JLabel();
 
         setTitle("Crear Cliente");
 
@@ -143,10 +146,16 @@ public class InsertarCliente extends javax.swing.JFrame {
 
         jLabelContFuerte.setText("jLabel4");
 
+        jLabelCorreoValido.setText("jLabel4");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonInsertar)
+                .addGap(190, 190, 190))
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,6 +173,9 @@ public class InsertarCliente extends javax.swing.JFrame {
                 .addGap(86, 86, 86)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelCorreoValido)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelContFuerte)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -176,10 +188,6 @@ public class InsertarCliente extends javax.swing.JFrame {
                             .addComponent(jTextFieldApellidos)
                             .addComponent(jTextFieldCedula))
                         .addGap(57, 57, 57))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonInsertar)
-                .addGap(190, 190, 190))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +208,9 @@ public class InsertarCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                .addGap(1, 1, 1)
+                .addComponent(jLabelCorreoValido)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -214,7 +224,7 @@ public class InsertarCliente extends javax.swing.JFrame {
                     .addComponent(jTextFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelContFuerte)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jButtonInsertar)
                 .addGap(21, 21, 21))
         );
@@ -301,14 +311,16 @@ public class InsertarCliente extends javax.swing.JFrame {
         Matcher matcher = pattern.matcher(jTextFieldCorreo.getText());
         
         if(!matcher.matches()){
-            jTextFieldCorreo.setForeground(Color.red);
+            jLabelCorreoValido.setForeground(Color.red);
+            jLabelCorreoValido.setText("Correo no valido");
             
         }else{
-            jTextFieldCorreo.setForeground(Color.black);
+            Color col =  new Color(0,102,0);
+            jLabelCorreoValido.setForeground(col);
+            jLabelCorreoValido.setText("Correo valido");
             
-        }
-        
-        
+            
+        }   
     }//GEN-LAST:event_jTextFieldCorreoKeyReleased
 
     private void jTextFieldContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldContrasenaActionPerformed
@@ -378,6 +390,7 @@ public class InsertarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelContFuerte;
+    private javax.swing.JLabel jLabelCorreoValido;
     private javax.swing.JTextField jTextFieldApellidos;
     private javax.swing.JTextField jTextFieldCedula;
     private javax.swing.JTextField jTextFieldContrasena;

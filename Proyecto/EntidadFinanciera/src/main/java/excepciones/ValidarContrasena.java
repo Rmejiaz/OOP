@@ -20,13 +20,15 @@ public class ValidarContrasena extends Exception{
     public static void verificar(String cont) throws ValidarContrasena{
         
         
-        String regex = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})";
-        
+       String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[!*@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";        
         Pattern pattern = Pattern.compile(regex);
         
         Matcher matcher = pattern.matcher(cont);
         
-        if(cont.length()<5)){
+        if(!matcher.matches()){
             throw new ValidarContrasena("La contraseña no es segura");
         }
 }}
