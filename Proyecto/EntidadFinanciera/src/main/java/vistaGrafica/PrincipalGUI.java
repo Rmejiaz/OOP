@@ -5,8 +5,10 @@ import controlador.ControladorBD;
 import controlador.ControladorCajeros;
 import javax.swing.JOptionPane;
 import controlador.ControladorClientes;
+import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import javax.swing.ImageIcon;
 import modelo.Administrador;
 import modelo.Cajero;
 import modelo.Cliente;
@@ -33,6 +35,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
     
     public PrincipalGUI() {
         initComponents();
+        
+        // fijar icono:
+        
+//        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../../../../Launch/logo.jpg")));
         
         // Se necesitan los controladores para poder autenticar a los usuarios según su tipo
         contrAdmin = new ControladorAdministradores();

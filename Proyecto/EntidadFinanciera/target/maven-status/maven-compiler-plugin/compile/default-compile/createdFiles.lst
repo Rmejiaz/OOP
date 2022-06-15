@@ -1,6 +1,7 @@
 vistaGrafica/Retiros$3.class
 controlador/TestConection.class
 vistaGrafica/ManejadorAdmins$5.class
+vistaGrafica/InsertarCajero$3.class
 vistaGrafica/MenuClientesGUI$1.class
 Sustentacion2/ManejadorClientesGUI$1.class
 vistaGrafica/MenuAdminGUI.class
@@ -18,6 +19,7 @@ vistaGrafica/DatosAdministrador.class
 vistaGrafica/MenuCajeros$2.class
 vistaGrafica/InsertarCliente.class
 vistaGrafica/ManejadorClientesGUI$2.class
+vistaGrafica/InsertarAdmin$7.class
 vistaGrafica/PrincipalGUI$1.class
 modelo/CuentaAhorros.class
 vistaGrafica/DatosCliente$1.class
@@ -67,6 +69,7 @@ vistaGrafica/ManejadorCuentasGUI$6.class
 vistaGrafica/ManejadorClientesGUI.class
 vistaGrafica/Consignar$4.class
 vistaGrafica/DatosCajero$1.class
+vistaGrafica/InsertarAdmin$2.class
 vistaGrafica/ManejadorAdmins.class
 vista/PrincipalCajeros.class
 vistaGrafica/ManejadorClientesGUI$7.class
@@ -81,6 +84,7 @@ vistaGrafica/InsertarCliente$1.class
 vistaGrafica/ManejadorCajeros$2.class
 vistaGrafica/DatosAdministrador$4.class
 vistaGrafica/DatosCliente$2.class
+vistaGrafica/InsertarAdmin$8.class
 vistaGrafica/DatosCliente.class
 vistaGrafica/MenuClientesGUI$8.class
 modelo/Cajero.class
@@ -91,6 +95,7 @@ controlador/ConexionBD.class
 vistaGrafica/RetiroCajero$7.class
 vistaGrafica/PrincipalGUI$5.class
 vistaGrafica/InsertarCajero.class
+vistaGrafica/InsertarAdmin$6.class
 vistaGrafica/Transferencias$1.class
 vistaGrafica/Consignar$5.class
 controlador/ControladorCuentasAhorros.class
@@ -111,6 +116,7 @@ vistaGrafica/ManejadorCuentasGUI$5.class
 vistaGrafica/MenuCajeros$3.class
 vistaGrafica/PrincipalGUI$8.class
 vistaGrafica/Retiros$4.class
+excepciones/ValidarTelefono.class
 vista/PrincipalBanco.class
 vistaGrafica/RetiroCajero.class
 vista/PrincipalAdministradores.class
@@ -120,6 +126,7 @@ vistaGrafica/InsertarCliente$6.class
 vistaGrafica/InsertarCliente$3.class
 vistaGrafica/Transferencias$4.class
 vistaGrafica/CambiarContrasena$3.class
+vistaGrafica/InsertarAdmin$3.class
 vistaGrafica/RetiroCajero$4.class
 vistaGrafica/MenuCajeros$6.class
 controlador/ControladorCajeros.class
@@ -133,6 +140,7 @@ excepciones/ValidarCorreo.class
 vistaGrafica/ManejadorCajeros$5.class
 vistaGrafica/ManejadorAdmins$3.class
 vistaGrafica/InsertarCajero$1.class
+vistaGrafica/InsertarAdmin$4.class
 vistaGrafica/DatosAdministrador$2.class
 vista/PrincipalCuentasCorriente.class
 vistaGrafica/MenuCajeros$7.class
@@ -156,6 +164,8 @@ vistaGrafica/MenuClientesGUI.class
 controlador/CRUD.class
 vistaGrafica/ManejadorCajeros.class
 vistaGrafica/ManejadorCuentasGUI$3.class
+vistaGrafica/InsertarAdmin$5.class
+vistaGrafica/InsertarCajero$2.class
 Sustentacion2/InsertarCliente$1.class
 vistaGrafica/MenuAdminGUI$7.class
 vistaGrafica/Consignar$1.class

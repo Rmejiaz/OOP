@@ -25,7 +25,7 @@ public class ValidarCorreo extends Exception{
         Matcher matcher = pattern.matcher(email);
         
         if(!matcher.matches()){
-            throw new ValidarCorreo("Por favor ingrese un email valido de la forma usuario@dominio.xyz");
+            throw new ValidarCorreo("Ingrese un email valido de la forma usuario@dominio.xyz");
         }
     }
     
