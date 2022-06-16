@@ -7,6 +7,7 @@ package vistaGrafica;
 import controlador.ControladorBD;
 import controlador.ControladorCuentasAhorros;
 import controlador.ControladorCuentasCorriente;
+import excepciones.ValidarMonto;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -315,6 +316,7 @@ public class Transferencias extends javax.swing.JFrame {
     
     private void jButtonTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransferirActionPerformed
         
+        try{
         
         int cedulaTitular = Integer.parseInt(jTextFieldCedulaTitular.getText());
         // Primero se valida que la clave sea correcta
@@ -330,7 +332,7 @@ public class Transferencias extends javax.swing.JFrame {
         // Ahora se valida que si haya disponible el monto ingresado
         
         float monto = Float.parseFloat(jTextFieldMonto.getText());
-        
+        ValidarMonto.verificar(monto);
         float saldo;
         saldo = 0;
         if(getTipoCuenta().equals("Ahorros - ")){
@@ -430,7 +432,13 @@ public class Transferencias extends javax.swing.JFrame {
 
         
         JOptionPane.showMessageDialog(null, "Transacción exitosa");
-        
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Los campos numericos no pueden tener letras");
+        }
+        catch(ValidarMonto e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }//GEN-LAST:event_jButtonTransferirActionPerformed
 
     private void jTextFieldMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMontoActionPerformed

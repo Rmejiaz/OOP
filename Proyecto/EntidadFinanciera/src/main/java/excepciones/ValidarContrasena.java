@@ -31,4 +31,5 @@ public class ValidarContrasena extends Exception{
         if(!matcher.matches()){
             throw new ValidarContrasena("La contraseña no es segura");
         }
-}}
+}
+}

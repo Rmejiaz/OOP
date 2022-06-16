@@ -15,8 +15,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Cajero;
 import modelo.Cliente;
 import modelo.CuentaCorriente;
+import modelo.Usuario;
 
 /**
  *
@@ -35,8 +37,9 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
     ControladorBD contrBD;
     
     Object rowData[];
+    Usuario usu;
     
-    public ManejadorClientesGUI() {
+    public ManejadorClientesGUI(Usuario usu) {
         initComponents();
         contrCli = new ControladorClientes();
         contrCorr = new ControladorCuentasCorriente();
@@ -47,6 +50,19 @@ public class ManejadorClientesGUI extends javax.swing.JFrame {
         rowData = new Object [6];
         
         actualizarTabla();
+        
+        this.usu = usu;
+        
+        Cajero caj = new Cajero();
+        
+        if(usu.getClass() == caj.getClass()){
+            // Esconder todos los botones menos el de ordenar y actualizar:
+            
+            jButtonEliminar.setVisible(false);
+            jButtonModificar.setVisible(false);
+            jButtonNuevo.setVisible(false);
+            setTitle("Información de Clientes");
+        }
         
     }
 

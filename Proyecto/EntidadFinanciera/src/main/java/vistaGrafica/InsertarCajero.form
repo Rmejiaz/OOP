@@ -24,43 +24,45 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
-                      <Component id="jButtonInsertar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelCorreoValido" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextFieldNombre" alignment="0" pref="132" max="32767" attributes="0"/>
-                              <Component id="jTextFieldApellidos" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldCedula" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldIdentificador" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldCorreo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldTelefono" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldSueldo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldDireccion" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldContrasena" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jLabelContFuerte" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="52" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelCorreoValido" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldIdentificador" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextFieldCorreo" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextFieldTelefono" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextFieldSueldo" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextFieldDireccion" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextFieldContrasena" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabelContFuerte" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelValidacionNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelValidacionApellidos" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelValidacionCedula" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelValidacionId" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelValidacionTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelValidacionSueldo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelValidacionDireccion" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldNombre" min="-2" pref="205" max="-2" attributes="0"/>
+                  <Component id="jTextFieldApellidos" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextFieldCedula" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
+              <Component id="jButtonInsertar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,21 +75,29 @@
                   <Component id="jTextFieldNombre" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabelValidacionNombre" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldApellidos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabelValidacionApellidos" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldCedula" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+              <Component id="jLabelValidacionCedula" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldIdentificador" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabelValidacionId" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -99,26 +109,32 @@
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabelValidacionTelefono" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldSueldo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabelValidacionSueldo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+              <Component id="jLabelValidacionDireccion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldContrasena" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabelContFuerte" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="jButtonInsertar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <EmptySpace pref="152" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -207,6 +223,9 @@
           <Font name="sansserif" size="18" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldNombreKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldApellidos">
       <Properties>
@@ -214,6 +233,9 @@
           <Font name="sansserif" size="18" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldApellidosKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCedula">
       <Properties>
@@ -221,6 +243,9 @@
           <Font name="sansserif" size="18" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldCedulaKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldIdentificador">
       <Properties>
@@ -228,6 +253,9 @@
           <Font name="sansserif" size="18" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldIdentificadorKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCorreo">
       <Properties>
@@ -245,6 +273,9 @@
           <Font name="sansserif" size="18" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldTelefonoKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldSueldo">
       <Properties>
@@ -252,13 +283,16 @@
           <Font name="sansserif" size="18" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldSueldoKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonInsertar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="sansserif" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Insertar"/>
+        <Property name="text" type="java.lang.String" value="Crear"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInsertarActionPerformed"/>
@@ -304,14 +338,22 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelCorreoValido">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel10"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelContFuerte">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel10"/>
-      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelValidacionNombre">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelValidacionApellidos">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelValidacionCedula">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelValidacionId">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelValidacionTelefono">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelValidacionSueldo">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelValidacionDireccion">
     </Component>
   </SubComponents>
 </Form>

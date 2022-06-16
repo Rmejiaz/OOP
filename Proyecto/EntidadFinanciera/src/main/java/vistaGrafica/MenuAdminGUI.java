@@ -149,7 +149,7 @@ public class MenuAdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManejadorClientesGUI().setVisible(true);
+                new ManejadorClientesGUI(admin).setVisible(true);
             }
         }); 
     }//GEN-LAST:event_jButtonClientesActionPerformed
@@ -158,7 +158,7 @@ public class MenuAdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManejadorCuentasGUI().setVisible(true);
+                new ManejadorCuentasGUI(admin).setVisible(true);
             }
         });
     }//GEN-LAST:event_jButtonCuentasActionPerformed

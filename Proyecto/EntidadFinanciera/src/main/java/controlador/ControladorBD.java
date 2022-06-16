@@ -192,7 +192,7 @@ public class ControladorBD {
 
     public void insertarCuentaCorr(CuentaCorriente cuenta){
         
-        String statement = "INSERT INTO CUENTA_AHORROS "
+        String statement = "INSERT INTO CUENTA_CORRIENTE "
                             +"VALUES('"+cuenta.getIdCuentaCorriente()+"'"
                             +","+cuenta.getSaldoCuentaCorriente()+","
                             + cuenta.getIdCliente()+");";

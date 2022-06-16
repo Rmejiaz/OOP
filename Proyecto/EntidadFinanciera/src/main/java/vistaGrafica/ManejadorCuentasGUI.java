@@ -16,9 +16,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Administrador;
+import modelo.Cajero;
 import modelo.Cliente;
 import modelo.CuentaAhorros;
 import modelo.CuentaCorriente;
+import modelo.Usuario;
 
 /**
  *
@@ -39,8 +42,8 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
     static DefaultTableModel model;
     Object rowData[];
     
-    
-    public ManejadorCuentasGUI() {
+    Usuario usu;
+    public ManejadorCuentasGUI(Usuario usu) {
         initComponents();
         contrCuentasCorriente = new ControladorCuentasCorriente();
         contrCuentasAhorros = new ControladorCuentasAhorros();
@@ -64,6 +67,20 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
         
         for (Cliente c:ControladorClientes.arregloClientes)
             jComboBoxIdTitular.addItem(Integer.toString(c.getCedula()));
+        
+        
+        
+        this.usu = usu;
+        
+        
+        Cajero caj = new Cajero();
+        
+        if(caj.getClass() == usu.getClass()){
+            // Se esconde el botón de borrar:
+            jButtonBorrar.setVisible(false);
+        }
+        
+        
         
     }
 
@@ -92,6 +109,9 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
         jComboBoxTipoCuenta = new javax.swing.JComboBox<>();
         jComboBoxIdTitular = new javax.swing.JComboBox<>();
         jLabelTipoCuenta = new javax.swing.JLabel();
+        jButtonOrdenar = new javax.swing.JButton();
+
+        setTitle("Manejador de Cuentas");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
@@ -167,62 +187,66 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
         jLabelTipoCuenta.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabelTipoCuenta.setText("Cuentas Ahorros");
 
+        jButtonOrdenar.setText("Ordenar");
+        jButtonOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxTipoCuenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxIdTitular, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(79, 79, 79))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jComboBoxTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(94, 94, 94))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxIdTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButtonOrdenar)
+                                .addGap(28, 28, 28)
+                                .addComponent(jButtonBorrar))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelTipoCuenta)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonInsertar)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
-                                        .addComponent(jButtonConsultar)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButtonBorrar)))))
-                        .addGap(47, 47, 47))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 26, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(102, 102, 102))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelTipoCuenta)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                                .addGap(40, 40, 40)
+                                .addComponent(jButtonConsultar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(jTextSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(136, 136, 136)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jComboBoxTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -242,12 +266,13 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonInsertar)
                     .addComponent(jButtonConsultar)
-                    .addComponent(jButtonBorrar))
+                    .addComponent(jButtonBorrar)
+                    .addComponent(jButtonOrdenar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jLabelTipoCuenta)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -381,6 +406,20 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
+    private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
+        // TODO add your handling code here:
+        
+        if(jComboBoxTipoCuenta.equals("Ahorros")){
+            contrCuentasAhorros.ordenar();
+        }
+        else{
+            contrCuentasCorriente.ordenar();
+        }
+        
+        actualizarTablas();
+        
+    }//GEN-LAST:event_jButtonOrdenarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -421,6 +460,7 @@ public class ManejadorCuentasGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonConsultar;
     private javax.swing.JButton jButtonInsertar;
+    private javax.swing.JButton jButtonOrdenar;
     private javax.swing.JComboBox<String> jComboBoxIdTitular;
     private javax.swing.JComboBox<String> jComboBoxTipoCuenta;
     private javax.swing.JLabel jLabel1;

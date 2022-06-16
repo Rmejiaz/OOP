@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
  */
 public class ValidarCorreo extends Exception{
     
+    public static String littleMessage;
     public ValidarCorreo(String mensaje){
         super(mensaje);
     }
@@ -24,9 +25,21 @@ public class ValidarCorreo extends Exception{
         
         Matcher matcher = pattern.matcher(email);
         
+        
+        if(email.equals("")){
+            littleMessage = "Campo requerido (*)";
+            throw new ValidarCorreo("El correo es un campo requerido");
+        }
+        else
         if(!matcher.matches()){
+            littleMessage = "Correo no válido (*)";
             throw new ValidarCorreo("Ingrese un email valido de la forma usuario@dominio.xyz");
         }
     }
+    
+    public String getLittleMessage(){
+        return littleMessage;
+    }
+    
     
 }
