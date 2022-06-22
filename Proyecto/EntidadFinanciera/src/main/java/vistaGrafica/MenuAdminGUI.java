@@ -20,7 +20,10 @@ public class MenuAdminGUI extends javax.swing.JFrame {
     public MenuAdminGUI(Administrador admin) {
         initComponents();
         this.admin = admin;
-        jLabelWelcome.setText("Bienvenido, "+admin.getNombre());
+        if(admin.getNombre().charAt(admin.getNombre().length()-1)=='a')
+            jLabelWelcome.setText("Bienvenida, "+admin.getNombre());
+        else
+            jLabelWelcome.setText("Bienvenido, "+admin.getNombre());
     }
 
     /**

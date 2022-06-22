@@ -19,7 +19,11 @@ public class MenuCajeros extends javax.swing.JFrame {
     public MenuCajeros(Cajero caj) {
         initComponents();
         this.caj = caj;
-        jLabelWelcome.setText("Bienvenido, "+caj.getNombre());
+        if(caj.getNombre().charAt(caj.getNombre().length()-1)=='a')
+            jLabelWelcome.setText("Bienvenida, "+caj.getNombre());
+        else
+            jLabelWelcome.setText("Bienvenido, "+caj.getNombre());
+        
     }
 
     /**

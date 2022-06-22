@@ -241,6 +241,7 @@ public class ControladorBD {
             stmt.executeUpdate(statement);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Problemas al conectarse con la base de datos");
+            ex.printStackTrace();
         }   
     }
     

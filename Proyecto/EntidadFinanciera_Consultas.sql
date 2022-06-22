@@ -11,6 +11,12 @@ Correo varchar(20) not null,
 Contrasena varchar(30) not null
 );
 
+
+# Cambiar para poner correos más largos:
+
+ALTER TABLE EntidadFinanciera.CLIENTE
+MODIFY COLUMN Correo varchar(50) not null;
+
 CREATE TABLE ADMINISTRADOR
 (
 Cedula integer not null primary key,
@@ -22,6 +28,9 @@ Correo varchar(20) not null,
 Contrasena varchar(30) not null,
 IdAdmin int not null
 );
+
+ALTER TABLE EntidadFinanciera.ADMINISTRADOR
+MODIFY column Correo varchar(50) not null;
 
 CREATE TABLE CAJERO
 (
@@ -36,6 +45,8 @@ IdCajero int not null,
 Sueldo double not null
 );
 
+ALTER TABLE EntidadFinanciera.CAJERO
+MODIFY column Correo varchar(50) not null;
 
 CREATE TABLE CUENTA_AHORROS
 (
@@ -58,8 +69,8 @@ foreign key (IdCliente) references CLIENTE(Cedula)
 
 # Consultas:
 
-SELECT * FROM ADMINISTRADOR;
-SELECT * FROM CLIENTE;
-SELECT * FROM CUENTA_AHORROS;
-SELECT * FROM CUENTA_CORRIENTE;
-SELECT * FROM CAJERO;
+SELECT * FROM EntidadFinanciera.ADMINISTRADOR;
+SELECT * FROM EntidadFinanciera.CLIENTE;
+SELECT * FROM EntidadFinanciera.CUENTA_AHORROS;
+SELECT * FROM EntidadFinanciera.CUENTA_CORRIENTE;
+SELECT * FROM EntidadFinanciera.CAJERO;

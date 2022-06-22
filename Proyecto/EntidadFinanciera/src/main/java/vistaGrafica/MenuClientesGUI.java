@@ -18,8 +18,12 @@ public class MenuClientesGUI extends javax.swing.JFrame {
     Cliente cli;
     public MenuClientesGUI(Cliente cli) {
         initComponents();
-        jLabelBienvenida.setText("Bievenido, "+cli.getNombre());
         this.cli = cli;
+        
+        if(cli.getNombre().charAt(cli.getNombre().length()-1)=='a')
+            jLabelWelcome.setText("Bienvenida, "+cli.getNombre());
+        else
+            jLabelWelcome.setText("Bienvenido, "+cli.getNombre());
     }
 
     /**
@@ -34,7 +38,7 @@ public class MenuClientesGUI extends javax.swing.JFrame {
         jButtonConsultar = new javax.swing.JButton();
         jButtonTransaccion = new javax.swing.JButton();
         jButtonRetirar = new javax.swing.JButton();
-        jLabelBienvenida = new javax.swing.JLabel();
+        jLabelWelcome = new javax.swing.JLabel();
         jButtonDatos = new javax.swing.JButton();
 
         setTitle("Menu de Clientes");
@@ -63,9 +67,9 @@ public class MenuClientesGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabelBienvenida.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabelBienvenida.setForeground(new java.awt.Color(0, 0, 255));
-        jLabelBienvenida.setText("jLabel1");
+        jLabelWelcome.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jLabelWelcome.setForeground(new java.awt.Color(0, 0, 255));
+        jLabelWelcome.setText("jLabel1");
 
         jButtonDatos.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonDatos.setText("Datos Personales");
@@ -83,7 +87,7 @@ public class MenuClientesGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addComponent(jLabelBienvenida))
+                        .addComponent(jLabelWelcome))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(120, 120, 120)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -97,7 +101,7 @@ public class MenuClientesGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabelBienvenida)
+                .addComponent(jLabelWelcome)
                 .addGap(27, 27, 27)
                 .addComponent(jButtonConsultar)
                 .addGap(18, 18, 18)
@@ -185,6 +189,6 @@ public class MenuClientesGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDatos;
     private javax.swing.JButton jButtonRetirar;
     private javax.swing.JButton jButtonTransaccion;
-    private javax.swing.JLabel jLabelBienvenida;
+    private javax.swing.JLabel jLabelWelcome;
     // End of variables declaration//GEN-END:variables
 }
