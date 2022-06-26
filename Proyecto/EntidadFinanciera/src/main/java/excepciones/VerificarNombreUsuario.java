@@ -13,12 +13,14 @@ import java.util.regex.Pattern;
  */
 public class VerificarNombreUsuario extends Exception{
     
+    public static String littleMessage;
     public VerificarNombreUsuario(String mensaje){
         super(mensaje);
     }
     
     public static void verificar(String nombre) throws VerificarNombreUsuario{
         if(nombre.length() < 3){
+            littleMessage = "Demasiado corto (*)";
             throw new VerificarNombreUsuario("El y/o apellido del usuario debe tener más de 3 caracteres");
         }
         
@@ -29,13 +31,15 @@ public class VerificarNombreUsuario extends Exception{
         Matcher matcher = pattern.matcher(nombre);
         
         if(!matcher.matches()){
+            littleMessage = "Solo puede tener letras (*)";
             throw new VerificarNombreUsuario("El nombre y/o apellido solo puede contener letras");
         }
         
-        
-        
     }
    
+    public static String getLittleMessage(){
+        return littleMessage;
+    }
     
     
 }

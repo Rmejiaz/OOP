@@ -6,6 +6,8 @@ package vistaGrafica;
 
 import controlador.ControladorBD;
 import controlador.ControladorCajeros;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cajero;
@@ -33,6 +35,20 @@ public class ManejadorCajeros extends javax.swing.JFrame {
         contrCaj = new ControladorCajeros();
         // Llenar la tabla:
         actualizarTabla();
+        
+        jComboBoxSortBy.addActionListener(new ActionListener() {  
+                                            public void actionPerformed(ActionEvent e) {
+                                            
+                                                if(jComboBoxSortBy.getSelectedItem().equals("Nombre")){
+                                                    contrCaj.ordenarNombres();
+                                                    actualizarTabla();
+                                                }
+                                                else{
+                                                    contrCaj.ordenar();
+                                                    actualizarTabla();
+                                            }}
+                                            });
+        
     }
 
     
@@ -76,10 +92,18 @@ public class ManejadorCajeros extends javax.swing.JFrame {
         jButtonNuevo = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
-        jButtonOrdenar = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxSortBy = new javax.swing.JComboBox<>();
 
         setTitle("Manejador de Cajeros");
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jTableCajeros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,14 +150,6 @@ public class ManejadorCajeros extends javax.swing.JFrame {
             }
         });
 
-        jButtonOrdenar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButtonOrdenar.setText("Ordenar");
-        jButtonOrdenar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOrdenarActionPerformed(evt);
-            }
-        });
-
         jButtonActualizar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonActualizar.setText("Actualizar");
         jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -141,6 +157,13 @@ public class ManejadorCajeros extends javax.swing.JFrame {
                 jButtonActualizarActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel1.setText("Ordenar Por:");
+
+        jComboBoxSortBy.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jComboBoxSortBy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Cedula" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,21 +173,20 @@ public class ManejadorCajeros extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
                 .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonOrdenar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonActualizar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButtonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonActualizar))
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBoxSortBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jButtonNuevo)
@@ -173,10 +195,15 @@ public class ManejadorCajeros extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonModificar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonOrdenar)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxSortBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonActualizar)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(jButtonActualizar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -216,11 +243,6 @@ public class ManejadorCajeros extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
-        contrCaj.ordenar();
-        actualizarTabla();
-    }//GEN-LAST:event_jButtonOrdenarActionPerformed
-
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         int row = jTableCajeros.getSelectedRow();
         
@@ -253,6 +275,11 @@ public class ManejadorCajeros extends javax.swing.JFrame {
         else
             contrBD.modificarCajero(new_caj);
     }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        actualizarTabla();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -294,7 +321,8 @@ public class ManejadorCajeros extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonNuevo;
-    private javax.swing.JButton jButtonOrdenar;
+    private javax.swing.JComboBox<String> jComboBoxSortBy;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCajeros;
     // End of variables declaration//GEN-END:variables

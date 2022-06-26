@@ -97,13 +97,26 @@ public class ControladorCuentasCorriente implements CRUD{
             System.out.println(c.toString());
     }
 
+    // Ordenar por id:
     @Override
     public void ordenar() {
         Collections.sort(arregloCuentasCorriente);
     }
 
-    @Override
-    public void quicksort(int izq, int der) {
+    // Ordenar por id del titular (con quicksort):
+    
+    public void ordenarCedulas(){
+        quicksort(0, arregloCuentasCorriente.size()-1);
+    }
+    
+    // ordenar según el saldo (también con quicksort):
+
+    public void ordenarSaldo(){
+        quicksort_2(0, arregloCuentasCorriente.size()-1);
+    }
+    
+    
+    public void quicksort_2(int izq, int der) { 
         //int pivote=A[izq]; // tomamos primer elemento como pivote
         CuentaCorriente pivote = arregloCuentasCorriente.get(izq);
         int i=izq;         // i realiza la búsqueda de izquierda a derecha
@@ -112,10 +125,10 @@ public class ControladorCuentasCorriente implements CRUD{
 
         while(i < j){                          // mientras no se crucen las búsquedas                                   
           // while(A[i] <= pivote && i < j) i++; // busca elemento mayor que pivote
-          while(arregloCuentasCorriente.get(i).getIdCuentaCorriente().compareToIgnoreCase(pivote.getIdCuentaCorriente()) <=0 && i<j) i++; 
+          while(arregloCuentasCorriente.get(i).getSaldoCuentaCorriente()<= pivote.getSaldoCuentaCorriente()&& i<j) i++; 
           
           //while(A[j] > pivote) j--;           // busca elemento menor que pivote
-          while(arregloCuentasCorriente.get(j).getIdCuentaCorriente().compareToIgnoreCase(pivote.getIdCuentaCorriente()) > 0) j--;  
+          while(arregloCuentasCorriente.get(j).getSaldoCuentaCorriente()> pivote.getSaldoCuentaCorriente()) j--;  
           if (i < j) {                        // si no se han cruzado                      
                aux = arregloCuentasCorriente.get(i);                      // los intercambia
                arregloCuentasCorriente.set(i, arregloCuentasCorriente.get(j));
@@ -131,7 +144,43 @@ public class ControladorCuentasCorriente implements CRUD{
             quicksort(izq,j-1);          // ordenamos subarray izquierdo
          if(j+1 < der)
             quicksort(j+1,der);          // ordenamos subarray derecho
-    }
+
+      }
+    
+    
+   
+    // implementación de quicksort para ordenar por cedula
+    @Override
+    public void quicksort(int izq, int der) { 
+        //int pivote=A[izq]; // tomamos primer elemento como pivote
+        CuentaCorriente pivote = arregloCuentasCorriente.get(izq);
+        int i=izq;         // i realiza la búsqueda de izquierda a derecha
+        int j=der;         // j realiza la búsqueda de derecha a izquierda
+        CuentaCorriente aux;
+
+        while(i < j){                          // mientras no se crucen las búsquedas                                   
+          // while(A[i] <= pivote && i < j) i++; // busca elemento mayor que pivote
+          while(arregloCuentasCorriente.get(i).getIdCliente()<= pivote.getIdCliente()&& i<j) i++; 
+          
+          //while(A[j] > pivote) j--;           // busca elemento menor que pivote
+          while(arregloCuentasCorriente.get(j).getIdCliente()> pivote.getIdCliente()) j--;  
+          if (i < j) {                        // si no se han cruzado                      
+               aux = arregloCuentasCorriente.get(i);                      // los intercambia
+               arregloCuentasCorriente.set(i, arregloCuentasCorriente.get(j));
+               arregloCuentasCorriente.set(j, aux);
+           }
+         }
+
+         //A[izq]=A[j];      // se coloca el pivote en su lugar de forma que tendremos                                    
+         arregloCuentasCorriente.set(izq, arregloCuentasCorriente.get(j));
+         //A[j]=pivote;      // los menores a su izquierda y los mayores a su derecha
+         arregloCuentasCorriente.set(j, pivote);
+         if(izq < j-1)
+            quicksort(izq,j-1);          // ordenamos subarray izquierdo
+         if(j+1 < der)
+            quicksort(j+1,der);          // ordenamos subarray derecho
+
+      }
     
     public boolean existeCuenta(String idCuenta){  // para verificar si un cliente existe en el sistema
         CuentaCorriente cuenta = new CuentaCorriente();

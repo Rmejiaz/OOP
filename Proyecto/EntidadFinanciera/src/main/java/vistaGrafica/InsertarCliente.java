@@ -11,6 +11,7 @@ import excepciones.ValidarCorreo;
 import excepciones.ValidarTelefono;
 import excepciones.VerificarNombreUsuario;
 import java.awt.Color;
+import java.awt.event.WindowEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -280,6 +281,9 @@ public class InsertarCliente extends javax.swing.JFrame {
         try{
             VerificarNombreUsuario.verificar(jTextFieldNombre.getText());
             ValidarCorreo.verificar(jTextFieldCorreo.getText());
+            ValidarContrasena.verificar(jTextFieldContrasena.getText());
+            VerificarNombreUsuario.verificar(jTextFieldApellidos.getText());
+            ValidarTelefono.verificar(jTextFieldTelefono.getText());
             
             //Faltaría validar los datos ingresados
             cli.setCedula(Integer.parseInt(jTextFieldCedula.getText()));
@@ -296,6 +300,22 @@ public class InsertarCliente extends javax.swing.JFrame {
         else{
             contrBD.insertarCliente(cli);
             JOptionPane.showMessageDialog(null, "Cliente insertado exitosamente");
+            jTextFieldNombre.setText("");
+            jTextFieldApellidos.setText("");
+            jTextFieldCedula.setText("");
+            jTextFieldCorreo.setText("");
+            jTextFieldTelefono.setText("");
+            jTextFieldContrasena.setText("");
+            jTextFieldDireccion.setText("");
+            
+            jLabelContFuerte.setText("");
+            jLabelCorreoValido.setText("");
+            jLabelValidacionApellidos.setText("");
+            jLabelValidacionCedula.setText("");
+            jLabelValidacionCedula.setText("");
+            jLabelValidacionNombre.setText("");
+            jLabelValidacionTelefono.setText("");
+            dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
             
             
@@ -352,7 +372,7 @@ public class InsertarCliente extends javax.swing.JFrame {
             jLabelContFuerte.setForeground(col);
         }
         catch(ValidarContrasena ex){
-            jLabelContFuerte.setText("La contraseña es debil");
+            jLabelContFuerte.setText("La contraseña es debil (*)");
             jLabelContFuerte.setForeground(Color.red);
         }
         
@@ -368,7 +388,7 @@ public class InsertarCliente extends javax.swing.JFrame {
             jLabelValidacionNombre.setForeground(col);
         }
         catch(VerificarNombreUsuario ex){
-            jLabelValidacionNombre.setText("Demasiado corto (*)");
+            jLabelValidacionNombre.setText(ex.getLittleMessage());
             jLabelValidacionNombre.setForeground(Color.red);
         }
         
@@ -384,7 +404,7 @@ public class InsertarCliente extends javax.swing.JFrame {
             jLabelValidacionApellidos.setForeground(col);
         }
         catch(VerificarNombreUsuario ex){
-            jLabelValidacionApellidos.setText("Demasiado cortos (*)");
+            jLabelValidacionApellidos.setText(ex.getLittleMessage());
             jLabelValidacionApellidos.setForeground(Color.red);
         }
     }//GEN-LAST:event_jTextFieldApellidosKeyReleased

@@ -5,9 +5,12 @@ import controlador.ControladorBD;
 import controlador.ControladorCajeros;
 import javax.swing.JOptionPane;
 import controlador.ControladorClientes;
+import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 import modelo.Administrador;
 import modelo.Cajero;
@@ -90,6 +93,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jComboBoxTipo = new javax.swing.JComboBox<>();
         jToggleButton1 = new javax.swing.JToggleButton();
+        jButtonHelp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Autenticación");
@@ -137,6 +141,15 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jToggleButton1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jToggleButton1.setText("👁️");
 
+        jButtonHelp.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButtonHelp.setForeground(new java.awt.Color(0, 0, 255));
+        jButtonHelp.setText("?");
+        jButtonHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHelpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,8 +158,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)
@@ -155,12 +168,14 @@ public class PrincipalGUI extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(cedula)
                                     .addComponent(contrasena)
-                                    .addComponent(jComboBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jComboBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(entrar)
-                                .addGap(96, 96, 96)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(81, 81, 81)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonHelp)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(115, 115, 115)
                         .addComponent(jLabel1)))
@@ -185,7 +200,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(entrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(entrar)
+                    .addComponent(jButtonHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -269,6 +286,18 @@ public class PrincipalGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoActionPerformed
 
+    private void jButtonHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHelpActionPerformed
+        // TODO add your handling code here:
+        if (Desktop.isDesktopSupported()) {
+        try {
+            File myFile = new File("../README.md");
+            Desktop.getDesktop().open(myFile);
+        } catch (IOException ex) {
+            // no application registered for PDFs
+        }
+    }
+    }//GEN-LAST:event_jButtonHelpActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -311,6 +340,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JTextField cedula;
     private javax.swing.JPasswordField contrasena;
     private javax.swing.JButton entrar;
+    private javax.swing.JButton jButtonHelp;
     private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

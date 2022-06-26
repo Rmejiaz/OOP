@@ -132,11 +132,17 @@ public class ControladorClientes implements CRUD{
     
     @Override
     public void ordenar(){
-        Collections.sort(arregloClientes);
+        quicksort(0, arregloClientes.size()-1);
     }
 
+    public void ordenarNombres(){
+        mergeSort(arregloClientes, arregloClientes.size());
+    }
+    
+    
+    //Se utiliza quicksort para ordenar por id:
     @Override
-    public void quicksort(int izq, int der) {
+    public void quicksort(int izq, int der) { 
         //int pivote=A[izq]; // tomamos primer elemento como pivote
         Cliente pivote = arregloClientes.get(izq);
         int i=izq;         // i realiza la búsqueda de izquierda a derecha
@@ -145,10 +151,10 @@ public class ControladorClientes implements CRUD{
 
         while(i < j){                          // mientras no se crucen las búsquedas                                   
           // while(A[i] <= pivote && i < j) i++; // busca elemento mayor que pivote
-          while(arregloClientes.get(i).getNombre().compareToIgnoreCase(pivote.getNombre()) <=0 && i<j) i++; 
+          while(arregloClientes.get(i).getCedula() <= pivote.getCedula() && i<j) i++; 
           
           //while(A[j] > pivote) j--;           // busca elemento menor que pivote
-          while(arregloClientes.get(j).getNombre().compareToIgnoreCase(pivote.getNombre()) > 0) j--;  
+          while(arregloClientes.get(j).getCedula() > pivote.getCedula()) j--;  
           if (i < j) {                        // si no se han cruzado                      
                aux = arregloClientes.get(i);                      // los intercambia
                arregloClientes.set(i, arregloClientes.get(j));
@@ -167,6 +173,54 @@ public class ControladorClientes implements CRUD{
 
       }
     
+    // El ordenamiento por nombre se hace con mergesort:
+    
+        public static void mergeSort(ArrayList<Cliente> a, int n) {
+            if (n < 2) {
+                return;
+            }
+            int mid = n / 2;
+            ArrayList<Cliente> l = new ArrayList<Cliente>();
+            ArrayList<Cliente> r = new ArrayList<Cliente>();
+
+            for (int i = 0; i < mid; i++) {
+//                l[i] = a[i];
+                l.add(a.get(i));
+            }
+            for (int i = mid; i < n; i++) {
+//                r[i - mid] = a[i];
+                  r.add(a.get(i));
+            }
+            mergeSort(l, mid);
+            mergeSort(r, n - mid);
+
+            merge(a, l, r, mid, n - mid);
+        }
+ 
+    
+    public static void merge(ArrayList<Cliente> a, ArrayList<Cliente> l, ArrayList<Cliente> r, int left, int right) {
+
+          int i = 0, j = 0, k = 0;
+          while (i < left && j < right) {
+              if (l.get(i).getNombre().compareToIgnoreCase(r.get(j).getNombre()) <= 0) {
+//                  a[k++] = l[i++];
+                  a.set(k++, l.get(i++));
+              }
+              else {
+//                  a[k++] = r[j++];
+                    a.set(k++, r.get(j++));
+              }
+          }
+          while (i < left) {
+//              a[k++] = l[i++];
+                a.set(k++, l.get(i++));
+          }
+          while (j < right) {
+//              a[k++] = r[j++];
+                a.set(k++, r.get(j++));
+          }
+      }
+    
     
     public boolean existeCliente(int idCliente){  // para verificar si un cliente existe en el sistema
         Cliente cli = new Cliente();
@@ -177,25 +231,6 @@ public class ControladorClientes implements CRUD{
     }
     
     
-    public static void mergeSort(int[] a, int n) {
-    if (n < 2) {
-        return;
-    }
-    int mid = n / 2;
-    int[] l = new int[mid];
-    int[] r = new int[n - mid];
-
-    for (int i = 0; i < mid; i++) {
-        l[i] = a[i];
-    }
-    for (int i = mid; i < n; i++) {
-        r[i - mid] = a[i];
-    }
-    mergeSort(l, mid);
-    mergeSort(r, n - mid);
-
-    merge(a, l, r, mid, n - mid);
-}
-    
+   
     
 }

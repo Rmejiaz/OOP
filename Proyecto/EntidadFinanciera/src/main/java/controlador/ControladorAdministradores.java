@@ -113,12 +113,18 @@ public class ControladorAdministradores implements CRUD{
     }
 
     @Override
-    public void ordenar() {
-        Collections.sort(arregloAdministradores);
+    public void ordenar(){
+        quicksort(0, arregloAdministradores.size()-1);
     }
 
+    public void ordenarNombres(){
+        mergeSort(arregloAdministradores, arregloAdministradores.size());
+    }
+    
+    
+    //Se utiliza quicksort para ordenar por id:
     @Override
-    public void quicksort(int izq, int der) {
+    public void quicksort(int izq, int der) { 
         //int pivote=A[izq]; // tomamos primer elemento como pivote
         Administrador pivote = arregloAdministradores.get(izq);
         int i=izq;         // i realiza la búsqueda de izquierda a derecha
@@ -127,10 +133,10 @@ public class ControladorAdministradores implements CRUD{
 
         while(i < j){                          // mientras no se crucen las búsquedas                                   
           // while(A[i] <= pivote && i < j) i++; // busca elemento mayor que pivote
-          while(arregloAdministradores.get(i).getNombre().compareToIgnoreCase(pivote.getNombre()) <=0 && i<j) i++; 
+          while(arregloAdministradores.get(i).getCedula() <= pivote.getCedula() && i<j) i++; 
           
           //while(A[j] > pivote) j--;           // busca elemento menor que pivote
-          while(arregloAdministradores.get(j).getNombre().compareToIgnoreCase(pivote.getNombre()) > 0) j--;  
+          while(arregloAdministradores.get(j).getCedula() > pivote.getCedula()) j--;  
           if (i < j) {                        // si no se han cruzado                      
                aux = arregloAdministradores.get(i);                      // los intercambia
                arregloAdministradores.set(i, arregloAdministradores.get(j));
@@ -147,6 +153,54 @@ public class ControladorAdministradores implements CRUD{
          if(j+1 < der)
             quicksort(j+1,der);          // ordenamos subarray derecho
 
+      }
+    
+    // El ordenamiento por nombre se hace con mergesort:
+    
+        public static void mergeSort(ArrayList<Administrador> a, int n) {
+            if (n < 2) {
+                return;
+            }
+            int mid = n / 2;
+            ArrayList<Administrador> l = new ArrayList<Administrador>();
+            ArrayList<Administrador> r = new ArrayList<Administrador>();
+
+            for (int i = 0; i < mid; i++) {
+//                l[i] = a[i];
+                l.add(a.get(i));
+            }
+            for (int i = mid; i < n; i++) {
+//                r[i - mid] = a[i];
+                  r.add(a.get(i));
+            }
+            mergeSort(l, mid);
+            mergeSort(r, n - mid);
+
+            merge(a, l, r, mid, n - mid);
+        }
+ 
+    
+    public static void merge(ArrayList<Administrador> a, ArrayList<Administrador> l, ArrayList<Administrador> r, int left, int right) {
+
+          int i = 0, j = 0, k = 0;
+          while (i < left && j < right) {
+              if (l.get(i).getNombre().compareToIgnoreCase(r.get(j).getNombre()) <= 0) {
+//                  a[k++] = l[i++];
+                  a.set(k++, l.get(i++));
+              }
+              else {
+//                  a[k++] = r[j++];
+                    a.set(k++, r.get(j++));
+              }
+          }
+          while (i < left) {
+//              a[k++] = l[i++];
+                a.set(k++, l.get(i++));
+          }
+          while (j < right) {
+//              a[k++] = r[j++];
+                a.set(k++, r.get(j++));
+          }
       }
     
     

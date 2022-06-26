@@ -6,6 +6,8 @@ package vistaGrafica;
 
 import controlador.ControladorAdministradores;
 import controlador.ControladorBD;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Administrador;
@@ -35,6 +37,21 @@ public class ManejadorAdmins extends javax.swing.JFrame {
         rowData = new Object [7];
         
         actualizarTabla();
+        
+        
+        jComboBoxSortBy.addActionListener(new ActionListener() {  
+                                            public void actionPerformed(ActionEvent e) {
+                                            
+                                                if(jComboBoxSortBy.getSelectedItem().equals("Nombre")){
+                                                    contrAdmins.ordenarNombres();
+                                                    actualizarTabla();
+                                                }
+                                                else{
+                                                    contrAdmins.ordenar();
+                                                    actualizarTabla();
+                                            }}
+                                            });
+        
         
     }
     
@@ -76,10 +93,18 @@ public class ManejadorAdmins extends javax.swing.JFrame {
         jButtonNuevo = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
-        jButtonOrdenar = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxSortBy = new javax.swing.JComboBox<>();
 
         setTitle("Manejador de Administradores");
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jTableAdmins.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,14 +151,6 @@ public class ManejadorAdmins extends javax.swing.JFrame {
             }
         });
 
-        jButtonOrdenar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jButtonOrdenar.setText("Ordenar");
-        jButtonOrdenar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOrdenarActionPerformed(evt);
-            }
-        });
-
         jButtonActualizar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButtonActualizar.setText("Actualizar");
         jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -141,6 +158,13 @@ public class ManejadorAdmins extends javax.swing.JFrame {
                 jButtonActualizarActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel1.setText("Ordenar Por:");
+
+        jComboBoxSortBy.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jComboBoxSortBy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Cedula" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,33 +174,35 @@ public class ManejadorAdmins extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonOrdenar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButtonActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBoxSortBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
                         .addComponent(jButtonNuevo)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonEliminar)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonModificar)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonOrdenar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonActualizar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(18, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addComponent(jComboBoxSortBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                        .addComponent(jButtonActualizar)))
+                .addGap(49, 49, 49))
         );
 
         pack();
@@ -186,11 +212,6 @@ public class ManejadorAdmins extends javax.swing.JFrame {
         //También se debe consultar de la bd antes
         actualizarTabla();
     }//GEN-LAST:event_jButtonActualizarActionPerformed
-
-    private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
-        contrAdmins.ordenar();
-        actualizarTabla();
-    }//GEN-LAST:event_jButtonOrdenarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         
@@ -256,6 +277,11 @@ public class ManejadorAdmins extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jButtonNuevoActionPerformed
 
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        actualizarTabla();
+    }//GEN-LAST:event_formWindowGainedFocus
+
     /**
      * @param args the command line arguments
      */
@@ -297,7 +323,8 @@ public class ManejadorAdmins extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonNuevo;
-    private javax.swing.JButton jButtonOrdenar;
+    private javax.swing.JComboBox<String> jComboBoxSortBy;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAdmins;
     // End of variables declaration//GEN-END:variables

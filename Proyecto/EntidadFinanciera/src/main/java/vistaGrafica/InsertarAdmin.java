@@ -11,6 +11,7 @@ import excepciones.ValidarCorreo;
 import excepciones.ValidarTelefono;
 import excepciones.VerificarNombreUsuario;
 import java.awt.Color;
+import java.awt.event.WindowEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -284,7 +285,8 @@ public class InsertarAdmin extends javax.swing.JFrame {
          ValidarCorreo.verificar(jTextFieldCorreo.getText()); // Para el correo
          VerificarNombreUsuario.verificar(jTextFieldApellidos.getText());   
          ValidarTelefono.verificar(jTextFieldTelefono.getText());
-            
+         ValidarContrasena.verificar(jTextFieldContrasena.getText());   
+         
         admin.setCedula(Integer.parseInt(jTextFieldCedula.getText()));
         admin.setIdAdmin(Integer.parseInt(jTextFieldIdentificador.getText()));
         admin.setNombre(jTextFieldNombre.getText());
@@ -302,6 +304,24 @@ public class InsertarAdmin extends javax.swing.JFrame {
         else{
             contrBD.insertarAdmin(admin);
             JOptionPane.showMessageDialog(null, "Administrador insertado exitosamente");
+            jTextFieldNombre.setText("");
+            jTextFieldApellidos.setText("");
+            jTextFieldCedula.setText("");
+            jTextFieldCorreo.setText("");
+            jTextFieldTelefono.setText("");
+            jTextFieldContrasena.setText("");
+            jTextFieldDireccion.setText("");
+            jTextFieldIdentificador.setText("");
+            
+            jLabelContFuerte.setText("");
+            jLabelCorreoValido.setText("");
+            jLabelValidacionApellido.setText("");
+            jLabelValidacionCedula.setText("");
+            jLabelValidacionId.setText("");
+            jLabelValidacionNombre.setText("");
+            jLabelValidacionTelefono.setText("");
+            dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+
         }
         }
         catch(NumberFormatException e){
@@ -337,7 +357,7 @@ public class InsertarAdmin extends javax.swing.JFrame {
             jLabelContFuerte.setForeground(col);
         }
         catch(ValidarContrasena ex){
-            jLabelContFuerte.setText("La contraseña es debil");
+            jLabelContFuerte.setText("La contraseña es debil (*)");
             jLabelContFuerte.setForeground(Color.red);
         }
     }//GEN-LAST:event_jTextFieldContrasenaKeyReleased
@@ -351,7 +371,7 @@ public class InsertarAdmin extends javax.swing.JFrame {
             jLabelValidacionNombre.setForeground(col);
         }
         catch(VerificarNombreUsuario ex){
-            jLabelValidacionNombre.setText("Demasiado corto (*)");
+            jLabelValidacionNombre.setText(ex.getLittleMessage());
             jLabelValidacionNombre.setForeground(Color.red);
         }
     }//GEN-LAST:event_jTextFieldNombreKeyReleased
@@ -365,7 +385,7 @@ public class InsertarAdmin extends javax.swing.JFrame {
             jLabelValidacionApellido.setForeground(col);
         }
         catch(VerificarNombreUsuario ex){
-            jLabelValidacionApellido.setText("Demasiado cortos (*)");
+            jLabelValidacionApellido.setText(ex.getLittleMessage());
             jLabelValidacionApellido.setForeground(Color.red);
         }
     }//GEN-LAST:event_jTextFieldApellidosKeyReleased

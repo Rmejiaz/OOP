@@ -12,6 +12,7 @@ import excepciones.ValidarMonto;
 import excepciones.ValidarTelefono;
 import excepciones.VerificarNombreUsuario;
 import java.awt.Color;
+import java.awt.event.WindowEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -296,7 +297,7 @@ public class InsertarCajero extends javax.swing.JFrame {
         VerificarNombreUsuario.verificar(jTextFieldApellidos.getText());  // Se validan los apellidos de la misma forma que el nombre
         ValidarTelefono.verificar(jTextFieldTelefono.getText());  
         ValidarMonto.verificar(Double.parseDouble(jTextFieldSueldo.getText()));
-            
+        ValidarContrasena.verificar(jTextFieldContrasena.getText());
             
         Cajero caj= new Cajero(Integer.parseInt(jTextFieldIdentificador.getText()), Double.parseDouble(jTextFieldSueldo.getText()), jTextFieldNombre.getText(),
                                 jTextFieldApellidos.getText(), jTextFieldDireccion.getText(), Long.parseLong(jTextFieldTelefono.getText()), jTextFieldCorreo.getText(),
@@ -310,6 +311,8 @@ public class InsertarCajero extends javax.swing.JFrame {
         }
         else{
             contrBD.insertarCajero(caj);
+            JOptionPane.showMessageDialog(null, "Cajero insertado exitosamente");
+            dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
         }
         
@@ -349,7 +352,7 @@ public class InsertarCajero extends javax.swing.JFrame {
             jLabelContFuerte.setForeground(col);
         }
         catch(ValidarContrasena ex){
-            jLabelContFuerte.setText("La contraseña es debil");
+            jLabelContFuerte.setText("La contraseña es debil (*)");
             jLabelContFuerte.setForeground(Color.red);
         }
     }//GEN-LAST:event_jTextFieldContrasenaKeyReleased
@@ -363,7 +366,7 @@ public class InsertarCajero extends javax.swing.JFrame {
             jLabelValidacionNombre.setForeground(col);
         }
         catch(VerificarNombreUsuario ex){
-            jLabelValidacionNombre.setText("Demasiado corto (*)");
+            jLabelValidacionNombre.setText(ex.getLittleMessage());
             jLabelValidacionNombre.setForeground(Color.red);
         }
     }//GEN-LAST:event_jTextFieldNombreKeyReleased
@@ -377,7 +380,7 @@ public class InsertarCajero extends javax.swing.JFrame {
             jLabelValidacionApellidos.setForeground(col);
         }
         catch(VerificarNombreUsuario ex){
-            jLabelValidacionApellidos.setText("Demasiado cortos (*)");
+            jLabelValidacionApellidos.setText(ex.getLittleMessage());
             jLabelValidacionApellidos.setForeground(Color.red);
         }
     }//GEN-LAST:event_jTextFieldApellidosKeyReleased
